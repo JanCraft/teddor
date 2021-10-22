@@ -1,0 +1,90 @@
+==================
+= DAMAGE FORMULA =
+==================
+
+DMG         = ATK * (1 + ATK%)
+DMG (BURST) = ATK * (1 + ATK%) * BurstDMG%
+DMG (CRIT)  = ATK * (1 + ATK%) * (1 + CritDMG%)
+DMG (BOTH)  = ATK * (1 + ATK%) * (1 + BurstDMG%) * (1 + CritDMG%)
+
+===========
+= BONUSES =
+===========
+
+6 bonus total, max 3 repeated stats.
+When a stat is repeated 3 times, +50% bonus.
+
+(HP%) (ATK% ATK%) (BURST% BURST% BURST%)
+ => BURST% gets a +50% bonus
+(HP% HP%) (ATK% ATK%) (BURST% BURST%)
+ => None get a bonus
+
+==============
+= BASE STATS =
+==============
+
+HP  = Level * 100 + (floor(Level / 10) * 1000)
+ATK = Level * 10  + (floor(Level / 10) * 100)
+
+=================
+= XP and LEVELS =
+=================
+
+XP-to-next  = Level * 1000 + (floor(Level / 10) * 10000)
+XP-per-kill = XP-to-next / Level
+
+================
+= ENEMY LEVELS =
+================
+* AreaDanger is a number with the range (0-10) that represents
+ how dangerous the area the player is currently standing on is.
+
+Enemy Level = Level + (AreaDanger * 2)
+
+===============
+= BONUS RATES =
+===============
+
+Base BONUS%
+ => 80% chance the base is your Level
+ => 15% chance the base is your Level + 10
+ => 5% chance the base is your Level + 25
+
+On top of the Base BONUS%, a Random BONUS% is added on top.
+ => Random BONUS% range from 0% to 5%
+
+Which means, the maximum you will get is:
+ => Level + 25 + 5
+
+
+=====================
+= ABILITY BURST DMG =
+=====================
+Most abilities deal Burst DMG when casted.
+Some can heal your character.
+Some provide a shield.
+Some enter into Burst Mode.
+
+4-star abilities:
+ => Deal 100% of ATK as Burst DMG
+ => ± 50%
+
+5-star abilities:
+ => Deal 200% of ATK as Burst DMG
+ => ± 50%
+
+6-star abilities:
+ => Deal 300% of ATK as Burst DMG
+ => ± 50%
+
+Additionally, some abilities can enter Burst Mode:
+ => 125% of ATK is dealt on hit as Burst DMG.
+ => ± 50%
+
+Some abilities can heal you:
+ => 10% of Max HP
+ => ± 5%
+
+Some abilities can provide a shield to you:
+ => 50% of Max HP
+ => ± 25%
