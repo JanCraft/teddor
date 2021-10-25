@@ -5,18 +5,21 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
     [Header("Movement")]
-    public Direction direction;
-    public float speed = 5f;
-    public Sprite[] sprites;
+    public float speed = 6f;
+    public float turnSmoothTime = 0.1f;
+    private float turnSmoothVelocity;
+    private float velocity = 0f;
+    public Transform cam;
+    public CharacterController controller;
 
     [Header("Effects")]
     public GameObject slashPrefab;
     public GameObject burstSlashPrefab;
 
-    private float animprog = 0f;
-    private bool animrun = false;
-    private SpriteRenderer sr;
-    private Vector2 target = Vector2.zero;
+    public Transform slasher;
+    public TrailRenderer slasherTrail;
+    public ParticleSystem slasherParticles;
+    private float attackCD;
 
     [Header("Stats")]
     public PlayerStats stats;
@@ -25,26 +28,21 @@ public class PlayerController : MonoBehaviour {
     public Transform hpbar;
     public Transform hpdmgbar;
 
-    void Start() {
-        sr = GetComponent<SpriteRenderer>();
+    [Header("Ability")]
+    public Image abilityProgress;
+    public Image abilityIcon;
+    private float abilityCD = 0f;
 
+    void Start() {
         stats.Calculate();
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Update() {
-        sr.sprite = sprites[(int) direction * 3 + GetAnimPoint(animprog)];
-
-        if (animrun) {
-            animprog += Time.deltaTime * speed * 3f;
-            if (animprog > 4) {
-                animprog = 0;
-                animrun = false;
-            }
-        }
-
-        transform.localPosition = Vector2.Lerp(transform.localPosition, target, Time.deltaTime * speed);
-
         if (!PauseMenu.open) Controls();
+        if (!PauseMenu.open) AbilityControls();
 
         Vector3 hpbarscale = new Vector3(stats.hp / stats.maxhp, 1f, 1f);
         hpbar.localScale = hpbarscale;
@@ -52,50 +50,66 @@ public class PlayerController : MonoBehaviour {
         lvltxt.text = "Lv. " + stats.level;
     }
 
+    void AbilityControls() {
+        abilityProgress.fillAmount = 1f - (abilityCD / stats.ability.GetCooldown());
+        if (abilityCD > 0f) abilityCD -= Time.deltaTime;
+        if (Input.GetMouseButtonDown(1) && abilityCD <= 0f) {
+            abilityCD = stats.ability.GetCooldown();
+            stats.ability.Perform(this);
+        }
+    }
+
     void Controls() {
-        if (Input.GetKeyDown(KeyCode.A)) {
-            direction = Direction.LEFT;
-            animrun = true;
-            if (CheckCollision(target.x - .16f, target.y)) {
-                target.x -= .16f;
-            }
-        } else if (Input.GetKeyDown(KeyCode.D)) {
-            direction = Direction.RIGHT;
-            animrun = true;
-            if (CheckCollision(target.x + .16f, target.y)) {
-                target.x += .16f;
-            }
-        } else if (Input.GetKeyDown(KeyCode.W)) {
-            direction = Direction.UP;
-            animrun = true;
-            if (CheckCollision(target.x, target.y + .16f)) {
-                target.y += .16f;
-            }
-        } else if (Input.GetKeyDown(KeyCode.S)) {
-            direction = Direction.DOWN;
-            animrun = true;
-            if (CheckCollision(target.x, target.y - .16f)) {
-                target.y -= .16f;
-            }
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+        Vector3 dir = new Vector3(horizontal, 0f, vertical).normalized;
+        if (dir.magnitude >= 0.1f) {
+            float targetAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            controller.Move(moveDir.normalized * speed * Time.deltaTime);
         }
 
-        if (Input.GetMouseButtonDown(0)) {
-            Enemy[] enemies = FindObjectsOfType<Enemy>();
+        if (attackCD > 0f) {
+            attackCD -= Time.deltaTime;
 
-            Enemy proximity = null;
-            float proximitydst = 1.25f;
+            float initial = slasher.localEulerAngles.y;
+            slasher.localEulerAngles += Vector3.up * 360f * 5f * Time.deltaTime;
+            if (initial > slasher.localEulerAngles.y) {
+                slasherTrail.emitting = false;
+            }
+        }
+        if (Input.GetMouseButtonDown(0) && attackCD <= 0f) {
+            slasher.localEulerAngles = Vector3.up * Random.value * 90f;
+            slasherTrail.Clear();
+            slasherTrail.emitting = true;
+            slasherParticles.Play();
+
+            Enemy[] enemies = FindObjectsOfType<Enemy>();
+            List<Enemy> hittable = new List<Enemy>();
             foreach (Enemy enemy in enemies) {
-                float dst = Vector2.Distance(enemy.transform.position, transform.position);
-                if (dst < proximitydst) {
-                    proximitydst = dst;
-                    proximity = enemy;
+                if (Vector3.Distance(transform.position, enemy.transform.position) < 2.25f) {
+                    hittable.Add(enemy);
                 }
             }
-            if (proximity != null) {
-                GameObject slo = Instantiate(slashPrefab);
-                slo.transform.position = proximity.transform.position;
-                proximity.hp -= GetDamage();
+            foreach (Enemy enemy in hittable) {
+                enemy.TakeDamage(GetDamage(), transform.position);
+                GameObject obj = Instantiate(slashPrefab);
+                Vector3 midp = Vector3.Lerp(transform.position, enemy.transform.position, .6f);
+                midp.y += .5f;
+                obj.transform.position = midp;
             }
+
+            attackCD = .25f;
+        }
+
+        velocity -= Time.deltaTime * 9.81f;
+        controller.Move(Vector3.up * velocity * Time.deltaTime);
+        if (controller.isGrounded) {
+            velocity = -.2f;
         }
     }
 
@@ -114,35 +128,23 @@ public class PlayerController : MonoBehaviour {
         stats.hp = Mathf.Max(stats.hp, 0f);
     }
 
-    float GetDamage(bool burst = false) {
+    public float GetDamage(bool burst = false, float multiplier = 1f) {
         float final = stats.atk;
 
+        final *= multiplier;
+
         if (burst)
-            final *= 1f + stats.GetTotalBuff(PlayerBuffType.BURSTDMG);
+            final *= 1f + stats.GetTotalBuff(PlayerBuffType.BURST_DMG);
 
         if (Random.value < stats.critrate)
             final *= 1f + stats.critdmg;
 
         return final;
     }
-
-    bool CheckCollision(float x, float y) {
-        return true;
-    }
-
-    int GetAnimPoint(float anim) {
-        int floor = Mathf.FloorToInt(anim);
-        if (floor == 3) return 1;
-        return floor;
-    }
-}
-
-public enum Direction {
-    DOWN, LEFT, RIGHT, UP
 }
 
 public enum PlayerBuffType {
-    HP, ATK, CRITRATE, CRITDMG, BURSTDMG
+    HP, ATK, CRIT_RATE, CRIT_DMG, BURST_DMG
 }
 
 [System.Serializable]
@@ -150,6 +152,89 @@ public class PlayerBuff {
     public PlayerBuffType type;
     public float value;
     public bool reforged;
+    public int identifier = new System.Random().Next();
+
+    public bool Equality(PlayerBuff obj) {
+        return obj.value == value && obj.type == type && obj.reforged == reforged && obj.identifier == identifier;
+    }
+}
+
+public enum PlayerAbilityType {
+    NONE, RANGED, SHIELD, HEAL, BLINK, METEOR, EARTHQUAKE, BOLT
+}
+
+[System.Serializable]
+public class PlayerAbility {
+    public PlayerAbilityType type;
+    public int level;
+
+    public int GetStarCount() {
+        if (type == PlayerAbilityType.METEOR || type == PlayerAbilityType.EARTHQUAKE) {
+            return 5;
+        } else if (type == PlayerAbilityType.BOLT) {
+            return 6;
+        }
+
+        return 4;
+    }
+
+    public float GetCooldown() {
+        switch (type) {
+            case PlayerAbilityType.RANGED:
+                return 5f;
+            case PlayerAbilityType.SHIELD:
+                return 12.5f;
+            case PlayerAbilityType.HEAL:
+                return 15f;
+            case PlayerAbilityType.BLINK:
+                return 4.5f;
+            case PlayerAbilityType.METEOR:
+                return 13.5f;
+            case PlayerAbilityType.EARTHQUAKE:
+                return 14.5f;
+            case PlayerAbilityType.BOLT:
+                return 18.5f;
+            default:
+                return 5f;
+        }
+    }
+
+    public void Perform(PlayerController player) {
+        if (type == PlayerAbilityType.RANGED) {
+            Enemy[] enemies = GameObject.FindObjectsOfType<Enemy>();
+            Enemy targetenemy = null;
+            float dstenemy = 25f;
+            foreach (Enemy enemy in enemies) {
+                float dst = Vector3.Distance(player.transform.position, enemy.transform.position);
+                if (dst < dstenemy) {
+                    dstenemy = dst;
+                    targetenemy = enemy;
+                }
+            }
+            if (targetenemy != null) {
+                targetenemy.TakeDamage(player.GetDamage(true, 1f + (level-1) * .5f), player.transform.position);
+                GameObject.Instantiate(player.burstSlashPrefab).transform.position = targetenemy.transform.position;
+            }
+        }
+    }
+
+    public bool Equality(PlayerAbility obj) {
+        return obj.level == level && obj.type == type;
+    }
+}
+
+public enum PlayerSoulShardType {
+    NONE, CROWNED, WINGED, DEPTHS, MAGE, DEMON
+}
+
+[System.Serializable]
+public class PlayerSoulShard {
+    public PlayerSoulShardType type;
+    public int level = 1;
+
+    public bool Equality(PlayerSoulShard obj) {
+        return obj.level == level && obj.type == type;
+    }
 }
 
 [System.Serializable]
@@ -158,6 +243,8 @@ public class PlayerStats {
     public float xp = 0;
 
     public List<PlayerBuff> buffs;
+    public PlayerAbility ability = null;
+    public PlayerSoulShard soulShard = null;
 
     public float hp = 100f;
     public float maxhp = 100f;
@@ -176,8 +263,8 @@ public class PlayerStats {
 
         atk *= 1f + GetTotalBuff(PlayerBuffType.ATK);
         maxhp *= 1f + GetTotalBuff(PlayerBuffType.HP);
-        critrate += GetTotalBuff(PlayerBuffType.CRITRATE);
-        critdmg += GetTotalBuff(PlayerBuffType.CRITDMG);
+        critrate += GetTotalBuff(PlayerBuffType.CRIT_RATE);
+        critdmg += GetTotalBuff(PlayerBuffType.CRIT_DMG);
     }
 
     public void CheckLevelUp() {
