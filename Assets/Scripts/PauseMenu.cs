@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour {
     public static bool open = false;
+    private bool switching;
     public GameObject menu;
     public RectTransform selected;
     private int selectedIdx = 0;
@@ -16,6 +15,12 @@ public class PauseMenu : MonoBehaviour {
     public GameObject buffsMenu;
     public GameObject abilitiesMenu;
     public GameObject shardsMenu;
+
+    private void Start() {
+        open = false;
+        AudioListener.volume = PlayerPrefs.GetFloat("teddor.volume", 1f);
+        QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("teddor.quality", 5));
+    }
 
     void Update() {
         menu.SetActive(open);
@@ -43,9 +48,9 @@ public class PauseMenu : MonoBehaviour {
             else if (selectedIdx == 1) buffsOpen = true;
             else if (selectedIdx == 2) abilitiesOpen = true;
             else if (selectedIdx == 3) shardsOpen = true;
-            else if (selectedIdx == 4) {
-                open = false;
-                SceneManager.LoadSceneAsync(0);
+            else if (selectedIdx == 4 && !switching) {
+                switching = true;
+                LoadingScreen.SwitchScene(0);
             }
         }
 

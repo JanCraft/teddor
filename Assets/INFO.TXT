@@ -31,7 +31,7 @@ ATK = Level * 10  + (floor(Level / 10) * 100)
 =================
 
 XP-to-next  = Level * 1000 + (floor(Level / 10) * 10000)
-XP-per-kill = XP-to-next / Level
+XP-per-kill = XP-to-next / Level / 100
 
 ================
 = ENEMY LEVELS =
@@ -70,12 +70,12 @@ Some enter into Burst Mode.
  => ± 50%
 
 5-star abilities:
- => Deal 200% of ATK as Burst DMG
+ => Deal 300% of ATK as Burst DMG
  => ± 50%
 
 6-star abilities:
- => Deal 300% of ATK as Burst DMG
- => ± 50%
+ => Deal 500% of ATK as Burst DMG
+ => ± 65%
 
 Additionally, some abilities can enter Burst Mode:
  => 125% of ATK is dealt on hit as Burst DMG.
@@ -94,26 +94,29 @@ Some abilities can provide a shield to you:
 ===============
 Soul shards are cosmetics with powerful abilities. Soul shards can only
 activate their abilities by charging them. Soul Shards gain +1 charge when hitting
-an enemy with normal attacks and gain +100 charge when defeating an enemy.
+an enemy and gain +50 charge when defeating an enemy.
+
+Base Charge gets reduce by 5% every level over one.
+Base Charge cannot be lower than 100.
 
 "Soul Shard of the Crowned": Enters a 10s Burst Mode, normal attacks
  deal 200% of ATK as Burst DMG. Cannot stack.
  Base Charge: 1000
 
-"Soul Shard of the Winged": Enters a 5s Burst Mode, normal attacks deal
+"Soul Shard of the Winged": Enters a 15s Burst Mode, normal attacks deal
  100% of ATK as Burst DMG. Cannot stack.
- Additionally, increases movement speed by 50% for 6s. Can stack.
+ Additionally, increases movement speed by 50% for 10s. Can stack.
+ Additionally, reduces Ability CD by 5s for 10s.
  Base Charge: 2000
 
-"Soul Shard of the Depths": Deals 30% of the HP of enemies as Burst DMG.
- The damage dealt to enemies is capped at 300% of ATK.
- Base Charge: 500
+"Soul Shard of the Depths": Deals 35% of the Max HP of enemies in a 10m radius
+ as Direct DMG. The damage dealt to enemies is not capped.
+ Base Charge: 1500
 
-"Soul Shard of the Mage": All abilities CD is decreased by 1.5s for 10s.
+"Soul Shard of the Mage": Ability CD is decreased by 1.5s for 10s.
  Can stack until CD is 1s.
  Base Charge: 500
 
-"Soul Shard of the Demon": All damage received in a period of 5s is bypassed.
- Additionally, when the 5s period ends, deals all bypassed damage as Burst DMG.
- Cannot stack.
+"Soul Shard of the Demon": Deals 150% of Max HP as DMG to enemies in a 10m radius
+ Additionally hurts the player 30% of their HP.
  Base Charge: 1500

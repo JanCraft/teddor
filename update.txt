@@ -1,1 +1,0 @@
-https://raw.githubusercontent.com/JanCraft/teddor/CHANNEL/gamedef.json

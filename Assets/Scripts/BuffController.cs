@@ -11,6 +11,10 @@ public class BuffController : MonoBehaviour {
     public PlayerController player;
     public List<PlayerBuff> buffs;
 
+    private void Start() {
+        TranslateKey.Init();
+    }
+
     void OnEnable() {
         alldata.text = GetBuffsAsText();
     }
@@ -65,7 +69,7 @@ public class BuffController : MonoBehaviour {
         }
 
         if (buffs.Count == 0) {
-            outp += "<color=red>no buffs available</color>";
+            outp += "<color=red>" + TranslateKey.Translate("ui.menu.nobuffs") + "</color>";
         }
 
         return outp;

@@ -10,6 +10,10 @@ public class SoulShardController : MonoBehaviour {
     public PlayerController player;
     public List<PlayerSoulShard> shards;
 
+    private void Start() {
+        TranslateKey.Init();
+    }
+
     void OnEnable() {
         alldata.text = GetShardsAsText();
     }
@@ -55,7 +59,7 @@ public class SoulShardController : MonoBehaviour {
         }
 
         if (shards.Count == 0) {
-            outp += "<color=red>no shards available</color>";
+            outp += "<color=red>" + TranslateKey.Translate("ui.pause.noshards") + "</color>";
         }
 
         return outp;
