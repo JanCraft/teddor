@@ -76,7 +76,7 @@ public class BuffController : MonoBehaviour {
         }
 
         if (buffs.Count == 0) {
-            outp += "<color=red>" + TranslateKey.Translate("ui.menu.nobuffs") + "</color>";
+            outp += "<color=red>" + TranslateKey.Translate("ui.pause.nobuffs") + "</color>";
         }
 
         return outp;

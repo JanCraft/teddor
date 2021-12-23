@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using System.Security.Cryptography;
+using SimpleFileBrowser;
 
 public class SettingsMenu : MonoBehaviour {
     public Text versionTxt;
@@ -32,28 +33,35 @@ public class SettingsMenu : MonoBehaviour {
     }
 
     public void SetVolume(float volume) {
+        FileBrowser.HideDialog();
         AudioListener.volume = volume;
         volumeF.value = volume;
         PlayerPrefs.SetFloat("teddor.volume", volume);
     }
 
     public void SetQuality(float quality) {
+        FileBrowser.HideDialog();
         QualitySettings.SetQualityLevel((int)quality);
         qualityI.value = (int) quality;
         PlayerPrefs.SetInt("teddor.quality", (int) quality);
     }
 
     public void LogOut() {
+        FileBrowser.HideDialog();
         StartCoroutine(_LogOut());
     }
 
     public void OpenWeb(string url) {
+        FileBrowser.HideDialog();
         Application.OpenURL(url);
     }
 
     public void ImportGiftFile() {
-        NativeFilePicker.PickFile(path => {
-            if (path != null) {
+        FileBrowser.SetFilters(true, ".tgf");
+        FileBrowser.SetDefaultFilter(".tgf");
+        FileBrowser.ShowLoadDialog((paths) => {
+            if (paths.Length > 0) {
+                var path = paths[0];
                 string b64enc = System.IO.File.ReadAllText(path);
                 string b64dec = System.Text.Encoding.UTF8.GetString(System.Convert.FromBase64String(b64enc));
                 TgfRequest tr = JsonUtility.FromJson<TgfRequest>(b64dec);
@@ -84,7 +92,11 @@ public class SettingsMenu : MonoBehaviour {
                     }
                 }
             }
-        }, new string[] { ".tgf" });
+        }, () => { }, FileBrowser.PickMode.Files, false);
+    }
+
+    public void CloseDialog() {
+        FileBrowser.HideDialog();
     }
 
     public static byte[] StringToByteArray(string hex) {
@@ -107,6 +119,7 @@ public class SettingsMenu : MonoBehaviour {
     }
 
     public void ChangeLang() {
+        FileBrowser.HideDialog();
         string curr = TranslateKey.lang;
         string trgt = curr;
         if (curr == "en") {

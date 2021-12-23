@@ -67,7 +67,7 @@ public class WellOfDepthsController : MonoBehaviour {
             player.canDie = true;
             isInChallenge = false;
             foreach (Enemy e in activeEnemies) {
-                if (e != null) Destroy(e);
+                if (e != null) Destroy(e.gameObject);
             }
             activeEnemies.Clear();
             scores.StartCoroutine(scores.Fetch());
