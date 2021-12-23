@@ -1,0 +1,43 @@
+ui.quest.none:
+  en: "<b>Open World</b>\n no active quest"
+  es: "<b>Mundo Abierto</b>\n sin misiones"
+
+ui.quest.1.01:
+  en: "<b>Chapter I</b>\n The Start"
+  es: "<b>Capítulo I</b>\n El Inicio"
+
+ui.quest.1.02:
+  en: "<b>Chapter I</b>\n talk to the mage"
+  es: "<b>Capítulo I</b>\n habla con el mago"
+
+ui.quest.1.03:
+  en: "<b>Chapter I</b>\n the crisis"
+  es: "<b>Capítulo I</b>\n la crisis"
+
+ui.quest.1.04:
+  en: "<b>Chapter I</b>\n corruption"
+  es: "<b>Capítulo I</b>\n corrupción"
+
+ui.quest.1.05:
+  en: "<b>Chapter I</b>\n the red slime"
+  es: "<b>Capítulo I</b>\n el slime rojo"
+
+ui.quest.1.06:
+  en: "<b>Chapter I</b>\n laboratory"
+  es: "<b>Capítulo I</b>\n laboratorio"
+
+ui.quest.1.07:
+  en: "<b>Chapter I</b>\n perpetual room"
+  es: "<b>Capítulo I</b>\n sala perpétua"
+
+ui.quest.1.08:
+  en: "<b>Chapter I</b>\n perpetual room"
+  es: "<b>Capítulo I</b>\n sala perpétua"
+
+ui.quest.1.09:
+  en: "<b>Chapter I</b>\n outside the lab"
+  es: "<b>Capítulo I</b>\n fuera del laboratorio"
+
+ui.quest.1.10:
+  en: "<b>Chapter I</b>\n conclusion"
+  es: "<b>Capítulo I</b>\n conclusion"

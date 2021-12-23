@@ -8,6 +8,8 @@ public class MainMenuController : MonoBehaviour {
     public bool canplay;
     public bool willplay;
 
+    public LoginController login;
+
     private string statustarget = "";
     public AudioSource statusDelay;
     private string statuscurrent = "";
@@ -32,7 +34,7 @@ public class MainMenuController : MonoBehaviour {
 
         statusText.text = "< " + statuscurrent + " >";
 
-        if (Input.GetKeyDown(KeyCode.Space) && canplay && !willplay) {
+        if (Input.GetKeyDown(KeyCode.Space) && canplay && !willplay && !login.open) {
             willplay = true;
             SetStatusTarget(" ");
             LoadingScreen.SwitchScene(1);

@@ -16,6 +16,9 @@ public class PauseMenu : MonoBehaviour {
     public GameObject abilitiesMenu;
     public GameObject shardsMenu;
 
+    public AudioSource slideSfx;
+    public AudioSource clickSfx;
+
     private void Start() {
         open = false;
         AudioListener.volume = PlayerPrefs.GetFloat("teddor.volume", 1f);
@@ -34,16 +37,19 @@ public class PauseMenu : MonoBehaviour {
             shardsOpen = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        if (Input.GetKeyDown(KeyCode.Escape) && !Banner.playing) {
             open = !open;
             selectedIdx = 0;
         } else if (Input.GetKeyDown(KeyCode.UpArrow) && open && !buffsOpen && !abilitiesOpen && !shardsOpen) {
             selectedIdx--;
+            slideSfx.Play();
             if (selectedIdx < 0) selectedIdx = 5 + selectedIdx;
         } else if (Input.GetKeyDown(KeyCode.DownArrow) && open && !buffsOpen && !abilitiesOpen && !shardsOpen) {
             selectedIdx++;
+            slideSfx.Play();
             selectedIdx %= 5;
         } else if (Input.GetKeyDown(KeyCode.Return) && open && !buffsOpen && !abilitiesOpen && !shardsOpen) {
+            clickSfx.Play();
             if (selectedIdx == 0) open = false;
             else if (selectedIdx == 1) buffsOpen = true;
             else if (selectedIdx == 2) abilitiesOpen = true;

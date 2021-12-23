@@ -7,6 +7,9 @@ public class SoulShardController : MonoBehaviour {
     public Text alldata;
     private int cursor;
 
+    public AudioSource slideSfx;
+    public AudioSource clickSfx;
+
     public PlayerController player;
     public List<PlayerSoulShard> shards;
 
@@ -24,13 +27,16 @@ public class SoulShardController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.UpArrow)) {
             cursor--;
             changed = true;
+            slideSfx.Play();
         } else if (Input.GetKeyDown(KeyCode.DownArrow)) {
             cursor++;
             changed = true;
+            slideSfx.Play();
         } else if (Input.GetKeyDown(KeyCode.Return)) {
             if (shards.Count > 0) {
                 PlayerSoulShard shard = shards[cursor];
                 player.stats.soulShard = shard;
+                clickSfx.Play();
                 changed = true;
             }
         }
@@ -46,8 +52,8 @@ public class SoulShardController : MonoBehaviour {
         string outp = "";
 
         int start = 0;
-        if (cursor > 10) {
-            start = cursor - 10;
+        if (cursor > 9) {
+            start = cursor - 9;
         }
         int end = start + Mathf.Min(shards.Count-start, 10);
         for (int i = start; i < end; i++) {

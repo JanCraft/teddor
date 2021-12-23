@@ -36,11 +36,23 @@ public class Dialog : MonoBehaviour {
         }
     }
 
+    public void Trigger() {
+        trigger = true;
+    }
+
+    public void DeTrigger() {
+        trigger = false;
+    }
+
     void Refresh() {
         DialogController.instance.next = false;
         DialogController.instance.isOpen = true;
         DialogController.instance.hasNext = current < contents.Length - 1;
-        DialogController.instance.speakerTxt.text = speakers[current];
+        if (speakers[current].Trim() == "") {
+            DialogController.instance.speakerTxt.text = "";
+        } else {
+            DialogController.instance.speakerTxt.text = TranslateKey.Translate(speakers[current]);
+        }
         DialogController.instance.contentslow = TranslateKey.Translate(contents[current]);
         DialogController.instance.ConsumeCache();
 

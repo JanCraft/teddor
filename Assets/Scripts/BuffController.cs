@@ -8,6 +8,9 @@ public class BuffController : MonoBehaviour {
     public Text alldata;
     private int cursor;
 
+    public AudioSource slideSfx;
+    public AudioSource clickSfx;
+
     public PlayerController player;
     public List<PlayerBuff> buffs;
 
@@ -25,19 +28,23 @@ public class BuffController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.UpArrow)) {
             cursor--;
             changed = true;
+            slideSfx.Play();
         } else if (Input.GetKeyDown(KeyCode.DownArrow)) {
             cursor++;
             changed = true;
+            slideSfx.Play();
         } else if (Input.GetKeyDown(KeyCode.Return)) {
             if (buffs.Count > 0) {
                 PlayerBuff buff = buffs[cursor];
-                if (player.stats.buffs.Contains(buff)) {
-                    player.stats.buffs.Remove(buff);
+                PlayerBuff buffi = FindInReturn(buff, player.stats.buffs);
+                if (buffi != null) {
+                    player.stats.buffs.Remove(buffi);
                 } else {
                     if (player.stats.buffs.Count < 6) {
                         player.stats.buffs.Add(buff);
                     }
                 }
+                clickSfx.Play();
                 player.stats.Calculate();
                 changed = true;
             }
@@ -54,8 +61,8 @@ public class BuffController : MonoBehaviour {
         string outp = "";
 
         int start = 0;
-        if (cursor > 10) {
-            start = cursor - 10;
+        if (cursor > 9) {
+            start = cursor - 9;
         }
         int end = start + Mathf.Min(buffs.Count, 10);
         for (int i = start; i < end; i++) {
@@ -79,5 +86,11 @@ public class BuffController : MonoBehaviour {
         foreach (PlayerBuff itm in list)
             if (itm.Equality(obj)) return true;
         return false;
+    }
+
+    private PlayerBuff FindInReturn(PlayerBuff obj, List<PlayerBuff> list) {
+        foreach (PlayerBuff itm in list)
+            if (itm.Equality(obj)) return itm;
+        return null;
     }
 }

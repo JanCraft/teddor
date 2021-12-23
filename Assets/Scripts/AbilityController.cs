@@ -7,6 +7,9 @@ public class AbilityController : MonoBehaviour {
     public Text alldata;
     private int cursor;
 
+    public AudioSource slideSfx;
+    public AudioSource clickSfx;
+
     public PlayerController player;
     public List<PlayerAbility> abilities;
 
@@ -20,13 +23,16 @@ public class AbilityController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.UpArrow)) {
             cursor--;
             changed = true;
+            slideSfx.Play();
         } else if (Input.GetKeyDown(KeyCode.DownArrow)) {
             cursor++;
             changed = true;
+            slideSfx.Play();
         } else if (Input.GetKeyDown(KeyCode.Return)) {
             PlayerAbility ability = abilities[cursor];
             player.stats.ability = ability;
             changed = true;
+            clickSfx.Play();
         }
 
         if (changed) {
@@ -40,8 +46,8 @@ public class AbilityController : MonoBehaviour {
         string outp = "";
 
         int start = 0;
-        if (cursor > 10) {
-            start = cursor - 10;
+        if (cursor > 9) {
+            start = cursor - 9;
         }
         int end = start + Mathf.Min(abilities.Count, 10);
         for (int i = start; i < end; i++) {

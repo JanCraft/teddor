@@ -12,10 +12,10 @@ public class PlayerController : MonoBehaviour {
     public float turnSmoothTime = 0.1f;
     private float turnSmoothVelocity;
     private float velocity = 0f;
+    private float dashTime = 0f;
     public Transform cam;
     public CharacterController controller;
     public Animation anim;
-    public Cinemachine.CinemachineBrain camBrain;
 
     public AudioSource hitAudioSource;
     public AudioClip[] hitSoundClips;
@@ -30,9 +30,14 @@ public class PlayerController : MonoBehaviour {
     public Transform slasher;
     public TrailRenderer slasherTrail;
     public ParticleSystem slasherParticles;
+
+    public Banner banner;
+    public ForgeryController forgery;
     private Vector3 attackLock;
     private float attackCD;
-    private bool hasDied;
+    public bool hasDied;
+    public bool canDie = true;
+    private float iframes;
 
     [Header("Stats")]
     public PlayerStats stats;
@@ -48,7 +53,6 @@ public class PlayerController : MonoBehaviour {
     public GameObject enemyhud;
     public Text enemylvl;
     public Transform enemyhp;
-    private float lasthittime = 0f;
     [HideInInspector]
     public Enemy lasthitenemy;
 
@@ -85,13 +89,11 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Update() {
-        if (!PauseMenu.open && !dialog.isOpen && !soulShardAnimationPause && !hasDied) Controls();
-        if (!PauseMenu.open && !dialog.isOpen && !soulShardAnimationPause && !hasDied) AbilityControls();
+        if (!PauseMenu.open && !dialog.isOpen && !soulShardAnimationPause && !hasDied && !forgery.enabled && !banner.open) Controls();
+        if (!PauseMenu.open && !dialog.isOpen && !soulShardAnimationPause && !hasDied && !forgery.enabled && !banner.open) AbilityControls();
 
         cinematicUI.SetActive(soulShardAnimationPause);
         ingameUI.SetActive(!soulShardAnimationPause);
-
-        camBrain.enabled = !PauseMenu.open && !dialog.isOpen && !soulShardAnimationPause && !hasDied;
 
         Vector3 hpbarscale = new Vector3(stats.hp / stats.maxhp, 1f, 1f);
         hpbar.localScale = hpbarscale;
@@ -106,18 +108,12 @@ public class PlayerController : MonoBehaviour {
         if (lasthitenemy != null) {
             enemylvl.text = "Lv. " + lasthitenemy.level;
             enemyhp.localScale = new Vector3(lasthitenemy.hp / lasthitenemy.maxhp, 1f, 1f);
-
-            lasthittime += Time.deltaTime;
-            if (lasthittime > 5f) {
-                lasthitenemy = null;
-                lasthittime = 0f;
-            }
         }
         enemyhud.SetActive(lasthitenemy != null);
 
         if (stats.hp <= 0f && !hasDied) {
             hasDied = true;
-            LoadingScreen.SwitchScene(2);
+            if (canDie) LoadingScreen.SwitchScene(2);
         }
 
         int ssgc = soulShardGraphics.transform.childCount;
@@ -136,14 +132,22 @@ public class PlayerController : MonoBehaviour {
             soulChargeProgress.fillAmount = tfill;
         }
 
-        if (stats.hp < stats.maxhp * .99f) {
+        if (stats.hp < stats.maxhp * .99f && stats.hp > 10f) {
             stats.hp += .001f * stats.maxhp * Time.deltaTime;
         }
+
+        if (iframes > 0f) iframes -= Time.deltaTime;
     }
 
     public void Teleport(Vector3 worldPos) {
         controller.enabled = false;
         transform.position = worldPos;
+        controller.enabled = true;
+    }
+
+    public void Teleport(Transform worldPos) {
+        controller.enabled = false;
+        transform.position = worldPos.position;
         controller.enabled = true;
     }
 
@@ -190,7 +194,7 @@ public class PlayerController : MonoBehaviour {
         float vertical = Input.GetAxisRaw("Vertical");
         Vector3 dir = new Vector3(horizontal, 0f, vertical).normalized;
         bSpeed = Mathf.Lerp(bSpeed, speed, 7.5f * Time.deltaTime);
-        if (dir.magnitude >= 0.1f && attackCD <= .05f) {
+        if (dir.magnitude >= 0.1f) {
             if (!anim.isPlaying) anim.Play();
             float targetAngle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
@@ -199,6 +203,13 @@ public class PlayerController : MonoBehaviour {
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             controller.Move(moveDir.normalized * bSpeed * speedmult * Time.deltaTime);
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && dashTime <= 0f) {
+            iframes = .25f;
+            bSpeed *= 5f;
+            attackCD = .1f;
+            dashTime = .75f;
         }
 
         if (attackCD > 0f) {
@@ -214,6 +225,7 @@ public class PlayerController : MonoBehaviour {
                 slasherParticles.Stop();
             }
         }
+
         if (Input.GetMouseButtonDown(0) && attackCD <= 0f) {
             Enemy[] enemies = FindObjectsOfType<Enemy>();
             Enemy tohit = null;
@@ -266,6 +278,8 @@ public class PlayerController : MonoBehaviour {
             velocity = -.2f;
         }
 
+        if (dashTime > 0f) dashTime -= Time.deltaTime;
+
         if (speedmult > 1f) {
             if (speedmulttime > 0f) {
                 speedmulttime -= Time.deltaTime;
@@ -304,7 +318,7 @@ public class PlayerController : MonoBehaviour {
             soulCharge++;
 
             if (soulCharge >= stats.soulShard.ChargeMax()) {
-                soulCharge -= stats.soulShard.ChargeMax();
+                soulCharge = 0;
                 soulShardAnimationPause = true;
                 soulShardAudio.Play();
                 StartCoroutine(DisableSoulShardAnimPause());
@@ -322,6 +336,7 @@ public class PlayerController : MonoBehaviour {
 
     public void TakeDamage(float amount) {
         if (amount <= 0f) return;
+        if (iframes > 0f) return;
         if (shieldValue > 0f) {
             shieldValue -= amount * .5f;
             if (shieldValue < 0f) {
@@ -359,7 +374,7 @@ public class PlayerController : MonoBehaviour {
 
     private void OnTriggerStay(Collider other) {
         if (other.CompareTag("Water")) {
-            TakeDamage(Time.deltaTime * stats.maxhp * 5f);
+            stats.hp = 0f;
         }
     }
 }
@@ -402,7 +417,7 @@ public class PlayerAbility {
     public float GetCooldown() {
         switch (type) {
             case PlayerAbilityType.RANGED:
-                return 5f;
+                return 1.5f;
             case PlayerAbilityType.SHIELD:
                 return 25f;
             case PlayerAbilityType.HEAL:
@@ -421,6 +436,8 @@ public class PlayerAbility {
     }
 
     public void Perform(PlayerController player) {
+        float level = Mathf.Min(player.stats.level, this.level);
+
         if (type == PlayerAbilityType.RANGED) {
             Enemy[] enemies = GameObject.FindObjectsOfType<Enemy>();
             Enemy targetenemy = null;
@@ -434,12 +451,12 @@ public class PlayerAbility {
             }
             if (targetenemy != null) {
                 player.lasthitenemy = targetenemy;
-                targetenemy.TakeDamage(player.GetDamage(true, 1f + (level-1) * .5f), player);
+                targetenemy.TakeDamage(player.GetDamage(true, .5f + (level-1) * .02f), player);
                 player.OnHitEnemy(targetenemy);
                 GameObject.Instantiate(player.burstSlashPrefab).transform.position = targetenemy.transform.position;
             }
         } else if (type == PlayerAbilityType.SHIELD) {
-            float mult = .5f + (level - 1) * .1f;
+            float mult = Mathf.Clamp01(.25f + (level - 1) * .05f);
             player.shieldValue = player.stats.maxhp * mult;
         } else if (type == PlayerAbilityType.HEAL) {
             float mult = .1f + (level - 1) * .05f;
@@ -585,6 +602,8 @@ public class PlayerStats {
     public float critrate = .25f;
     public float critdmg = .5f;
 
+    public long checksum;
+
     public void Calculate() {
         CheckLevelUp();
 
@@ -600,7 +619,9 @@ public class PlayerStats {
     }
 
     public void CheckLevelUp() {
-        float xptonext = level * 1000f + (Mathf.Floor(level / 10f) * 10000f);
+        if (level >= 99) return; // level limited to 99 (this version)
+
+        float xptonext = level * 100f;
         if (xp >= xptonext) {
             xp -= xptonext;
             level++;
@@ -621,6 +642,16 @@ public class PlayerStats {
         }
 
         if (cnt == 3) acc += 50f;
+        acc = Mathf.Min(acc, (level + 30) * 3f);
         return acc / 100f;
+    }
+
+    public PlayerStats Verify() {
+        checksum = Checksum();
+        return this;
+    }
+
+    public long Checksum() {
+        return (long) (level * (1 + xp) * 32873 * 758364572) % 758364572743;
     }
 }
