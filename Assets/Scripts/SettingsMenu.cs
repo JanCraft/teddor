@@ -88,7 +88,7 @@ public class SettingsMenu : MonoBehaviour {
 
                         info.bstars += tp.bstars;
 
-                        System.IO.File.WriteAllText(Application.persistentDataPath + "/" + gamedef.channel + "resources.dat", JsonUtility.ToJson(info));
+                        System.IO.File.WriteAllText(Application.persistentDataPath + "/" + gamedef.channel + "resources.dat", JsonUtility.ToJson(info.Verify()));
                     }
                 }
             }
