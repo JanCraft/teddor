@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 60cc932d2e42ea941b66733732dd9a93
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Unipix (EN/ES)
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 0f8a1d762d616a54090da82c772ffb33, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

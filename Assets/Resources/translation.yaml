@@ -1,0 +1,97 @@
+ui.wod.floor:
+  en: "Floor"
+  es: "Piso"
+
+ui.pause.items:
+  en: "Resume\nBuffs\nAbilities\nSouls\nQuit"
+  es: "Volver\nMejoras\nAbilidades\nAlmas\nSalir"
+
+ui.pause.noshards:
+  en: "no souls available"
+  es: "sin almas disponibles"
+
+ui.pause.nobuffs:
+  en: "no buffs available"
+  es: "sin mejoras dispoibles"
+
+ui.menu.death:
+  en: "You have fallen...\nbut somehow...\n\n<color=#f88>You wake up again...</color>"
+  es: "Has caído...\npero de alguna forma...\n\n<color=#f88>Te despiertas de nuevo...</color>"
+
+ui.menu.spc_play:
+  en: "'Spacebar' to play"
+  es: "'Espacio' para jugar"
+
+ui.menu.clt_update:
+  en: "Client not up to date"
+  es: "Cliente no actualizado"
+
+ui.menu.chn_mismatch:
+  en: "Channel mismatch"
+  es: "Canal incompatible"
+
+ui.menu.req_error:
+  en: "Server request failed"
+  es: "Petición al servidor fallida"
+
+ui.menu.settings:
+  en: "Settings"
+  es: "Ajustes"
+
+ui.menu.lang_active:
+  en: "English"
+  es: "Español"
+
+ui.menu.volume:
+  en: "Volume"
+  es: "Volumen"
+
+ui.menu.quality:
+  en: "Quality"
+  es: "Calidad"
+
+ui.menu.credits:
+  en: "Credits"
+  es: "Créditos"
+
+ui.foundry.name:
+  en: "Foundry"
+  es: "Forja"
+
+ui.foundry.forge:
+  en: "[ENTER] Forge"
+  es: "[ENTER] Forjar"
+
+ui.foundry.back:
+  en: "[SPACE] Exit Forgery"
+  es: "[ESPACIO] Salir de la Forja"
+
+ui.foundry.reforge:
+  en: "Reforge"
+  es: "Reforjar"
+
+ui.login.title:
+  en: "Login"
+  es: "Iniciar Sesión"
+ui.login.username:
+  en: "Username"
+  es: "Nombre de Usuario"
+ui.login.email:
+  en: "Email"
+  es: "Correo electrónico"
+ui.login.password:
+  en: "Password"
+  es: "Contraseña"
+ui.login.confirm:
+  en: "Confirm"
+  es: "Confirmar"
+ui.login.logout:
+  en: "Log Out"
+  es: "Cerrar sesión"
+
+ui.banner.use:
+  en: "[Enter] roll\n[Space] exit"
+  es: "[Enter] gastar\n[Espacio] salir"
+ui.banner.top:
+  en: "Stargazing"
+  es: "Observar Estrellas"

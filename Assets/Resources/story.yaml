@@ -1,0 +1,288 @@
+story.speaker.mage:
+  en: "Mage"
+  es: "Mago"
+story.speaker.player:
+  en: "You"
+  es: "Tú"
+story.speaker.crowd:
+  en: "Crowd"
+  es: "Multitud"
+story.speaker.redslime:
+  en: "Red Slime"
+  es: "Slime Rojo"
+
+story.1.01.1:
+  en: "-and that concludes the ritual!"
+  es: "-¡y eso concluye el ritual!"
+
+story.1.01.2:
+  en: "Thanks to everyone for coming!"
+  es: "¡Gracias a todos por venir!"
+
+story.1.01.3:
+  en: "Wow!"
+  es: "¡Wow!"
+
+story.1.01.4:
+  en: "Wait! This time it worked?!"
+  es: "¡Espera! ¡¿Esta vez ha funcionado?!"
+
+story.1.01.5:
+  en: "Come here! I have so many questions for you!"
+  es: "¡Ven aquí! ¡Tengo tantas preguntas para ti!"
+
+story.1.02.1:
+  en: "So, tell me, where did you come from?"
+  es: "Eso, dime, ¿de dónde has salido?"
+
+story.1.02.2:
+  en: "A place called Earth, it got destroyed some months ago."
+  es: "Un lugar llamado la Tierra, fue destruido hace unos meses."
+
+story.1.02.3:
+  en: "I've been drifting through space for a long time."
+  es: "Llevo mucho tiempo vagando por el espacio."
+
+story.1.02.4:
+  en: "And then I found your planet."
+  es: "Y entonces encontré vuestro planeta."
+
+story.1.02.5:
+  en: "That... that's amazing!!!"
+  es: "Eso... ¡¡¡es increíble!!!"
+
+story.1.02.6:
+  en: "But, where's your spaceship?"
+  es: "Pero, ¿dónde está tu nave?"
+
+story.1.02.7:
+  en: "Well, that thing exploded when entering the atmosphere..."
+  es: "Bueno, esa cosa explotó al entrar en la atmósfera..."
+
+story.1.02.8:
+  en: "So I'm here with you."
+  es: "Así que estoy aquí contigo."
+
+story.1.02.9:
+  en: "But I find something a bit weird."
+  es: "Pero encuentro algo un poco raro."
+
+story.1.02.10:
+  en: "What is it?"
+  es: "¿El qué?"
+
+story.1.02.11:
+  en: "When entering the atmosphere, my form changed into the form of your species."
+  es: "Al entrar en la atmósfera, mi forma cambió a la de tu especie."
+
+story.1.02.12:
+  en: "Do you mean... you're not supposed to look like this?"
+  es: "¿Quieres decir que... se supone que no deberías tener este aspecto?"
+
+story.1.02.13:
+  en: "No, I'm supposed to be taller, and have arms and legs."
+  es: "No, se supone que soy más alto, y tengo brazos y piernas."
+
+story.1.02.14:
+  en: "arms... and legs..."
+  es: "brazos... y piernas..."
+
+story.1.02.15:
+  en: "hmmm..."
+  es: "hmmm..."
+
+story.1.02.16:
+  en: "Oh! Lemme go grab a book!"
+  es: "¡Oh! ¡Dejame ir a buscar un libro!"
+
+story.1.03.1:
+  en: "Here it is!"
+  es: "¡Aquí está!"
+
+story.1.03.2:
+  en: "That's... that's my species!"
+  es: "¡Esa es... esa es mi especie!"
+
+story.1.03.3:
+  en: "So, you're a human then?"
+  es: "Entonces, ¿eres un humano?"
+
+story.1.03.4:
+  en: "Yes, yes I am."
+  es: "Sí, sí lo soy."
+
+story.1.03.5:
+  en: "Though this form looks... more versatile."
+  es: "Aunque esta forma parece... más versátil."
+
+story.1.03.6:
+  en: "Our species is called slimoe, and we have been through a crisis lately."
+  es: "Nuestra especie se llama slimoe, y hemos pasado por una crisis últimamente."
+
+story.1.03.7:
+  en: "What crisis?"
+  es: "¿Qué crisis?"
+
+story.1.03.8:
+  en: "Come take a look outside..."
+  es: "Ven a echar un vistazo fuera..."
+
+story.1.04.1:
+  en: "Around here..."
+  es: "Por aquí..."
+
+story.1.04.2:
+  en: "What's happened to that one?"
+  es: "¿Qué ha pasado con ese?"
+
+story.1.04.3:
+  en: "He's corrupted, and must be destroyed..."
+  es: "Está corrupto, y debe ser destruido..."
+
+story.1.04.4:
+  en: "Where does this corruption come from?"
+  es: "¿De dónde viene esa corrupción?"
+
+story.1.04.5:
+  en: "We don't know... yet..."
+  es: "No lo sabemos... todavía..."
+
+story.1.04.6:
+  en: "We hope to find a solution with you..."
+  es: "Esperamos encontrar una solución contigo..."
+
+story.1.04.7:
+  en: "I don't know how to stop this corruption..."
+  es: "No sé cómo detener esta corrupción..."
+
+story.1.04.8:
+  en: "We'll see about that... it's waking up, time for you to destroy it."
+  es: "Ya lo veremos... se está despertando, es hora de que la destruyas."
+
+story.1.04.9:
+  en: "Wait! What do you mean it's waking up?!"
+  es: "¡Espera! ¿Qué quieres decir con que se está despertando?"
+
+story.1.05.1:
+  en: "huff... I'm done..."
+  es: "huff... Ya he terminado..."
+
+story.1.05.2:
+  en: "Huh? Mage, where are you?"
+  es: "¿Eh? Mago, ¿dónde estás?"
+
+story.1.05.3:
+  en: "He's gone... and now, my dear solution, you're all mine..."
+  es: "Se ha ido... y ahora, mi querida solución, eres todo mío..."
+
+story.1.05.4:
+  en: "What are you doing? Why can't I move?"
+  es: "¿Qué estás haciendo? ¿Por qué no puedo moverme?"
+
+story.1.05.5:
+  en: "You'll know soon... once you wake up..."
+  es: "Lo sabrás pronto... una vez que despiertes..."
+
+story.1.06.1:
+  en: "Where am I? What is this place?"
+  es: "¿Dónde estoy? ¿Qué es este lugar?"
+
+story.1.06.2:
+  en: "My lab, behind a house in the village you've been to."
+  es: "Mi laboratorio, detrás de una casa en el pueblo en el que has estado."
+
+story.1.06.3:
+  en: "But that doesn't matter, you can't escape."
+  es: "Pero eso no importa, no puedes escapar."
+
+story.1.06.4:
+  en: "Wanna prove that statement?"
+  es: "¿Quieres probar esa afirmación?"
+
+story.1.07.1:
+  en: "Fascinating, test subject can break through 3 layers of bullet-proof tempered glass..."
+  es: "Fascinante, el sujeto de prueba puede atravesar 3 capas de vidrio templado a prueba de balas..."
+
+story.1.07.2:
+  en: "Do not call me a test subject."
+  es: "No me llames sujeto de prueba."
+
+story.1.07.3:
+  en: "I call you by what you are, a test subject."
+  es: "Te llamo por lo que eres, un sujeto de pruebas."
+
+story.1.07.4:
+  en: "Enough, I'm gonna crush you until you can't breathe."
+  es: "Suficiente, te voy a aplastar hasta que no puedas respirar."
+
+story.1.07.5:
+  en: "Well then, you have to catch me first!"
+  es: "Pues entonces, ¡tendrás que atraparme primero!"
+
+story.1.08.1:
+  en: "(That red guy is faster than it looks...)"
+  es: "(Ese tipo rojo es más rápido de lo que parece...)"
+
+story.1.08.2:
+  en: "(And I'm alone in this... laboratory)"
+  es: "(Y estoy solo en este... laboratorio)"
+
+story.1.08.3:
+  en: "(Why am I talking to myself, I should go find him!)"
+  es: "(¿Por qué estoy hablando solo¿, ¡debería ir a buscarlo!)"
+
+story.1.09.1:
+  en: "(I couldn't find him, but at least I got out of here)"
+  es: "(No he podido encontrarlo, pero al menos he salido de aquí)"
+
+story.1.09.2:
+  en: "You're finally here! Where did you go?"
+  es: "¿Por fin estás aquí! ¿Dónde habías ido?"
+
+story.1.09.3:
+  en: "I was kidnapped by a red slime."
+  es: "Me secuestró una slime rojo."
+
+story.1.09.4:
+  en: "He put me in a lab and called me his test subject."
+  es: "Me metió en un laboratorio y me llamó su sujeto de pruebas."
+
+story.1.09.5:
+  en: "If he's a red slime... and has a laboratory..."
+  es: "Si es un slime rojo... y tiene un laboratorio..."
+
+story.1.09.6:
+  en: "And?"
+  es: "¿Y?"
+
+story.1.09.7:
+  en: "If he really was able to contain you..."
+  es: "Si realmente fue capaz de contenerte..."
+
+story.1.09.8:
+  en: "He does sound powerful and it seems he has bad intentions..."
+  es: "Suena poderoso y parece que tiene malas intenciones..."
+
+story.1.09.9:
+  en: "We must find him and stop him!"
+  es: "¡Debemos encontrarlo y detenerlo!"
+
+story.1.10.1:
+  en: "So how is the research going?"
+  es: "¿Cómo va la investigación?"
+
+story.1.10.2:
+  en: "I found 3 places on this island that may have something strange going on with them."
+  es: "He encontrado 3 lugares en esta isla que pueden tener algo extraño."
+
+story.1.10.3:
+  en: "Great! Give me the first one and I'll try to find everything there."
+  es: "¿Genial! Dame el primero y trataré de encontrar todo lo que haya allí."
+
+story.1.10.4:
+  en: "The next place is... if I remember correctly..."
+  es: "El siguiente lugar es... si no recuerdo mal..."
+
+story.1.10.5:
+  en: "The swirlpool at the edge of the island."
+  es: "El remolino en el borde de la isla."

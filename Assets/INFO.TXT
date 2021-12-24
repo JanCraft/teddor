@@ -30,8 +30,22 @@ ATK = Level * 10  + (floor(Level / 10) * 100)
 = XP and LEVELS =
 =================
 
-XP-to-next  = Level * 1000 + (floor(Level / 10) * 10000)
-XP-per-kill = XP-to-next / Level
+XP-to-next  = Level * 100
+XP-per-kill = 100 + (floor(Level / 5) * 500)
+
+=============
+= RESOURCES =
+=============
+
+There is 3 types of resources: "Coins", "Broken Stars" and "Base Matter"
+
+Coins are used on stores and the forgery and can be obtained when defeating
+ enemies and when finishing story quests.
+
+Base Matter is used in the forgery and can be obtained when defeating
+ a certain type of enemy (rock-based enemies).
+
+Broken Stars are used in the banner and can be obtained by finishing quests.
 
 ================
 = ENEMY LEVELS =
@@ -42,49 +56,89 @@ XP-per-kill = XP-to-next / Level
 Enemy Level = Level + (AreaDanger * 2)
 
 ===============
-= BONUS RATES =
+= BUFF POWERS =
 ===============
 
-Base BONUS%
- => 80% chance the base is your Level
- => 15% chance the base is your Level + 10
- => 5% chance the base is your Level + 25
+Base        = Level + 10
+Reforge 1st = Level + 25
+Reforge     = Level + 35
 
-On top of the Base BONUS%, a Random BONUS% is added on top.
- => Random BONUS% range from 0% to 5%
+Cost Coins (base)    = 1750
+Cost Coins (reforge) = 2250
 
-Which means, the maximum you will get is:
- => Level + 25 + 5
+Cost Matter (base)    = 75
+Cost Matter (reforge) = 125
 
-
-=====================
-= ABILITY BURST DMG =
-=====================
+===============
+= ABILITY DMG =
+===============
 Most abilities deal Burst DMG when casted.
 Some can heal your character.
 Some provide a shield.
 Some enter into Burst Mode.
 
 4-star abilities:
- => Deal 100% of ATK as Burst DMG
- => ± 50%
+ => Deal 50% of ATK as Burst DMG
+ => ± 2%
 
 5-star abilities:
- => Deal 200% of ATK as Burst DMG
- => ± 50%
-
-6-star abilities:
  => Deal 300% of ATK as Burst DMG
  => ± 50%
 
+6-star abilities:
+ => Deal 500% of ATK as Burst DMG
+ => ± 65%
+
 Additionally, some abilities can enter Burst Mode:
  => 125% of ATK is dealt on hit as Burst DMG.
- => ± 50%
+ => ± 25%
 
 Some abilities can heal you:
  => 10% of Max HP
  => ± 5%
 
 Some abilities can provide a shield to you:
- => 50% of Max HP
- => ± 25%
+ => 25% of Max HP
+ => ± 5%
+
+===============
+= SOUL SHARDS =
+===============
+Soul shards are cosmetics with powerful abilities. Soul shards can only
+activate their abilities by charging them. Soul Shards gain +1 charge when hitting
+an enemy and gain +50 charge when defeating an enemy.
+
+Base Charge gets reduce by 5% every level over one.
+Base Charge cannot be lower than 100.
+
+"Soul Shard of the Crowned": Enters a 10s Burst Mode, normal attacks
+ deal 200% of ATK as Burst DMG. Cannot stack.
+ Base Charge: 1000
+
+"Soul Shard of the Winged": Enters a 15s Burst Mode, normal attacks deal
+ 100% of ATK as Burst DMG. Cannot stack.
+ Additionally, increases movement speed by 50% for 10s. Can stack.
+ Additionally, reduces Ability CD by 5s for 10s.
+ Base Charge: 2000
+
+"Soul Shard of the Depths": Deals 35% of the Max HP of enemies in a 10m radius
+ as Direct DMG. The damage dealt to enemies is not capped.
+ Base Charge: 1500
+
+"Soul Shard of the Mage": Ability CD is decreased by 1.5s for 10s.
+ Can stack until CD is 1s.
+ Base Charge: 500
+
+"Soul Shard of the Demon": Deals 150% of Max HP as DMG to enemies in a 10m radius
+ Additionally hurts the player 30% of their HP.
+ Base Charge: 1500
+
+==========
+= BANNER =
+==========
+
+bMatter Chance = 30%
+4-star Ability Chance = 30%
+5-star Ability Chance = 20%
+6-star Ability Chance = 15%
+Soul Shard Chance = 5%
