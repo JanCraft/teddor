@@ -1,5 +1,5 @@
 {
-    "channel": "dev",
-    "version": 6,
-    "version_str": "v1.0.3 (dev)"
+    "channel": "stable",
+    "version": 7,
+    "version_str": "v1.0.4"
 }
