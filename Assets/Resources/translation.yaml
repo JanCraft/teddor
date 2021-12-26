@@ -4,7 +4,7 @@ ui.wod.floor:
 
 ui.pause.items:
   en: "Resume\nBuffs\nAbilities\nSouls\nQuit"
-  es: "Volver\nMejoras\nAbilidades\nAlmas\nSalir"
+  es: "Volver\nMejoras\nHabilidades\nAlmas\nSalir"
 
 ui.pause.noshards:
   en: "no souls available"
