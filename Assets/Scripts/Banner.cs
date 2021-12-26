@@ -151,8 +151,7 @@ public class Banner : MonoBehaviour {
     }
 
     private BannerType RollType() {
-        float luck = 1.1f - PlayerPrefs.GetInt("teddor.rolls") * .025f;
-        float rtype = Random.value * luck;
+        float rtype = Random.value;
         
         if (rtype < .01f) {
             PlayerPrefs.SetInt("teddor.rolls", 0);
