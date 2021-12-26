@@ -14,6 +14,9 @@ public class Enemy : MonoBehaviour {
     private float attackCD = 2.5f;
     private bool attacking;
 
+    public float shield = 0f;
+    public float shieldReduction = .5f;
+
     public bool gravityEnabled = true;
 
     public float baseSpeed = 2f;
@@ -39,6 +42,7 @@ public class Enemy : MonoBehaviour {
         }
 
         hp = maxhp = (level * 100 + (Mathf.Floor(level / 10) * 100)) * baseHealthMLT * Mathf.Max(Mathf.Min(15f, level * .5f), 1f);
+        shield = shield * maxhp;
         atk = (level * 10f + (Mathf.Floor(level / 10) * 100)) * baseAttackDMG * Mathf.Max(Mathf.Min(2.5f, level * .15f), 1f);
     }
 
@@ -116,8 +120,16 @@ public class Enemy : MonoBehaviour {
     }
 
     public void TakeDamage(float amount, PlayerController player) {
-        hp -= amount;
-        SpawnDamageNumber((int) amount, transform.position + Vector3.up * 1f);
+        if (shield > 0f) {
+            shield -= (amount - amount * shieldReduction);
+            if (shield < 0) {
+                hp += shield;
+                shield = 0f;
+            }
+        } else {
+            hp -= amount;
+            SpawnDamageNumber((int) amount, transform.position + Vector3.up * 1f);
+        }
 
         hp = Mathf.Max(hp, 0f);
         if (hp <= 0f) {

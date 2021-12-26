@@ -53,6 +53,8 @@ public class PlayerController : MonoBehaviour {
     public GameObject enemyhud;
     public Text enemylvl;
     public Transform enemyhp;
+    public Transform enemydmg;
+    public Transform enemyshield;
     [HideInInspector]
     public Enemy lasthitenemy;
 
@@ -97,7 +99,7 @@ public class PlayerController : MonoBehaviour {
 
         Vector3 hpbarscale = new Vector3(stats.hp / stats.maxhp, 1f, 1f);
         hpbar.localScale = hpbarscale;
-        hpshieldbar.localScale = Vector3.Lerp(hpshieldbar.localScale, new Vector3(Mathf.Min(shieldValue / stats.maxhp, 1f), 1f, 1f), 10f * Time.deltaTime);
+        hpshieldbar.localScale = Vector3.Lerp(hpshieldbar.localScale, new Vector3(Mathf.Min(shieldValue / stats.maxhp, 1f), 1f, 1f), 5f * Time.deltaTime);
         hpdmgbar.localScale = Vector3.Lerp(hpdmgbar.localScale, hpbarscale, Time.deltaTime * 2.5f);
         lvltxt.text = "Lv. " + stats.level;
 
@@ -108,6 +110,8 @@ public class PlayerController : MonoBehaviour {
         if (lasthitenemy != null) {
             enemylvl.text = "Lv. " + lasthitenemy.level;
             enemyhp.localScale = new Vector3(lasthitenemy.hp / lasthitenemy.maxhp, 1f, 1f);
+            enemydmg.localScale = new Vector3(Mathf.Lerp(enemydmg.localScale.x, lasthitenemy.hp / lasthitenemy.maxhp, 2.5f * Time.deltaTime), 1f, 1f);
+            enemyshield.localScale = new Vector3(lasthitenemy.shield / lasthitenemy.maxhp, 1f, 1f);
         }
         enemyhud.SetActive(lasthitenemy != null);
 

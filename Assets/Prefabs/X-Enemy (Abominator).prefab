@@ -254,6 +254,8 @@ MonoBehaviour:
   areadanger: 0
   level: -1
   canGrantXP: 1
+  shield: 0
+  shieldReduction: 0.5
   gravityEnabled: 1
   baseSpeed: 0
   baseAttackDST: 15
