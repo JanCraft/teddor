@@ -31,7 +31,7 @@ ATK = Level * 10  + (floor(Level / 10) * 100)
 =================
 
 XP-to-next  = Level * 100
-XP-per-kill = 100 + (floor(Level / 5) * 500)
+XP-per-kill = 100
 
 =============
 = RESOURCES =
