@@ -318,12 +318,14 @@ public class PlayerController : MonoBehaviour {
             soulCharge++;
 
             if (soulCharge >= stats.soulShard.ChargeMax()) {
-                soulCharge = 0;
-                soulShardAnimationPause = true;
-                soulShardAudio.Play();
-                StartCoroutine(DisableSoulShardAnimPause());
-                soulShardAnimation.Play();
-                cam.transform.position += cam.transform.forward * 2.5f;
+                if (stats.soulShard != null && stats.soulShard.type != PlayerSoulShardType.NONE) {
+                    soulCharge = 0;
+                    soulShardAnimationPause = true;
+                    soulShardAudio.Play();
+                    StartCoroutine(DisableSoulShardAnimPause());
+                    soulShardAnimation.Play();
+                    cam.transform.position += cam.transform.forward * 2.5f;
+                }
             }
         }
     }
@@ -466,15 +468,15 @@ public class PlayerAbility {
             float mult = 5f + (level - 1) * .1f;
             player.bSpeed = player.speed * mult;
         } else if (type == PlayerAbilityType.METEOR) {
-            float mult = 3f + (level - 1) * .5f;
+            float mult = 1f + (level - 1) * .05f;
             GameObject.Instantiate(player.kaboomPrefab, player.transform.position, Quaternion.identity);
             AoE(player, 5f, mult, false);
         } else if (type == PlayerAbilityType.EARTHQUAKE) {
-            float mult = 3f + (level - 1) * .5f;
+            float mult = 13f + (level - 1) * .05f;
             GameObject.Instantiate(player.earthquakePrefab, player.transform.position, Quaternion.identity);
             AoE(player, 10f, mult, false);
         } else if (type == PlayerAbilityType.BOLT) {
-            float mult = 5f + (level - 1) * .65f;
+            float mult = 2f + (level - 1) * .08f;
             GameObject.Instantiate(player.lightningPrefab, player.transform.position, Quaternion.identity);
             AoE(player, 5f, mult, false);
         }
