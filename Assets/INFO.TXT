@@ -82,12 +82,12 @@ Some enter into Burst Mode.
  => ± 2%
 
 5-star abilities:
- => Deal 300% of ATK as Burst DMG
- => ± 50%
+ => Deal 100% of ATK as Burst DMG
+ => ± 5%
 
 6-star abilities:
- => Deal 500% of ATK as Burst DMG
- => ± 65%
+ => Deal 200% of ATK as Burst DMG
+ => ± 8%
 
 Additionally, some abilities can enter Burst Mode:
  => 125% of ATK is dealt on hit as Burst DMG.
@@ -136,9 +136,10 @@ Base Charge cannot be lower than 100.
 ==========
 = BANNER =
 ==========
+(not accurate)
 
 bMatter Chance = 30%
 4-star Ability Chance = 30%
 5-star Ability Chance = 20%
 6-star Ability Chance = 15%
-Soul Shard Chance = 5%
+Soul Shard Chance = ~1-5%
