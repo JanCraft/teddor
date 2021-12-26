@@ -122,7 +122,7 @@ public class Enemy : MonoBehaviour {
         hp = Mathf.Max(hp, 0f);
         if (hp <= 0f) {
             if (canGrantXP) {
-                player.stats.xp += 100f + (Mathf.Floor(level / 5) * 500f);
+                player.stats.xp += 100f;
                 player.stats.Calculate();
                 player.GetComponent<ResourceController>().coins += 500;
                 player.GetComponent<ResourceController>().bmatter += 5;

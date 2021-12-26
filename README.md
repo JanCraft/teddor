@@ -33,6 +33,10 @@ The **Earthquake** ability also does *big boom*, but with *different particles* 
 
 The **Bolt** ability strikes lightning and deals *massive damage in an area*.
 
+### Buffs
+Buffs are stat boosts that the player can create throgugh the "Foundry" or "Forgery".
+Only 6 buffs can be active at the same time.
+
 ### Soul Shards
 Soul Shards **activate** when enough Soul Charge is *reached* and they **help** the player *boost* their power.
 
@@ -66,6 +70,7 @@ Story
 Graphics
 * JanCraft (jancraft.github.io)
 * Kenney (www.kenney.nl)
+* Noita_Game
 
 Level Design
 * JanCraft (jancraft.github.io)

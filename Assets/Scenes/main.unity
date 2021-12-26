@@ -2224,16 +2224,16 @@ MonoBehaviour:
   onTrigger:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2037163457}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: Teleport
-        m_Mode: 2
+      - m_Target: {fileID: 2037163459}
+        m_TargetAssemblyTypeName: StorylineController, Assembly-CSharp
+        m_MethodName: SetActiveQuest
+        m_Mode: 5
         m_Arguments:
-          m_ObjectArgument: {fileID: 585320343}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: 1.06
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 219730692}
@@ -8560,18 +8560,6 @@ MonoBehaviour:
     onFinish:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 2037163459}
-          m_TargetAssemblyTypeName: StorylineController, Assembly-CSharp
-          m_MethodName: SetActiveQuest
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 1.06
-            m_BoolArgument: 0
-          m_CallState: 2
         - m_Target: {fileID: 219730692}
           m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_MethodName: SetActive
@@ -9964,6 +9952,18 @@ MonoBehaviour:
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 604060658}
+          m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+          m_MethodName: set_enabled
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
           m_CallState: 2
   trigger: 0
   physicalTrigger: 0
@@ -15523,7 +15523,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_LocalRotation: {x: 0.31317425, y: 4.992438e-10, z: 1.6463149e-10, w: 0.9496957}
+  m_LocalRotation: {x: 0.31317425, y: -4.992438e-10, z: -1.6463149e-10, w: 0.9496957}
   m_LocalPosition: {x: -83.22, y: 21.988, z: -0.5799999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -16834,7 +16834,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 604060656}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d048ac66e09a6f4ebc531663943ca38, type: 3}
   m_Name: 
@@ -18228,7 +18228,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 796359150}
-  m_LocalRotation: {x: 0.34042525, y: -0.000000016178669, z: 0.000000005857486, w: 0.9402716}
+  m_LocalRotation: {x: 0.34042525, y: 0.000000016178673, z: -0.0000000058574874, w: 0.9402716}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -23726,7 +23726,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 927575515}
-  m_LocalRotation: {x: 0.28584558, y: 1e-45, z: -0, w: 0.95827574}
+  m_LocalRotation: {x: 0.28584558, y: -3e-45, z: 1e-45, w: 0.95827574}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -43044,7 +43044,7 @@ MonoBehaviour:
   onTrigger:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 443424348}
+      - m_Target: {fileID: 604060658}
         m_TargetAssemblyTypeName: Dialog, Assembly-CSharp
         m_MethodName: Trigger
         m_Mode: 1
@@ -43056,7 +43056,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 604060658}
+      - m_Target: {fileID: 443424348}
         m_TargetAssemblyTypeName: Dialog, Assembly-CSharp
         m_MethodName: Trigger
         m_Mode: 1
