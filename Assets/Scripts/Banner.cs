@@ -151,6 +151,11 @@ public class Banner : MonoBehaviour {
     }
 
     private BannerType RollType() {
+        if (PlayerPrefs.GetInt("teddor.rolls", 0) >= 40) {
+            PlayerPrefs.SetInt("teddor.rolls", 0);
+            return BannerType.SOULSHARD;
+        }
+
         float rtype = Random.value;
         
         if (rtype < .01f) {
