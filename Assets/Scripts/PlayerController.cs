@@ -279,7 +279,11 @@ public class PlayerController : MonoBehaviour {
         velocity -= Time.deltaTime * 9.81f;
         controller.Move(Vector3.up * velocity * Time.deltaTime);
         if (controller.isGrounded) {
-            velocity = -.2f;
+            if (velocity < 0f) velocity = -.2f;
+
+            if (Input.GetKeyDown(KeyCode.Space)) {
+                velocity = 9.81f * .66f;
+            }
         }
 
         if (dashTime > 0f) dashTime -= Time.deltaTime;
