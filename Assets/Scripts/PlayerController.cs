@@ -627,10 +627,12 @@ public class PlayerStats {
     public void CheckLevelUp() {
         if (level >= 99) return; // level limited to 99 (this version)
 
-        float xptonext = level * 100f;
+        float xptonext = level * 100f + Mathf.Floor(level / 10) * 1000f;
         if (xp >= xptonext) {
             xp -= xptonext;
             level++;
+            if (level % 10 == 0) 
+                GameObject.FindObjectOfType<ResourceController>().bstars += 5;
             CheckLevelUp();
         }
     }
@@ -648,7 +650,7 @@ public class PlayerStats {
         }
 
         if (cnt == 3) acc += 50f;
-        acc = Mathf.Min(acc, (level + 30) * 3f);
+        acc = Mathf.Min(acc, (level + 30) * 3f + 50f);
         return acc / 100f;
     }
 

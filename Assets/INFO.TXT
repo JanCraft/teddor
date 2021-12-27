@@ -30,7 +30,7 @@ ATK = Level * 10  + (floor(Level / 10) * 100)
 = XP and LEVELS =
 =================
 
-XP-to-next  = Level * 100
+XP-to-next  = Level * 100 + Floor(Level / 10) * 1000
 XP-per-kill = 100
 
 =============
@@ -142,4 +142,4 @@ bMatter Chance = 30%
 4-star Ability Chance = 30%
 5-star Ability Chance = 20%
 6-star Ability Chance = 15%
-Soul Shard Chance = ~1-5%
+Soul Shard Chance = 5%
