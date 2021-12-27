@@ -119,8 +119,8 @@ public class Enemy : MonoBehaviour {
         attacking = false;
     }
 
-    public void TakeDamage(float amount, PlayerController player) {
-        if (shield > 0f) {
+    public void TakeDamage(float amount, PlayerController player, bool trueDMG) {
+        if (shield > 0f && !trueDMG) {
             shield -= (amount - amount * shieldReduction);
             if (shield < 0) {
                 hp += shield;
