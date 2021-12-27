@@ -244,9 +244,9 @@ public class PlayerController : MonoBehaviour {
             }
             if (tohit != null) {
                 if (burstModeMult > 0f) {
-                    tohit.TakeDamage(GetDamage(true, burstModeMult), this);
+                    tohit.TakeDamage(GetDamage(true, burstModeMult), this, false);
                 } else {
-                    tohit.TakeDamage(GetDamage(), this);
+                    tohit.TakeDamage(GetDamage(), this, false);
                 }
                 attackLock = tohit.transform.position;
                 transform.LookAt(tohit.transform);
@@ -461,7 +461,7 @@ public class PlayerAbility {
             }
             if (targetenemy != null) {
                 player.lasthitenemy = targetenemy;
-                targetenemy.TakeDamage(player.GetDamage(true, .5f + (level-1) * .02f), player);
+                targetenemy.TakeDamage(player.GetDamage(true, .5f + (level-1) * .02f), player, false);
                 player.OnHitEnemy(targetenemy);
                 GameObject.Instantiate(player.burstSlashPrefab).transform.position = targetenemy.transform.position;
             }
@@ -478,19 +478,19 @@ public class PlayerAbility {
         } else if (type == PlayerAbilityType.METEOR) {
             float mult = 1f + (level - 1) * .05f;
             GameObject.Instantiate(player.kaboomPrefab, player.transform.position, Quaternion.identity);
-            AoE(player, 5f, mult, false);
+            AoE(player, 5f, mult, false, true, false);
         } else if (type == PlayerAbilityType.EARTHQUAKE) {
             float mult = 1f + (level - 1) * .05f;
             GameObject.Instantiate(player.earthquakePrefab, player.transform.position, Quaternion.identity);
-            AoE(player, 10f, mult, false);
+            AoE(player, 10f, mult, false, false, true);
         } else if (type == PlayerAbilityType.BOLT) {
             float mult = 2f + (level - 1) * .08f;
             GameObject.Instantiate(player.lightningPrefab, player.transform.position, Quaternion.identity);
-            AoE(player, 5f, mult, false);
+            AoE(player, 5f, mult, false, false, false);
         }
     }
 
-    private void AoE(PlayerController pc, float radius, float mult, bool particles=true) {
+    private void AoE(PlayerController pc, float radius, float mult, bool particles, bool shieldDMG, bool trueDMG) {
         Enemy[] enemies = GameObject.FindObjectsOfType<Enemy>();
         List<Enemy> hittable = new List<Enemy>();
         foreach (Enemy enemy in enemies) {
@@ -499,7 +499,10 @@ public class PlayerAbility {
             }
         }
         foreach (Enemy enemy in hittable) {
-            enemy.TakeDamage(pc.GetDamage(true, mult), pc);
+            if (enemy.shield > 0f && shieldDMG) {
+                mult += 1f;
+            }
+            enemy.TakeDamage(pc.GetDamage(true, mult), pc, trueDMG);
             pc.OnHitEnemy(enemy);
             if (particles) {
                 GameObject obj = GameObject.Instantiate(pc.burstSlashPrefab);
@@ -586,7 +589,7 @@ public class PlayerSoulShard {
             }
         }
         foreach (Enemy enemy in hittable) {
-            enemy.TakeDamage(directdmg, pc);
+            enemy.TakeDamage(directdmg, pc, false);
             pc.OnHitEnemy(enemy);
             pc.lasthitenemy = enemy;
         }
