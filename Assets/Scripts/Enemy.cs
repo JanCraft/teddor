@@ -138,7 +138,7 @@ public class Enemy : MonoBehaviour {
                 player.stats.Calculate();
                 player.GetComponent<ResourceController>().coins += 500;
                 player.GetComponent<ResourceController>().bmatter += 5;
-                if (UnityEngine.Random.value < .025f)
+                if (UnityEngine.Random.value < .05f)
                     player.GetComponent<ResourceController>().bstars += 1;
             }
 
