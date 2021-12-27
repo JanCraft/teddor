@@ -476,7 +476,7 @@ public class PlayerAbility {
             GameObject.Instantiate(player.kaboomPrefab, player.transform.position, Quaternion.identity);
             AoE(player, 5f, mult, false);
         } else if (type == PlayerAbilityType.EARTHQUAKE) {
-            float mult = 13f + (level - 1) * .05f;
+            float mult = 1f + (level - 1) * .05f;
             GameObject.Instantiate(player.earthquakePrefab, player.transform.position, Quaternion.identity);
             AoE(player, 10f, mult, false);
         } else if (type == PlayerAbilityType.BOLT) {
