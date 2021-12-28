@@ -133,22 +133,16 @@ public class Enemy : MonoBehaviour {
 
         hp = Mathf.Max(hp, 0f);
         if (hp <= 0f) {
+            Destroy(gameObject);
             if (canGrantXP) {
                 player.stats.xp += 100f;
                 player.stats.Calculate();
                 player.GetComponent<ResourceController>().coins += 500;
                 player.GetComponent<ResourceController>().bmatter += 5;
                 if (UnityEngine.Random.value < .075f) {
-                    if (UnityEngine.Random.value < .25f) {
-                        player.GetComponent<ResourceController>().bstars += 2;
-                    } else {
-                        player.GetComponent<ResourceController>().bstars += 1;
-                    }
+                    player.GetComponent<ResourceController>().bstars += 1;
                 }
-                SaveController.instance.SaveAll();
             }
-
-            Destroy(gameObject);
         }
     }
 
