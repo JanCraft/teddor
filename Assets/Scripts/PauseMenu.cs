@@ -40,6 +40,7 @@ public class PauseMenu : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Escape) && !Banner.playing) {
             open = !open;
             selectedIdx = 0;
+            SaveController.instance.SaveAll();
         } else if (Input.GetKeyDown(KeyCode.UpArrow) && open && !buffsOpen && !abilitiesOpen && !shardsOpen) {
             selectedIdx--;
             slideSfx.Play();

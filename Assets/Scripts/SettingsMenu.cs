@@ -84,11 +84,10 @@ public class SettingsMenu : MonoBehaviour {
                         string gamedefstr = System.IO.File.ReadAllText(Application.streamingAssetsPath + "/gamedef.json");
                         GameDef gamedef = JsonUtility.FromJson<GameDef>(gamedefstr);
 
-                        PlayerResourceInfo info = JsonUtility.FromJson<PlayerResourceInfo>(System.IO.File.ReadAllText(Application.persistentDataPath + "/" + gamedef.channel + "resources.dat"));
-
+                        PlayerResourceInfo info = JsonUtility.FromJson<PlayerResourceInfo>(PlayerPrefs.GetString("teddor_save_" + gamedef.channel + "resources"));
                         info.bstars += tp.bstars;
 
-                        System.IO.File.WriteAllText(Application.persistentDataPath + "/" + gamedef.channel + "resources.dat", JsonUtility.ToJson(info.Verify()));
+                        PlayerPrefs.SetString("teddor_save_" + gamedef.channel + "resources", JsonUtility.ToJson(info.Verify()));
                     }
                 }
             }

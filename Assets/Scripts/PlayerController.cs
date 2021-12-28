@@ -634,7 +634,7 @@ public class PlayerStats {
     public void CheckLevelUp() {
         if (level >= 99) return; // level limited to 99 (this version)
 
-        float xptonext = level * 100f + Mathf.Floor(level / 10) * 1000f;
+        float xptonext = level * 100f + Mathf.Floor(level / 5) * 1000f;
         if (xp >= xptonext) {
             xp -= xptonext;
             level++;

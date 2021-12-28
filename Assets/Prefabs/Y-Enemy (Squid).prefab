@@ -84,13 +84,13 @@ MonoBehaviour:
   level: -1
   canGrantXP: 1
   shield: 1
-  shieldReduction: 0.1
+  shieldReduction: 0.5
   gravityEnabled: 1
   baseSpeed: 0
   baseAttackDST: 15
   baseAttackCD: 0.5
-  baseHealthMLT: 1.25
-  baseAttackDMG: 0.5
+  baseHealthMLT: 0.1
+  baseAttackDMG: 1
   stationary: 1
   longRange: 2
   dmgIndicatorPrefab: {fileID: 30260464280918322, guid: 5ec3a00fbdc45c4409222ebe7609d248, type: 3}
