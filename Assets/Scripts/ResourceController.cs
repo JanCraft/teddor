@@ -8,6 +8,8 @@ public class ResourceController : MonoBehaviour {
     public int bstars;
     public int bmatter;
 
+    public int umatter;
+
     public Text resourceText;
 
     void Update() {
@@ -24,5 +26,9 @@ public class ResourceController : MonoBehaviour {
 
     public void GiveStars(int count) {
         bstars += count;
+    }
+
+    public void GiveUMatter(int count) {
+        umatter += count;
     }
 }

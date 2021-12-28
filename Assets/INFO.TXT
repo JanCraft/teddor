@@ -47,6 +47,9 @@ Base Matter is used in the forgery and can be obtained when defeating
 
 Broken Stars are used in the banner and can be obtained by finishing quests.
 
+There is a new resource obtained from bosses: "uMatter"
+uMatter is used to make pets and skins.
+
 ================
 = ENEMY LEVELS =
 ================
