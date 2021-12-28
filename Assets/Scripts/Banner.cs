@@ -20,6 +20,7 @@ public class Banner : MonoBehaviour {
     public SoulShardController ssc;
 
     public AudioSource sfxPay;
+    public AudioSource sfxPayGG;
     public AudioSource sfxError;
 
     public static bool playing;
@@ -39,7 +40,6 @@ public class Banner : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.Return) && !bannerNewAnim.isPlaying) {
                 if (res.bstars > 0) {
                     res.bstars--;
-                    sfxPay.Play();
                     bannerNewAnim.Play();
 
                     BannerType type = RollType();
@@ -47,29 +47,35 @@ public class Banner : MonoBehaviour {
                         res.bmatter += 15 + Random.Range(0, 11);
                         bannerNewItem.text = "bMatter";
                         bannerNewIcon.sprite = bmatter;
+                        sfxPay.Play();
                     } else if (type == BannerType.ABILITY4) {
                         PlayerAbilityType t = GetRandom4();
                         AddAbility(t);
                         bannerNewItem.text = "4* " + t;
                         bannerNewIcon.sprite = ability;
+                        sfxPay.Play();
                     } else if (type == BannerType.ABILITY5) {
                         PlayerAbilityType t = GetRandom5();
                         AddAbility(t);
                         bannerNewItem.text = "5* " + t;
                         bannerNewIcon.sprite = ability;
+                        sfxPay.Play();
                     } else if (type == BannerType.ABILITY6) {
                         PlayerAbilityType t = GetRandom6();
                         AddAbility(t);
                         bannerNewItem.text = "6* " + t;
                         bannerNewIcon.sprite = ability;
+                        sfxPay.Play();
                     } else if (type == BannerType.SOULSHARD) {
                         PlayerSoulShardType ss = GetCSoulShard();
                         AddSoulShard(ss);
                         bannerNewItem.text = "Soul Shard of the " + ss;
                         bannerNewIcon.sprite = soulshard;
+                        sfxPayGG.Play();
                         PlayerPrefs.SetInt("teddor.css", PlayerPrefs.GetInt("teddor.css", 0) + 1);
                     }
 
+                    SaveController.instance.SaveAll();
                 } else {
                     sfxError.Play();
                 }
