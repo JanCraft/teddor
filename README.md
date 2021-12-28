@@ -45,21 +45,6 @@ The **Quest Marker** shows you the place where the next quest is.
 
 The **Enemy Marker** shows you the next place you can kill daily enemies.
 
-## Donations
-You can donate here: paypal.me/jancraft888
-
-> 💬 If you donate a certain amount **AND** provide your Tedd'or Username in the payment notes, you will receive a Tedd'or Gift File (.tgf) to your email and you can redeem it through the game settings.
-
-> 💬 If you donate, please perform the payment as if it were *for a friend* and **NOT** *as a product*, or it will not count as a donation.
-
-> ⚠️ If your donation does not receive a Tedd'or Gift File, you can contact me at **jancraft.dev@gmail.com**
-
-> 💳 ~1€ 🡆 **2 stargazing rolls**
-
-> 💳 ~5€ 🡆 **20 stargazing rolls**
-
-> 💳 ~10€ 🡆 **60 stargazing rolls**
-
 ## Credits
 Coding
 * JanCraft (jancraft.github.io)
