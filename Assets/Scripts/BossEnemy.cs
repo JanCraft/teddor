@@ -16,6 +16,7 @@ public class BossEnemy : MonoBehaviour {
     public AnimationClip[] attacks;
     private int nextatt;
     public float attackCD = 2.5f;
+    public bool randomAttack;
 
     [Header("Rewards")]
     public int xp = 1000;
@@ -79,8 +80,12 @@ public class BossEnemy : MonoBehaviour {
             anim.clip = c;
             anim.Play();
             nextAttack = attackCD;
-            nextatt++;
-            nextatt %= attacks.Length;
+            if (randomAttack) {
+                nextatt = Random.Range(0, attacks.Length);
+            } else {
+                nextatt++;
+                nextatt %= attacks.Length;
+            }
         } else {
             nextAttack -= Time.deltaTime;
         }
