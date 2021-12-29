@@ -122,10 +122,7 @@ public class Enemy : MonoBehaviour {
     public virtual void TakeDamage(float amount, PlayerController player, bool trueDMG) {
         if (shield > 0f && !trueDMG) {
             shield -= (amount - amount * shieldReduction);
-            if (shield < 0) {
-                hp += shield;
-                shield = 0f;
-            }
+            if (shield < 0) shield = 0f;
         } else {
             hp -= amount;
             SpawnDamageNumber((int) amount, transform.position + Vector3.up * 1f);

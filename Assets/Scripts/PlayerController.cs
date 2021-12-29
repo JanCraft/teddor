@@ -483,8 +483,8 @@ public class PlayerAbility {
             float value = player.stats.maxhp * mult;
             player.Heal(value);
         } else if (type == PlayerAbilityType.BLINK) {
-            float mult = 5f + (level - 1) * .1f;
-            player.bSpeed = player.speed * mult;
+            float mult = 2.5f + (level - 1) * .1f;
+            player.AddSpeedMult(mult, 3.5f);
         } else if (type == PlayerAbilityType.METEOR) {
             float mult = 1f + (level - 1) * .05f;
             GameObject.Instantiate(player.kaboomPrefab, player.transform.position, Quaternion.identity);

@@ -84,7 +84,7 @@ public class WellOfDepthsController : MonoBehaviour {
 
         player.stats.hp = player.stats.maxhp * .95f;
         player.ReduceCD(888.888f, 1f);
-        player.soulCharge += (int) (player.stats.soulShard.ChargeMax() * .25f);
+        player.soulCharge += (int) (player.stats.soulShard.ChargeMax() * .1f);
 
         yield return new WaitForSeconds(2.5f);
 
