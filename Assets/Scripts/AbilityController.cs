@@ -31,6 +31,8 @@ public class AbilityController : MonoBehaviour {
         } else if (Input.GetKeyDown(KeyCode.Return)) {
             PlayerAbility ability = abilities[cursor];
             player.stats.ability = ability;
+            player.ResetCD();
+
             changed = true;
             clickSfx.Play();
         }

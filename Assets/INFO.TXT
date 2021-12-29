@@ -30,7 +30,7 @@ ATK = Level * 10  + (floor(Level / 10) * 100)
 = XP and LEVELS =
 =================
 
-XP-to-next  = Level * 100 + Floor(Level / 5) * 1000
+XP-to-next  = Level * 100
 XP-per-kill = 100
 
 =============

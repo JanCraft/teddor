@@ -143,6 +143,10 @@ public class PlayerController : MonoBehaviour {
         if (iframes > 0f) iframes -= Time.deltaTime;
     }
 
+    public void ResetCD() {
+        abilityCD = 0f;
+    }
+
     public void Teleport(Vector3 worldPos) {
         controller.enabled = false;
         transform.position = worldPos;
@@ -441,7 +445,7 @@ public class PlayerAbility {
             case PlayerAbilityType.SHIELD:
                 return 25f;
             case PlayerAbilityType.HEAL:
-                return 10f;
+                return 20f;
             case PlayerAbilityType.BLINK:
                 return 4.5f;
             case PlayerAbilityType.METEOR:
@@ -644,12 +648,23 @@ public class PlayerStats {
     public void CheckLevelUp() {
         if (level >= 99) return; // level limited to 99 (this version)
 
+        if (PlayerPrefs.GetInt("teddor.day", -1) != System.DateTime.UtcNow.Day) {
+            PlayerPrefs.SetInt("teddor.day", System.DateTime.UtcNow.Day);
+            PlayerPrefs.SetInt("teddot.daylvl", 0);
+        } else {
+            PlayerPrefs.SetInt("teddot.daylvl", PlayerPrefs.GetInt("teddot.daylvl", 0) + 1);
+            if (PlayerPrefs.GetInt("teddot.daylvl", 0) > 2) {
+                return;
+            }
+        }
+
         float xptonext = level * 100f + Mathf.Floor(level / 5) * 1000f;
         if (xp >= xptonext) {
             xp -= xptonext;
             level++;
             if (level % 10 == 0) 
                 GameObject.FindObjectOfType<ResourceController>().bstars += 5;
+
             CheckLevelUp();
         }
     }

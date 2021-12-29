@@ -39,6 +39,12 @@ public class BossEnemy : MonoBehaviour {
         shield = hp;
 
         nextAttack = attackCD + 2f;
+
+        if (pc.GetComponent<ResourceController>().coins < 50000) {
+            pc.stats.hp = -100f;
+        } else {
+            pc.GetComponent<ResourceController>().coins -= 50000;
+        }
     }
 
     public void TakeDamage(float amount) {
