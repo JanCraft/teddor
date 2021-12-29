@@ -14,6 +14,7 @@ public class BossEnemy : MonoBehaviour {
     [Header("Attack Animation")]
     public Animation anim;
     public AnimationClip[] attacks;
+    private int nextatt;
     public float attackCD = 2.5f;
 
     [Header("Rewards")]
@@ -74,10 +75,12 @@ public class BossEnemy : MonoBehaviour {
 
     void Update() {
         if (nextAttack < 0f) {
-            AnimationClip c = attacks[Random.Range(0, attacks.Length)];
+            AnimationClip c = attacks[nextatt];
             anim.clip = c;
             anim.Play();
             nextAttack = attackCD;
+            nextatt++;
+            nextatt %= attacks.Length;
         } else {
             nextAttack -= Time.deltaTime;
         }
