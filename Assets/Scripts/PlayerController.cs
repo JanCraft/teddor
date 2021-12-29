@@ -648,20 +648,21 @@ public class PlayerStats {
     public void CheckLevelUp() {
         if (level >= 99) return; // level limited to 99 (this version)
 
-        if (level > 15) {
-            if (PlayerPrefs.GetInt("teddor.day", -1) != System.DateTime.UtcNow.Day) {
-                PlayerPrefs.SetInt("teddor.day", System.DateTime.UtcNow.Day);
-                PlayerPrefs.SetInt("teddot.daylvl", 0);
-            } else {
-                PlayerPrefs.SetInt("teddot.daylvl", PlayerPrefs.GetInt("teddot.daylvl", 0) + 1);
-                if (PlayerPrefs.GetInt("teddot.daylvl", 0) > 2) {
-                    return;
-                }
-            }
-        }
-
         float xptonext = level * 100f;
         if (xp >= xptonext) {
+
+            if (level > 15) {
+                if (PlayerPrefs.GetInt("teddor.day", -1) != System.DateTime.UtcNow.Day) {
+                    PlayerPrefs.SetInt("teddor.day", System.DateTime.UtcNow.Day);
+                    PlayerPrefs.SetInt("teddor.daylvl", 0);
+                } else {
+                    PlayerPrefs.SetInt("teddor.daylvl", PlayerPrefs.GetInt("teddor.daylvl", 0) + 1);
+                    if (PlayerPrefs.GetInt("teddor.daylvl", 0) > 3) {
+                        return;
+                    }
+                }
+            }
+
             xp -= xptonext;
             level++;
             if (level % 10 == 0) 
