@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class CodeTrigger : MonoBehaviour {
     public int lvlRequired = 1;
+    public int lvlMaximum = int.MaxValue;
     public bool requiresEmptiness = false;
 
     public UnityEvent onTriggered;
@@ -17,7 +18,7 @@ public class CodeTrigger : MonoBehaviour {
     }
 
     void Update() {
-        if (!hasTriggered && pc.stats.level >= lvlRequired) {
+        if (!hasTriggered && pc.stats.level >= lvlRequired && pc.stats.level < lvlMaximum) {
             if (requiresEmptiness) {
                 if (transform.childCount == 0) {
                     hasTriggered = true;

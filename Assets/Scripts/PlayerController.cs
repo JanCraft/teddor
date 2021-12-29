@@ -155,6 +155,10 @@ public class PlayerController : MonoBehaviour {
         controller.enabled = true;
     }
 
+    public void TeleportFade(Transform worldPos) {
+        LoadingScreen.FadeInOutTeleport(1f, this, worldPos.position);
+    }
+
     void AbilityControls() {
         if (abilityCD > stats.ability.GetCooldown()) abilityCD = stats.ability.GetCooldown();
 
@@ -233,7 +237,7 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetMouseButtonDown(0) && attackCD <= 0f) {
             Enemy[] enemies = FindObjectsOfType<Enemy>();
             Enemy tohit = null;
-            float tohitdst = 2.25f;
+            float tohitdst = 3f;
 
             foreach (Enemy enemy in enemies) {
                 float dst = Vector3.Distance(transform.position, enemy.transform.position);
@@ -387,6 +391,12 @@ public class PlayerController : MonoBehaviour {
             stats.hp = 0f;
         }
     }
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.GetComponent<BossDamage>() != null) {
+            TakeDamage(other.GetComponent<BossDamage>().boss.atk);
+        }
+    }
 }
 
 public enum PlayerBuffType {
@@ -473,8 +483,8 @@ public class PlayerAbility {
             float value = player.stats.maxhp * mult;
             player.Heal(value);
         } else if (type == PlayerAbilityType.BLINK) {
-            float mult = 5f + (level - 1) * .1f;
-            player.bSpeed = player.speed * mult;
+            float mult = 2.5f + (level - 1) * .1f;
+            player.AddSpeedMult(mult, 3.5f);
         } else if (type == PlayerAbilityType.METEOR) {
             float mult = 1f + (level - 1) * .05f;
             GameObject.Instantiate(player.kaboomPrefab, player.transform.position, Quaternion.identity);

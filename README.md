@@ -23,7 +23,7 @@ The **Shield** ability adds a *shield* to your health bar.
 
 The **Heal** ability *heals* you.
 
-The **Blink** ability dashes, will be reworked next update.
+The **Blink** ability *boosts your speed* for some time.
 
 The **Ranged** ability hits enemies from *afar*.
 

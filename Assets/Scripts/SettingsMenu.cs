@@ -78,7 +78,7 @@ public class SettingsMenu : MonoBehaviour {
                     PlayerPrefs.SetString("teddor.gifts", PlayerPrefs.GetString("teddor.gifts") + " // " + tr.signature);
 
                     TgfPayload tp = JsonUtility.FromJson<TgfPayload>(tr.payload);
-                    if (tp.user == PlayerPrefs.GetString("teddor.user")) {
+                    if (tp.user == PlayerPrefs.GetString("teddor.user") || tp.user == "*") {
                         cashSound.Play();
 
                         string gamedefstr = System.IO.File.ReadAllText(Application.streamingAssetsPath + "/gamedef.json");

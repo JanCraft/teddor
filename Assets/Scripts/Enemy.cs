@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour {
     private Rigidbody rb;
     public AudioSource hitsound;
 
-    void Start() {
+    public virtual void Start() {
         player = FindObjectOfType<PlayerController>();
         rb = GetComponent<Rigidbody>();
         if (level < 0) {
@@ -46,7 +46,7 @@ public class Enemy : MonoBehaviour {
         atk = (level * 10f + (Mathf.Floor(level / 10) * 100)) * baseAttackDMG * Mathf.Max(Mathf.Min(2.5f, level * .15f), 1f);
     }
 
-    void Update() {
+    public virtual void Update() {
         if (transform.position.y < -250) Destroy(gameObject);
         if (PauseMenu.open || PlayerController.soulShardAnimationPause) return;
 
@@ -119,13 +119,10 @@ public class Enemy : MonoBehaviour {
         attacking = false;
     }
 
-    public void TakeDamage(float amount, PlayerController player, bool trueDMG) {
+    public virtual void TakeDamage(float amount, PlayerController player, bool trueDMG) {
         if (shield > 0f && !trueDMG) {
             shield -= (amount - amount * shieldReduction);
-            if (shield < 0) {
-                hp += shield;
-                shield = 0f;
-            }
+            if (shield < 0) shield = 0f;
         } else {
             hp -= amount;
             SpawnDamageNumber((int) amount, transform.position + Vector3.up * 1f);
