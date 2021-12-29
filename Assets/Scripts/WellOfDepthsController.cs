@@ -42,11 +42,13 @@ public class WellOfDepthsController : MonoBehaviour {
             if (activeEnemies.Count == 0 && !loadingLevel) {
                 level++;
                 score += Mathf.Max(0, 1200 - Mathf.FloorToInt((Time.time - floorStart) * Mathf.Min(40, level))) + (level * 10);
+#if !UNITY_EDITOR
                 if (score > PlayerPrefs.GetInt("teddor.wod.score", 0)) {
                     PlayerPrefs.SetInt("teddor.wod.score", score);
 
                     UnityWebRequest.Get("https://game.jdev.com.es/teddor/updatescore?score=" + score + "&token=" + PlayerPrefs.GetString("teddor.token")).SendWebRequest();
-                } 
+                }
+#endif
                 StartCoroutine(LoadLevel());
             }
         }
