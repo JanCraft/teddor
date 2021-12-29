@@ -657,7 +657,7 @@ public class PlayerStats {
                     PlayerPrefs.SetInt("teddor.daylvl", 0);
                 } else {
                     PlayerPrefs.SetInt("teddor.daylvl", PlayerPrefs.GetInt("teddor.daylvl", 0) + 1);
-                    if (PlayerPrefs.GetInt("teddor.daylvl", 0) > 3) {
+                    if (PlayerPrefs.GetInt("teddor.daylvl", 0) > 5) {
                         return;
                     }
                 }
