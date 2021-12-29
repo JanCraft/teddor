@@ -660,7 +660,7 @@ public class PlayerStats {
             }
         }
 
-        float xptonext = level * 100f + Mathf.Floor(level / 5) * 1000f;
+        float xptonext = level * 100f;
         if (xp >= xptonext) {
             xp -= xptonext;
             level++;
