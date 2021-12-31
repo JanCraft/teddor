@@ -144,5 +144,5 @@ Base Charge cannot be lower than 100.
 bMatter Chance = 30%
 4-star Ability Chance = 30%
 5-star Ability Chance = 20%
-6-star Ability Chance = 15%
+6-star Ability Chance = 10%
 Soul Shard Chance = 5%

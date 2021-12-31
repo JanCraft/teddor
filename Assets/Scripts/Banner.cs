@@ -167,7 +167,7 @@ public class Banner : MonoBehaviour {
         if (rtype < .05f) {
             PlayerPrefs.SetInt("teddor.rolls", 0);
             return BannerType.SOULSHARD;
-        } else if (rtype < .15f) {
+        } else if (rtype < .10f) {
             PlayerPrefs.SetInt("teddor.rolls", PlayerPrefs.GetInt("teddor.rolls", 0) + 1);
             return BannerType.ABILITY6;
         } else if (rtype < .20f) {
