@@ -95,7 +95,7 @@ public class WellOfDepthsController : MonoBehaviour {
             GameObject o = Instantiate(enemyPool[Random.Range(0, enemyPool.Length)], pos, Quaternion.identity);
             Enemy e = o.GetComponent<Enemy>();
             e.level = level * 2 - player.stats.level;
-            e.canGrantXP = true;
+            e.canGrantStars = true;
             activeEnemies.Add(e);
         }
 

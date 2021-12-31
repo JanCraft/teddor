@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour {
     public float atk = 10f;
     public int areadanger = 0;
     public int level = -1;
-    public bool canGrantXP = true;
+    public bool canGrantStars = true;
 
     private float attackCD = 2.5f;
     private bool attacking;
@@ -131,11 +131,11 @@ public class Enemy : MonoBehaviour {
         hp = Mathf.Max(hp, 0f);
         if (hp <= 0f) {
             Destroy(gameObject);
-            if (canGrantXP) {
-                player.stats.xp += 100f;
-                player.stats.Calculate();
-                player.GetComponent<ResourceController>().coins += 500;
-                player.GetComponent<ResourceController>().bmatter += 5;
+            player.stats.xp += 100f;
+            player.stats.Calculate();
+            player.GetComponent<ResourceController>().coins += 500;
+            player.GetComponent<ResourceController>().bmatter += 5;
+            if (canGrantStars) {
                 if (UnityEngine.Random.value < .075f) {
                     player.GetComponent<ResourceController>().bstars += 1;
                 }

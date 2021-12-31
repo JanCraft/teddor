@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour {
     public Transform hpbar;
     public Transform hpdmgbar;
     public Transform hpshieldbar;
+    public Transform xpbar;
     public float burstModeMult = 0f;
     public float burstModeTime = 0f;
 
@@ -102,6 +103,7 @@ public class PlayerController : MonoBehaviour {
         hpshieldbar.localScale = Vector3.Lerp(hpshieldbar.localScale, new Vector3(Mathf.Min(shieldValue / stats.maxhp, 1f), 1f, 1f), 5f * Time.deltaTime);
         hpdmgbar.localScale = Vector3.Lerp(hpdmgbar.localScale, hpbarscale, Time.deltaTime * 2.5f);
         lvltxt.text = "Lv. " + stats.level;
+        xpbar.localScale = new Vector3(stats.xp / stats.xptonext, 1f, 1f);
 
         if (shieldValue > 0f) {
             shieldValue -= shieldValue * .025f * Time.deltaTime;
@@ -629,6 +631,8 @@ public class PlayerStats {
     public float critrate = .25f;
     public float critdmg = .5f;
 
+    public float xptonext { get; private set; }
+
     public long checksum;
 
     public void Calculate() {
@@ -648,7 +652,7 @@ public class PlayerStats {
     public void CheckLevelUp() {
         if (level >= 99) return; // level limited to 99 (this version)
 
-        float xptonext = level * 100f;
+        xptonext = level * 100f + Mathf.Floor(level / 25) * 1000f + Mathf.Floor(level / 50) * 1000f + Mathf.Floor(level / 75) * 1000f + Mathf.Floor(Mathf.Max(0, level - 90)) * 1000f * Mathf.Min(Mathf.Max(level - 99, 0), 1);
         if (xp >= xptonext) {
 
             if (level > 15) {
