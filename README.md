@@ -33,6 +33,8 @@ The **Earthquake** ability also does *big boom*, but with *different particles* 
 
 The **Bolt** ability strikes lightning and deals *massive damage in an area*.
 
+The **Waterjet** ability makes enemies *bleed*.
+
 ### Buffs
 Buffs are stat boosts that the player can create throgugh the "Foundry" or "Forgery".
 Only 6 buffs can be active at the same time.

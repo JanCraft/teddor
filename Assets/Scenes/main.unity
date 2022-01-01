@@ -9238,6 +9238,9 @@ MonoBehaviour:
   areadanger: 0
   level: -1
   canGrantStars: 1
+  bleed: 0
+  flaming: 0
+  paralyze: 0
   shield: 0
   shieldReduction: 0.5
   gravityEnabled: 1
@@ -16416,7 +16419,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_LocalRotation: {x: 0.31317425, y: -4.992438e-10, z: -1.6463149e-10, w: 0.9496957}
+  m_LocalRotation: {x: 0.31317425, y: 4.992438e-10, z: 1.6463149e-10, w: 0.9496957}
   m_LocalPosition: {x: -83.22, y: 21.988, z: -0.5799999}
   m_LocalScale: {x: 1000, y: 1000, z: 1000}
   m_Children: []
@@ -25418,7 +25421,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 927575515}
-  m_LocalRotation: {x: 0.28584558, y: -3e-45, z: 1e-45, w: 0.95827574}
+  m_LocalRotation: {x: 0.28584558, y: 1e-45, z: -0, w: 0.95827574}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -35250,6 +35253,9 @@ MonoBehaviour:
   areadanger: 0
   level: -1
   canGrantStars: 1
+  bleed: 0
+  flaming: 0
+  paralyze: 0
   shield: 0
   shieldReduction: 0.5
   gravityEnabled: 1
@@ -44119,6 +44125,9 @@ MonoBehaviour:
   areadanger: 0
   level: -1
   canGrantStars: 1
+  bleed: 0
+  flaming: 0
+  paralyze: 0
   shield: 0
   shieldReduction: 0.5
   gravityEnabled: 1
@@ -48050,6 +48059,9 @@ MonoBehaviour:
   areadanger: 0
   level: -1
   canGrantStars: 1
+  bleed: 0
+  flaming: 0
+  paralyze: 0
   shield: 0
   shieldReduction: 0.5
   gravityEnabled: 1
@@ -48436,6 +48448,9 @@ MonoBehaviour:
   areadanger: 0
   level: -1
   canGrantStars: 1
+  bleed: 0
+  flaming: 0
+  paralyze: 0
   shield: 0
   shieldReduction: 0.5
   gravityEnabled: 1
@@ -49380,6 +49395,9 @@ MonoBehaviour:
   areadanger: 0
   level: -1
   canGrantStars: 1
+  bleed: 0
+  flaming: 0
+  paralyze: 0
   shield: 0
   shieldReduction: 0.5
   gravityEnabled: 1
@@ -56534,6 +56552,7 @@ MonoBehaviour:
   enemydmg: {fileID: 311487545}
   enemyshield: {fileID: 1813383457}
   lasthitenemy: {fileID: 0}
+  removeEnemyHUD: 0
   dialog: {fileID: 2037163458}
   story: {fileID: 2037163459}
   abilityProgress: {fileID: 1145830143}

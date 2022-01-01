@@ -11,6 +11,10 @@ public class Enemy : MonoBehaviour {
     public int level = -1;
     public bool canGrantStars = true;
 
+    public float bleed;
+    public float flaming;
+    public float paralyze;
+
     private float attackCD = 2.5f;
     private bool attacking;
 
@@ -89,6 +93,23 @@ public class Enemy : MonoBehaviour {
             v.y = 0f;
             rb.velocity = v;
         }
+
+        if (paralyze > 0f) {
+            paralyze -= Time.deltaTime;
+            attackCD = 1f;
+        }
+
+        if (bleed > 0f) {
+            bleed = Mathf.Lerp(bleed, 0f, .75f * Time.deltaTime);
+            hp -= (bleed * maxhp * .1f) * Time.deltaTime;
+            CheckDeath();
+        }
+
+        if (flaming > 0f) {
+            flaming = Mathf.Lerp(flaming, 1f, 1.5f * Time.deltaTime);
+            hp -= (flaming * maxhp * .25f) * Time.deltaTime;
+            CheckDeath();
+        }
     }
 
     IEnumerator ShortRangeAttack() {
@@ -129,6 +150,12 @@ public class Enemy : MonoBehaviour {
             SpawnDamageNumber((int) amount, transform.position + Vector3.up * 1f);
         }
 
+        if (bleed > 0f) bleed += 1f;
+
+        CheckDeath();
+    }
+
+    private void CheckDeath() {
         hp = Mathf.Max(hp, 0f);
         if (hp <= 0f) {
             Destroy(gameObject);

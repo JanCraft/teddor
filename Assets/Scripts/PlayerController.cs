@@ -412,7 +412,7 @@ public class PlayerController : MonoBehaviour {
 }
 
 public enum PlayerBuffType {
-    HP, ATK, CRIT_RATE, CRIT_DMG, BURST_DMG
+    HP, ATK, CRIT_RATE, CRIT_DMG, BURST_DMG, BLEED_DMG
 }
 
 [System.Serializable]
@@ -428,7 +428,7 @@ public class PlayerBuff {
 }
 
 public enum PlayerAbilityType {
-    NONE, RANGED, SHIELD, HEAL, BLINK, METEOR, EARTHQUAKE, BOLT
+    NONE, RANGED, SHIELD, HEAL, BLINK, METEOR, EARTHQUAKE, BOLT, WATERJET
 }
 
 [System.Serializable]
@@ -439,7 +439,7 @@ public class PlayerAbility {
     public int GetStarCount() {
         if (type == PlayerAbilityType.METEOR || type == PlayerAbilityType.EARTHQUAKE) {
             return 5;
-        } else if (type == PlayerAbilityType.BOLT) {
+        } else if (type == PlayerAbilityType.BOLT || type == PlayerAbilityType.WATERJET) {
             return 6;
         }
 
@@ -462,6 +462,8 @@ public class PlayerAbility {
                 return 9.5f;
             case PlayerAbilityType.BOLT:
                 return 5.5f;
+            case PlayerAbilityType.WATERJET:
+                return 2.0f;
             default:
                 return 5f;
         }
@@ -509,6 +511,19 @@ public class PlayerAbility {
             float mult = 2f + (level - 1) * .08f;
             GameObject.Instantiate(player.lightningPrefab, player.transform.position, Quaternion.identity);
             AoE(player, 5f, mult, false, false, false);
+        } else if (type == PlayerAbilityType.WATERJET) {
+            float mult = 1f + (level - 1) * .05f * (1f + player.stats.GetTotalBuff(PlayerBuffType.BLEED_DMG)) * (1f + player.stats.GetTotalBuff(PlayerBuffType.ATK));
+            Enemy[] enemies = GameObject.FindObjectsOfType<Enemy>();
+            List<Enemy> hittable = new List<Enemy>();
+            foreach (Enemy enemy in enemies) {
+                if (Vector3.Distance(player.transform.position, enemy.transform.position) < 5f) {
+                    hittable.Add(enemy);
+                }
+            }
+            foreach (Enemy enemy in hittable) {
+                enemy.bleed += mult;
+                player.lasthitenemy = enemy;
+            }
         }
     }
 
@@ -540,7 +555,7 @@ public class PlayerAbility {
 }
 
 public enum PlayerSoulShardType {
-    NONE, CROWNED, WINGED, DEPTHS, MAGE, DEMON
+    NONE, CROWNED, WINGED, DEPTHS, MAGE, DEMON, TIDES
 }
 
 [System.Serializable]
@@ -554,6 +569,7 @@ public class PlayerSoulShard {
         if (type == PlayerSoulShardType.DEPTHS) return 1500;
         if (type == PlayerSoulShardType.MAGE) return 500;
         if (type == PlayerSoulShardType.DEMON) return 1500;
+        if (type == PlayerSoulShardType.TIDES) return 1750;
 
         return 5000; // in case I forget to add new ones
     }
@@ -584,6 +600,16 @@ public class PlayerSoulShard {
         if (type == PlayerSoulShardType.DEMON) {
             AoE(player, 10f, player.stats.maxhp * 1.5f);
             player.stats.hp *= .7f;
+        }
+        if (type == PlayerSoulShardType.TIDES) {
+            AoE(player, 10f, player.stats.atk * (1f + player.stats.GetTotalBuff(PlayerBuffType.BURST_DMG)));
+            Enemy[] enemies = GameObject.FindObjectsOfType<Enemy>();
+            List<Enemy> hittable = new List<Enemy>();
+            foreach (Enemy enemy in enemies) {
+                if (Vector3.Distance(player.transform.position, enemy.transform.position) < 10) {
+                    enemy.bleed = 15f;
+                }
+            }
         }
     }
 

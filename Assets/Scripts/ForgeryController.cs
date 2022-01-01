@@ -166,7 +166,7 @@ public class ForgeryController : MonoBehaviour {
                 }
             }
 
-            outp += opt.type + " <color=yellow>";
+            outp += opt.type.ToString().Replace('_', ' ') + " <color=yellow>";
             if (opt.reforge) outp += TranslateKey.Translate("ui.foundry.reforge");
             outp += "</color>\n";
         }
