@@ -74,6 +74,7 @@ public class Enemy : MonoBehaviour {
                     StartCoroutine(ShortRangeAttack());
                 } else if (longRange == LongRangeMode.SPEEDUP) {
                     baseSpeed *= 1.25f;
+                    baseSpeed = Mathf.Min(baseSpeed, 8f);
                     attacking = false;
                 }
                 attackCD += 3.5f;

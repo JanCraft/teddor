@@ -58,6 +58,8 @@ public class PlayerController : MonoBehaviour {
     public Transform enemyshield;
     [HideInInspector]
     public Enemy lasthitenemy;
+    [HideInInspector]
+    public bool removeEnemyHUD;
 
     [Header("Storyline")]
     public DialogController dialog;
@@ -109,6 +111,10 @@ public class PlayerController : MonoBehaviour {
             shieldValue -= shieldValue * .025f * Time.deltaTime;
         }
 
+        if (removeEnemyHUD && lasthitenemy != null) {
+            lasthitenemy = null;
+            removeEnemyHUD = false;
+        }
         if (lasthitenemy != null) {
             enemylvl.text = "Lv. " + lasthitenemy.level;
             enemyhp.localScale = new Vector3(lasthitenemy.hp / lasthitenemy.maxhp, 1f, 1f);

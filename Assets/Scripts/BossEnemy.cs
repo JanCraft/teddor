@@ -67,7 +67,7 @@ public class BossEnemy : MonoBehaviour {
             pc.GetComponent<ResourceController>().bmatter += bMatter;
             pc.GetComponent<ResourceController>().bstars += bStars;
             pc.GetComponent<ResourceController>().umatter += uMatter;
-            pc.lasthitenemy = null;
+            pc.removeEnemyHUD = true;
             reward.Invoke();
 
             gameObject.SetActive(false);
