@@ -12,6 +12,17 @@ public class BossPart : Enemy {
         maxhp = boss.maxhp;
         shield = boss.shield;
         level = boss.lvl;
+
+        // bleed and flaming slightly reduced
+        if (bleed > 0f) {
+            bleed = Mathf.Lerp(bleed, 0f, .75f * Time.deltaTime);
+            boss.hp -= (bleed * maxhp * .015f) * Time.deltaTime;
+        }
+
+        if (flaming > 0f) {
+            flaming = Mathf.Lerp(flaming, 1f, 1.5f * Time.deltaTime);
+            boss.hp -= (flaming * maxhp * .05f) * Time.deltaTime;
+        }
     }
 
     public override void TakeDamage(float amount, PlayerController _, bool tdmg) {

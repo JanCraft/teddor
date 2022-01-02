@@ -50,6 +50,8 @@ public class PlayerController : MonoBehaviour {
     public float burstModeMult = 0f;
     public float burstModeTime = 0f;
 
+    public float bleedHP;
+
     [Header("Enemy HUD")]
     public GameObject enemyhud;
     public Text enemylvl;
@@ -84,8 +86,6 @@ public class PlayerController : MonoBehaviour {
 
     public GameObject ingameUI;
     public GameObject cinematicUI;
-
-    private float bleedHP;
 
     void Start() {
         stats.Calculate();

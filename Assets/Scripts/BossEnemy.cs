@@ -59,19 +59,6 @@ public class BossEnemy : MonoBehaviour {
         } else {
             hp -= amount;
         }
-
-        hp = Mathf.Max(hp, 0f);
-        if (hp <= 0f) {
-            pc.stats.xp += xp;
-            pc.stats.Calculate();
-            pc.GetComponent<ResourceController>().bmatter += bMatter;
-            pc.GetComponent<ResourceController>().bstars += bStars;
-            pc.GetComponent<ResourceController>().umatter += uMatter;
-            pc.removeEnemyHUD = true;
-            reward.Invoke();
-
-            gameObject.SetActive(false);
-        }
     }
 
     void Update() {
@@ -88,6 +75,19 @@ public class BossEnemy : MonoBehaviour {
             }
         } else {
             nextAttack -= Time.deltaTime;
+        }
+
+        hp = Mathf.Max(hp, 0f);
+        if (hp <= 0f) {
+            pc.stats.xp += xp;
+            pc.stats.Calculate();
+            pc.GetComponent<ResourceController>().bmatter += bMatter;
+            pc.GetComponent<ResourceController>().bstars += bStars;
+            pc.GetComponent<ResourceController>().umatter += uMatter;
+            pc.removeEnemyHUD = true;
+            reward.Invoke();
+
+            gameObject.SetActive(false);
         }
     }
 }
