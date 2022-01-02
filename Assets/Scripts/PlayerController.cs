@@ -85,6 +85,8 @@ public class PlayerController : MonoBehaviour {
     public GameObject ingameUI;
     public GameObject cinematicUI;
 
+    private float bleedHP;
+
     void Start() {
         stats.Calculate();
         stats.hp = stats.maxhp;
@@ -148,6 +150,12 @@ public class PlayerController : MonoBehaviour {
             stats.hp += .001f * stats.maxhp * Time.deltaTime;
         }
 
+        if (bleedHP > 0f) {
+            float tobleed = bleedHP * Time.deltaTime;
+            stats.hp -= tobleed;
+            bleedHP -= tobleed;
+        }
+
         if (iframes > 0f) iframes -= Time.deltaTime;
     }
 
@@ -165,6 +173,10 @@ public class PlayerController : MonoBehaviour {
         controller.enabled = false;
         transform.position = worldPos.position;
         controller.enabled = true;
+    }
+
+    public void HealMax() {
+        stats.hp = stats.maxhp;
     }
 
     public void TeleportFade(Transform worldPos) {

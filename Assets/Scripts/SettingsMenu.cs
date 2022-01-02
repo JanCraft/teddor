@@ -14,6 +14,7 @@ public class SettingsMenu : MonoBehaviour {
 
     public Slider volumeF;
     public Slider qualityI;
+    public Toggle coop;
 
     void Start() {
         TranslateKey.Init();
@@ -30,6 +31,7 @@ public class SettingsMenu : MonoBehaviour {
 
         SetVolume(PlayerPrefs.GetFloat("teddor.volume", 1f));
         SetQuality(PlayerPrefs.GetInt("teddor.quality", 5));
+        coop.isOn = PlayerPrefs.GetInt("teddor.coop", 0) == 1;
     }
 
     public void SetVolume(float volume) {
@@ -37,6 +39,12 @@ public class SettingsMenu : MonoBehaviour {
         AudioListener.volume = volume;
         volumeF.value = volume;
         PlayerPrefs.SetFloat("teddor.volume", volume);
+        PlayerPrefs.Save();
+    }
+
+    public void SetCoop(bool coop) {
+        PlayerPrefs.SetInt("teddor.coop", coop ? 1 : 0);
+        PlayerPrefs.Save();
     }
 
     public void SetQuality(float quality) {
@@ -44,6 +52,7 @@ public class SettingsMenu : MonoBehaviour {
         QualitySettings.SetQualityLevel((int)quality);
         qualityI.value = (int) quality;
         PlayerPrefs.SetInt("teddor.quality", (int) quality);
+        PlayerPrefs.Save();
     }
 
     public void LogOut() {

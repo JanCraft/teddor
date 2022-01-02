@@ -136,14 +136,14 @@ Base Charge cannot be lower than 100.
  Additionally hurts the player 30% of their HP.
  Base Charge: 1500
 
-"Soul Shard of the TIDES": Deals 100% of ATK as Burst DMG to enemies in a 10m radius.
- Additionally, all enemies bleed by a factor of 15.
+"Soul Shard of the Tides": Deals 100% of ATK as Burst DMG to enemies in a 10m radius.
+ Additionally, all enemies (in a 10m radius) bleed by a factor of 15.
  Base Charge: 1750
 
-==========
-= BANNER =
-==========
-(not accurate)
+================
+= BANNER RATES =
+================
+(note: not 100% accurate)
 
 bMatter Chance = 30%
 4-star Ability Chance = 30%
