@@ -1322,7 +1322,7 @@ GameObject:
   - component: {fileID: 98725099}
   - component: {fileID: 98725101}
   - component: {fileID: 98725100}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Damage Boom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1884,6 +1884,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 152f5dfb28479b54d9c1c3e70f593997, type: 3}
       propertyPath: m_Name
       value: semi_smo_cube
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 152f5dfb28479b54d9c1c3e70f593997, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 152f5dfb28479b54d9c1c3e70f593997, type: 3}
@@ -9208,6 +9212,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.7071068
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e4a1b35b31bce0349a49f294e88adc41, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4a1b35b31bce0349a49f294e88adc41, type: 3}
 --- !u!4 &322964238 stripped
@@ -10233,6 +10241,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 0f101c8a5903a324d879123a713d3cc6, type: 3}
       propertyPath: m_Name
       value: Internal Cube
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0f101c8a5903a324d879123a713d3cc6, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f101c8a5903a324d879123a713d3cc6, type: 3}
@@ -16419,7 +16431,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_LocalRotation: {x: 0.31317425, y: -4.992438e-10, z: -1.6463149e-10, w: 0.9496957}
+  m_LocalRotation: {x: 0.31317425, y: 4.992438e-10, z: 1.6463149e-10, w: 0.9496957}
   m_LocalPosition: {x: -83.22, y: 21.988, z: -0.5799999}
   m_LocalScale: {x: 1000, y: 1000, z: 1000}
   m_Children: []
@@ -17279,7 +17291,7 @@ GameObject:
   - component: {fileID: 581499477}
   - component: {fileID: 581499476}
   - component: {fileID: 581499474}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17959,7 +17971,7 @@ GameObject:
   - component: {fileID: 614529696}
   - component: {fileID: 614529695}
   - component: {fileID: 614529694}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Lv. 50 - Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18106,7 +18118,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 616020682}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CylA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25222,7 +25234,7 @@ GameObject:
   - component: {fileID: 926276325}
   - component: {fileID: 926276324}
   - component: {fileID: 926276326}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25433,7 +25445,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 927575515}
-  m_LocalRotation: {x: 0.28584558, y: -3e-45, z: 1e-45, w: 0.95827574}
+  m_LocalRotation: {x: 0.28584558, y: 1e-45, z: -0, w: 0.95827574}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -35240,6 +35252,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: smooth_cube
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e4a1b35b31bce0349a49f294e88adc41, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4a1b35b31bce0349a49f294e88adc41, type: 3}
 --- !u!1 &987706809 stripped
@@ -35675,7 +35691,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1011965532}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Teleport Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36599,7 +36615,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1099750909}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CylB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43570,7 +43586,7 @@ GameObject:
   - component: {fileID: 1280493123}
   - component: {fileID: 1280493125}
   - component: {fileID: 1280493124}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Damage Boom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44659,7 +44675,7 @@ GameObject:
   - component: {fileID: 1344038827}
   - component: {fileID: 1344038828}
   - component: {fileID: 1344038829}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CTrigs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45000,7 +45016,7 @@ GameObject:
   - component: {fileID: 1388377841}
   - component: {fileID: 1388377843}
   - component: {fileID: 1388377842}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Damage Boom (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48475,6 +48491,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: smooth_cube (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e4a1b35b31bce0349a49f294e88adc41, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4a1b35b31bce0349a49f294e88adc41, type: 3}
 --- !u!4 &1690098220 stripped
@@ -48831,7 +48851,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1733898828}
   - component: {fileID: 1733898827}
-  - component: {fileID: 1733898829}
   m_Layer: 0
   m_Name: Global Volume
   m_TagString: Untagged
@@ -48870,20 +48889,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1733898829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1733898826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8b04f852a97b6749b8754c95622baa6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  volume: {fileID: 1733898827}
-  triggerLensFallback: 0
 --- !u!1001 &1753927360
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49273,7 +49278,7 @@ GameObject:
   - component: {fileID: 1788814462}
   - component: {fileID: 1788814464}
   - component: {fileID: 1788814463}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Arns GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49413,6 +49418,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e4a1b35b31bce0349a49f294e88adc41, type: 3}
       propertyPath: m_Name
       value: smooth_cube (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e4a1b35b31bce0349a49f294e88adc41, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4a1b35b31bce0349a49f294e88adc41, type: 3}
@@ -49925,7 +49934,7 @@ GameObject:
   - component: {fileID: 1894147003}
   - component: {fileID: 1894147002}
   - component: {fileID: 1894147005}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Lv. 25 - Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50355,7 +50364,7 @@ GameObject:
   - component: {fileID: 1910312120}
   - component: {fileID: 1910312122}
   - component: {fileID: 1910312121}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Damage Boom (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56339,7 +56348,7 @@ GameObject:
   - component: {fileID: 2028179754}
   - component: {fileID: 2028179753}
   - component: {fileID: 2028179752}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Lv. 75 - Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57032,7 +57041,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2075592028}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Boss Entrance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57886,7 +57895,7 @@ GameObject:
   - component: {fileID: 4167280743928904335}
   - component: {fileID: 5835772783091801943}
   - component: {fileID: 2570646522989201299}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57919,7 +57928,7 @@ GameObject:
   - component: {fileID: 919132148624494055}
   - component: {fileID: 919132148624494054}
   - component: {fileID: 919132148624494053}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BOSS Rock Giant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58064,7 +58073,7 @@ GameObject:
   - component: {fileID: 1425000227542495278}
   - component: {fileID: 1425000227542495279}
   - component: {fileID: 1425000227542495280}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BOSS Abominator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58241,7 +58250,7 @@ GameObject:
   - component: {fileID: 2797527257736267590}
   - component: {fileID: 5763239269497217694}
   - component: {fileID: 4371643514899905114}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58407,7 +58416,7 @@ GameObject:
   - component: {fileID: 5589199315368103821}
   - component: {fileID: 4577615609463969717}
   - component: {fileID: 4852200888069592078}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Icosphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58553,7 +58562,7 @@ GameObject:
   - component: {fileID: 6303818256533776673}
   - component: {fileID: 3002324182409994851}
   - component: {fileID: 1525539153039439467}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Arms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58612,7 +58621,7 @@ GameObject:
   - component: {fileID: 5567349225844125799}
   - component: {fileID: 5046532091815946974}
   - component: {fileID: 5046532091815946975}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BOSS Squid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58806,7 +58815,7 @@ GameObject:
   - component: {fileID: 8785169358822362989}
   - component: {fileID: 5553108809874906621}
   - component: {fileID: 8150596772018376861}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Squid Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58901,7 +58910,7 @@ GameObject:
   - component: {fileID: 5653519914781376590}
   - component: {fileID: 6691687110436180429}
   - component: {fileID: 2803436536147701056}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58984,7 +58993,7 @@ GameObject:
   - component: {fileID: 8742472324542187799}
   - component: {fileID: 4619392473510238061}
   - component: {fileID: 3540786649690244385}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Lil feet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59002,7 +59011,7 @@ GameObject:
   - component: {fileID: 8029370809116521150}
   - component: {fileID: 177264213140259583}
   - component: {fileID: 1281222941276225543}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Necks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59020,7 +59029,7 @@ GameObject:
   - component: {fileID: 2865261499338996776}
   - component: {fileID: 3453000759663329382}
   - component: {fileID: 8876754717573610618}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Squid Mouth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59038,7 +59047,7 @@ GameObject:
   - component: {fileID: 812758161666910114}
   - component: {fileID: 2394780713835193082}
   - component: {fileID: 7945062512594095844}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Roller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59237,7 +59246,7 @@ GameObject:
   - component: {fileID: 6417727170277832575}
   - component: {fileID: 5222272866160320007}
   - component: {fileID: 6067373500026303617}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Squid Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59255,7 +59264,7 @@ GameObject:
   - component: {fileID: 8487051996718416020}
   - component: {fileID: 2523703694261316760}
   - component: {fileID: 1657741493606315819}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Heads
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59342,7 +59351,7 @@ GameObject:
   - component: {fileID: 7876023680699012573}
   - component: {fileID: 1221258854376043737}
   - component: {fileID: 5065847854661748974}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
