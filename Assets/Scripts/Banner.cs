@@ -89,9 +89,9 @@ public class Banner : MonoBehaviour {
                 }
                 if (isFirst) {
                     isFirst = false;
-                    yield return new WaitForSeconds(.35f);
+                    yield return new WaitForSeconds(.15f);
                 }
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(1.75f);
             }
 
             SaveController.instance.SaveAll();

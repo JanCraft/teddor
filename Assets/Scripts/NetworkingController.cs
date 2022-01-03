@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using WebSocketSharp;
 
 public class NetworkingController : MonoBehaviour {
     public static NetworkingController instance;
     public Transform localPlayer;
     [Range(1f, 10f)]
     public float smoothing = 7.5f;
+
+    private WebSocket ws;
 
     void Start() {
         instance = this;
@@ -15,9 +18,25 @@ public class NetworkingController : MonoBehaviour {
             enabled = false;
             return;
         }
+        
+        ws = new WebSocket("wss://relay.jdev.com.es/");
+        ws.Connect();
+        ws.OnOpen += (sender, e) => {
+            Debug.Log("bws > connected to relay");
+            ws.Send("{}");
+        };
+        ws.OnClose += (sender, e) => {
+            Debug.Log("bws > connection cut with relay");
+        };
+        ws.OnMessage += (sender, e) => {
+            
+        };
     }
 
     void Update() {
-        
+    }
+
+    void OnDisable() {
+        ws.Close();
     }
 }
