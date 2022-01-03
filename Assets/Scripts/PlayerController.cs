@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject earthquakePrefab;
     public GameObject kaboomPrefab;
     public GameObject lightningPrefab;
+    public GameObject splashPrefab;
 
     public Transform slasher;
     public TrailRenderer slasherTrail;
@@ -536,6 +537,7 @@ public class PlayerAbility {
                 enemy.bleed += mult;
                 player.lasthitenemy = enemy;
             }
+            GameObject.Instantiate(player.splashPrefab, player.transform.position, Quaternion.identity);
         }
     }
 
