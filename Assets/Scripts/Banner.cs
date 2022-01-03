@@ -38,48 +38,108 @@ public class Banner : MonoBehaviour {
             if (!bannerNewAnim.isPlaying) bannerItem.text = "Soul Shard of the " + GetCSoulShard() + "\n\n" + PlayerPrefs.GetInt("teddor.rolls", 0) + "/40";
 
             if (Input.GetKeyDown(KeyCode.Return) && !bannerNewAnim.isPlaying) {
-                if (res.bstars > 0) {
-                    res.bstars--;
-                    bannerNewAnim.Play();
-
-                    BannerType type = RollType();
-                    if (type == BannerType.BMATTER) {
-                        res.bmatter += 15 + Random.Range(0, 11);
-                        bannerNewItem.text = "bMatter";
-                        bannerNewIcon.sprite = bmatter;
-                        sfxPay.Play();
-                    } else if (type == BannerType.ABILITY4) {
-                        PlayerAbilityType t = GetRandom4();
-                        AddAbility(t);
-                        bannerNewItem.text = "4* " + t;
-                        bannerNewIcon.sprite = ability;
-                        sfxPay.Play();
-                    } else if (type == BannerType.ABILITY5) {
-                        PlayerAbilityType t = GetRandom5();
-                        AddAbility(t);
-                        bannerNewItem.text = "5* " + t;
-                        bannerNewIcon.sprite = ability;
-                        sfxPay.Play();
-                    } else if (type == BannerType.ABILITY6) {
-                        PlayerAbilityType t = GetRandom6();
-                        AddAbility(t);
-                        bannerNewItem.text = "6* " + t;
-                        bannerNewIcon.sprite = ability;
-                        sfxPay.Play();
-                    } else if (type == BannerType.SOULSHARD) {
-                        PlayerSoulShardType ss = GetCSoulShard();
-                        AddSoulShard(ss);
-                        bannerNewItem.text = "Soul Shard of the " + ss;
-                        bannerNewIcon.sprite = soulshard;
-                        sfxPayGG.Play();
-                        PlayerPrefs.SetInt("teddor.css", PlayerPrefs.GetInt("teddor.css", 0) + 1);
-                    }
-
-                    SaveController.instance.SaveAll();
+                if (Input.GetKey(KeyCode.LeftShift)) {
+                    StartCoroutine(DoMultiPull());
                 } else {
-                    sfxError.Play();
+                    DoSinglePull();
                 }
             }
+        }
+    }
+
+    private IEnumerator DoMultiPull() {
+        if (res.bstars > 9) {
+            res.bstars -= 10;
+            bannerNewAnim.Play("BannerLong");
+
+            List<BannerType> bannr = new List<BannerType>();
+            for (int i = 0; i < 10; i++) {
+                bannr.Add(RollType());
+            }
+            bannr.Sort((a, b) => b - a);
+            if (bannr[0] == BannerType.SOULSHARD) sfxPayGG.Play(); else sfxPay.Play();
+
+            yield return new WaitForSeconds(4.5f);
+            bool isFirst = true;
+            foreach (BannerType type in bannr) {
+                if (type == BannerType.BMATTER) {
+                    res.bmatter += 15 + Random.Range(0, 11);
+                    bannerNewItem.text = "bMatter";
+                    bannerNewIcon.sprite = bmatter;
+                } else if (type == BannerType.ABILITY4) {
+                    PlayerAbilityType t = GetRandom4();
+                    AddAbility(t);
+                    bannerNewItem.text = "4* " + t;
+                    bannerNewIcon.sprite = ability;
+                } else if (type == BannerType.ABILITY5) {
+                    PlayerAbilityType t = GetRandom5();
+                    AddAbility(t);
+                    bannerNewItem.text = "5* " + t;
+                    bannerNewIcon.sprite = ability;
+                } else if (type == BannerType.ABILITY6) {
+                    PlayerAbilityType t = GetRandom6();
+                    AddAbility(t);
+                    bannerNewItem.text = "6* " + t;
+                    bannerNewIcon.sprite = ability;
+                } else if (type == BannerType.SOULSHARD) {
+                    PlayerSoulShardType ss = GetCSoulShard();
+                    AddSoulShard(ss);
+                    bannerNewItem.text = "Soul Shard of the " + ss;
+                    bannerNewIcon.sprite = soulshard;
+                }
+                if (isFirst) {
+                    isFirst = false;
+                    yield return new WaitForSeconds(.35f);
+                }
+                yield return new WaitForSeconds(1f);
+            }
+
+            SaveController.instance.SaveAll();
+        } else {
+            sfxError.Play();
+        }
+    }
+
+    private void DoSinglePull() {
+        if (res.bstars > 0) {
+            res.bstars--;
+            bannerNewAnim.Play("Banner");
+
+            BannerType type = RollType();
+            if (type == BannerType.BMATTER) {
+                res.bmatter += 15 + Random.Range(0, 11);
+                bannerNewItem.text = "bMatter";
+                bannerNewIcon.sprite = bmatter;
+                sfxPay.Play();
+            } else if (type == BannerType.ABILITY4) {
+                PlayerAbilityType t = GetRandom4();
+                AddAbility(t);
+                bannerNewItem.text = "4* " + t;
+                bannerNewIcon.sprite = ability;
+                sfxPay.Play();
+            } else if (type == BannerType.ABILITY5) {
+                PlayerAbilityType t = GetRandom5();
+                AddAbility(t);
+                bannerNewItem.text = "5* " + t;
+                bannerNewIcon.sprite = ability;
+                sfxPay.Play();
+            } else if (type == BannerType.ABILITY6) {
+                PlayerAbilityType t = GetRandom6();
+                AddAbility(t);
+                bannerNewItem.text = "6* " + t;
+                bannerNewIcon.sprite = ability;
+                sfxPay.Play();
+            } else if (type == BannerType.SOULSHARD) {
+                PlayerSoulShardType ss = GetCSoulShard();
+                AddSoulShard(ss);
+                bannerNewItem.text = "Soul Shard of the " + ss;
+                bannerNewIcon.sprite = soulshard;
+                sfxPayGG.Play();
+            }
+
+            SaveController.instance.SaveAll();
+        } else {
+            sfxError.Play();
         }
     }
 
@@ -171,6 +231,7 @@ public class Banner : MonoBehaviour {
         
         if (rtype < .05f) {
             PlayerPrefs.SetInt("teddor.rolls", 0);
+            PlayerPrefs.SetInt("teddor.css", PlayerPrefs.GetInt("teddor.css", 0) + 1);
             return BannerType.SOULSHARD;
         } else if (rtype < .15f) {
             PlayerPrefs.SetInt("teddor.rolls", PlayerPrefs.GetInt("teddor.rolls", 0) + 1);
