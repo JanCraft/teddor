@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour {
     public float burstModeMult = 0f;
     public float burstModeTime = 0f;
 
-    public float bleedHP;
+    public float bleedHP, healHP;
 
     [Header("Enemy HUD")]
     public GameObject enemyhud;
@@ -156,12 +156,23 @@ public class PlayerController : MonoBehaviour {
             stats.hp -= tobleed;
             bleedHP -= tobleed;
         }
+        if (healHP > 0f) {
+            float toheal = healHP * Time.deltaTime;
+            stats.hp += toheal;
+            healHP -= toheal;
+        }
+
+        stats.hp = Mathf.Clamp(stats.hp, 0f, stats.maxhp);
 
         if (iframes > 0f) iframes -= Time.deltaTime;
     }
 
     public void ResetCD() {
         abilityCD = stats.ability.GetCooldown();
+    }
+
+    public void ZeroCD() {
+        abilityCD = 0f;
     }
 
     public void Teleport(Vector3 worldPos) {
@@ -508,7 +519,7 @@ public class PlayerAbility {
         } else if (type == PlayerAbilityType.HEAL) {
             float mult = .1f + (level - 1) * .05f;
             float value = player.stats.maxhp * mult;
-            player.Heal(value);
+            player.healHP += value;
         } else if (type == PlayerAbilityType.BLINK) {
             float mult = 2.5f + (level - 1) * .1f;
             player.AddSpeedMult(mult, 3.5f);

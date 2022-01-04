@@ -83,6 +83,7 @@ public class Banner : MonoBehaviour {
                     bannerNewIcon.sprite = ability;
                 } else if (type == BannerType.SOULSHARD) {
                     PlayerSoulShardType ss = GetCSoulShard();
+                    PlayerPrefs.SetInt("teddor.css", PlayerPrefs.GetInt("teddor.css", 0) + 1);
                     AddSoulShard(ss);
                     bannerNewItem.text = "Soul Shard of the " + ss;
                     bannerNewIcon.sprite = soulshard;
@@ -131,6 +132,7 @@ public class Banner : MonoBehaviour {
                 sfxPay.Play();
             } else if (type == BannerType.SOULSHARD) {
                 PlayerSoulShardType ss = GetCSoulShard();
+                PlayerPrefs.SetInt("teddor.css", PlayerPrefs.GetInt("teddor.css", 0) + 1);
                 AddSoulShard(ss);
                 bannerNewItem.text = "Soul Shard of the " + ss;
                 bannerNewIcon.sprite = soulshard;
@@ -154,6 +156,7 @@ public class Banner : MonoBehaviour {
         };
         if (PlayerPrefs.GetInt("teddor.newbanner", 0) < NEW_BANNER) {
             PlayerPrefs.SetInt("teddor.css", choice.Length - 1);
+            PlayerPrefs.SetInt("teddor.newbanner", NEW_BANNER);
         }
         int cur = PlayerPrefs.GetInt("teddor.css", 0);
         return choice[cur % choice.Length];
@@ -231,7 +234,6 @@ public class Banner : MonoBehaviour {
         
         if (rtype < .05f) {
             PlayerPrefs.SetInt("teddor.rolls", 0);
-            PlayerPrefs.SetInt("teddor.css", PlayerPrefs.GetInt("teddor.css", 0) + 1);
             return BannerType.SOULSHARD;
         } else if (rtype < .15f) {
             PlayerPrefs.SetInt("teddor.rolls", PlayerPrefs.GetInt("teddor.rolls", 0) + 1);
