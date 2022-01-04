@@ -102,13 +102,13 @@ public class Enemy : MonoBehaviour {
 
         if (bleed > 0f) {
             bleed = Mathf.Lerp(bleed, 0f, .75f * Time.deltaTime);
-            hp -= (bleed * Mathf.Min(maxhp * .025f, 1000)) * Time.deltaTime;
+            hp -= ((1.5f + bleed) * Mathf.Min(maxhp * .1f, 750)) * Time.deltaTime;
             CheckDeath();
         }
 
         if (flaming > 0f) {
             flaming = Mathf.Lerp(flaming, 1f, 1.5f * Time.deltaTime);
-            hp -= (flaming * Mathf.Min(maxhp * .1f, 2500)) * Time.deltaTime;
+            hp -= ((2.5f + flaming) * Mathf.Min(maxhp * .25f, 1000)) * Time.deltaTime;
             CheckDeath();
         }
     }

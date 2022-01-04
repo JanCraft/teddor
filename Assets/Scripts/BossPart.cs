@@ -13,15 +13,14 @@ public class BossPart : Enemy {
         shield = boss.shield;
         level = boss.lvl;
 
-        // bleed and flaming slightly reduced
         if (bleed > 0f) {
             bleed = Mathf.Lerp(bleed, 0f, .75f * Time.deltaTime);
-            boss.hp -= (bleed * Mathf.Min(maxhp * .015f, 1000)) * Time.deltaTime;
+            boss.hp -= ((1.5f + bleed) * Mathf.Min(maxhp * .1f, 750)) * Time.deltaTime;
         }
 
         if (flaming > 0f) {
             flaming = Mathf.Lerp(flaming, 1f, 1.5f * Time.deltaTime);
-            boss.hp -= (flaming * Mathf.Min(maxhp * .005f, 2500)) * Time.deltaTime;
+            boss.hp -= ((2.5f + flaming) * Mathf.Min(maxhp * .25f, 1000)) * Time.deltaTime;
         }
     }
 
