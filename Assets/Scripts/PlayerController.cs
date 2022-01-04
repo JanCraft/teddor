@@ -108,7 +108,7 @@ public class PlayerController : MonoBehaviour {
         hpshieldbar.localScale = Vector3.Lerp(hpshieldbar.localScale, new Vector3(Mathf.Min(shieldValue / stats.maxhp, 1f), 1f, 1f), 5f * Time.deltaTime);
         hpdmgbar.localScale = Vector3.Lerp(hpdmgbar.localScale, hpbarscale, Time.deltaTime * 2.5f);
         lvltxt.text = "Lv. " + stats.level;
-        xpbar.localScale = new Vector3(stats.xp / stats.xptonext, 1f, 1f);
+        xpbar.localScale = new Vector3(Mathf.Clamp01(stats.xp / stats.xptonext), 1f, 1f);
 
         if (shieldValue > 0f) {
             shieldValue -= shieldValue * .025f * Time.deltaTime;
@@ -707,11 +707,11 @@ public class PlayerStats {
     }
 
     public void CheckLevelUp() {
+        xptonext = level * 100f + Mathf.Floor(level / 25) * 1000f + Mathf.Floor(level / 50) * 1000f + Mathf.Floor(level / 75) * 1000f + Mathf.Floor(Mathf.Max(0, level - 90)) * 1000f * Mathf.Min(Mathf.Max(level - 99, 0), 1);
+
         if (level >= 99) return; // level limited to 99 (this version)
 
-        xptonext = level * 100f + Mathf.Floor(level / 25) * 1000f + Mathf.Floor(level / 50) * 1000f + Mathf.Floor(level / 75) * 1000f + Mathf.Floor(Mathf.Max(0, level - 90)) * 1000f * Mathf.Min(Mathf.Max(level - 99, 0), 1);
         if (xp >= xptonext) {
-
             if (level > 15) {
                 if (PlayerPrefs.GetInt("teddor.day", -1) != System.DateTime.UtcNow.Day) {
                     PlayerPrefs.SetInt("teddor.day", System.DateTime.UtcNow.Day);

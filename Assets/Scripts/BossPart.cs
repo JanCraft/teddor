@@ -16,12 +16,12 @@ public class BossPart : Enemy {
         // bleed and flaming slightly reduced
         if (bleed > 0f) {
             bleed = Mathf.Lerp(bleed, 0f, .75f * Time.deltaTime);
-            boss.hp -= (bleed * maxhp * .015f) * Time.deltaTime;
+            boss.hp -= (bleed * Mathf.Min(maxhp * .015f, 1000)) * Time.deltaTime;
         }
 
         if (flaming > 0f) {
             flaming = Mathf.Lerp(flaming, 1f, 1.5f * Time.deltaTime);
-            boss.hp -= (flaming * maxhp * .05f) * Time.deltaTime;
+            boss.hp -= (flaming * Mathf.Min(maxhp * .005f, 2500)) * Time.deltaTime;
         }
     }
 
