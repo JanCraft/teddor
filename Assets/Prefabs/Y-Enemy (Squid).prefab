@@ -82,10 +82,14 @@ MonoBehaviour:
   atk: 10
   areadanger: 0
   level: -1
-  canGrantXP: 1
+  canGrantStars: 1
+  bleed: 0
+  flaming: 0
+  paralyze: 0
   shield: 1
   shieldReduction: 0.5
   gravityEnabled: 1
+  bleedATKs: 1
   baseSpeed: 0
   baseAttackDST: 15
   baseAttackCD: 0.5

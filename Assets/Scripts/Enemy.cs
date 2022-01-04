@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour {
     public float shieldReduction = .5f;
 
     public bool gravityEnabled = true;
+    public bool bleedATKs;
 
     public float baseSpeed = 2f;
     public float baseAttackDST = 1.5f;
@@ -119,6 +120,7 @@ public class Enemy : MonoBehaviour {
         hitsound.Play();
         if (Vector3.Distance(player.transform.position, transform.position) < baseAttackDST) {
             player.TakeDamage(atk);
+            if (bleedATKs) player.bleedHP = atk * .65f;
         }
 
         attacking = false;
