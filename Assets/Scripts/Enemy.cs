@@ -29,6 +29,7 @@ public class Enemy : MonoBehaviour {
     public float baseAttackCD = .75f;
     public float baseHealthMLT = 1f;
     public float baseAttackDMG = 1f;
+    public float effSpeed = 1f;
     public bool stationary;
     public LongRangeMode longRange;
 
@@ -60,9 +61,9 @@ public class Enemy : MonoBehaviour {
 
         if (!stationary && !attacking) {
             if (dst > 1.5f) {
-                transform.position += dir * baseSpeed * Time.deltaTime;
+                transform.position += dir * baseSpeed * effSpeed * Time.deltaTime;
             } else if (dst < 1.45f) {
-                transform.position -= dir * baseSpeed * Time.deltaTime;
+                transform.position -= dir * baseSpeed * effSpeed * Time.deltaTime;
             }
         }
 
