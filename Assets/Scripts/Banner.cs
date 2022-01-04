@@ -11,7 +11,7 @@ public class Banner : MonoBehaviour {
     public GameObject bannerPanel;
 
     public Sprite bmatter;
-    public Sprite ability;
+    public Sprite[] ability;
     public Sprite soulshard;
 
     public ResourceController res;
@@ -70,17 +70,17 @@ public class Banner : MonoBehaviour {
                     PlayerAbilityType t = GetRandom4();
                     AddAbility(t);
                     bannerNewItem.text = "4* " + t;
-                    bannerNewIcon.sprite = ability;
+                    bannerNewIcon.sprite = ability[(int) t];
                 } else if (type == BannerType.ABILITY5) {
                     PlayerAbilityType t = GetRandom5();
                     AddAbility(t);
                     bannerNewItem.text = "5* " + t;
-                    bannerNewIcon.sprite = ability;
+                    bannerNewIcon.sprite = ability[(int) t];
                 } else if (type == BannerType.ABILITY6) {
                     PlayerAbilityType t = GetRandom6();
                     AddAbility(t);
                     bannerNewItem.text = "6* " + t;
-                    bannerNewIcon.sprite = ability;
+                    bannerNewIcon.sprite = ability[(int) t];
                 } else if (type == BannerType.SOULSHARD) {
                     PlayerSoulShardType ss = GetCSoulShard();
                     PlayerPrefs.SetInt("teddor.css", PlayerPrefs.GetInt("teddor.css", 0) + 1);
@@ -116,19 +116,19 @@ public class Banner : MonoBehaviour {
                 PlayerAbilityType t = GetRandom4();
                 AddAbility(t);
                 bannerNewItem.text = "4* " + t;
-                bannerNewIcon.sprite = ability;
+                bannerNewIcon.sprite = ability[(int) t];
                 sfxPay.Play();
             } else if (type == BannerType.ABILITY5) {
                 PlayerAbilityType t = GetRandom5();
                 AddAbility(t);
                 bannerNewItem.text = "5* " + t;
-                bannerNewIcon.sprite = ability;
+                bannerNewIcon.sprite = ability[(int) t];
                 sfxPay.Play();
             } else if (type == BannerType.ABILITY6) {
                 PlayerAbilityType t = GetRandom6();
                 AddAbility(t);
                 bannerNewItem.text = "6* " + t;
-                bannerNewIcon.sprite = ability;
+                bannerNewIcon.sprite = ability[(int) t];
                 sfxPay.Play();
             } else if (type == BannerType.SOULSHARD) {
                 PlayerSoulShardType ss = GetCSoulShard();

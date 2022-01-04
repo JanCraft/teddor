@@ -102,6 +102,7 @@ public class SaveController : MonoBehaviour {
                 resourceController.coins = info.coins;
                 resourceController.bstars = info.bstars;
                 resourceController.bmatter = info.bmatter;
+                resourceController.umatter = info.umatter;
             }
         } else {
             Migrate(gamedef);
@@ -260,6 +261,7 @@ public class PlayerResourceInfo {
     public int coins;
     public int bstars;
     public int bmatter;
+    public int umatter;
     public int checksum;
 
     public PlayerResourceInfo() { }
@@ -267,6 +269,7 @@ public class PlayerResourceInfo {
         coins = rc.coins;
         bstars = rc.bstars;
         bmatter = rc.bmatter;
+        umatter = rc.umatter;
     }
 
     public PlayerResourceInfo Verify() {

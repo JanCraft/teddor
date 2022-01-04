@@ -99,3 +99,7 @@ ui.banner.use:
 ui.banner.top:
   en: "Stargazing"
   es: "Observar Estrellas"
+
+ui.pets.buy:
+  en: "[Enter]\nBuy Pet"
+  es: "[Enter]\nComprar Pet"
