@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour {
     public TrailRenderer slasherTrail;
     public ParticleSystem slasherParticles;
 
+    public Transform waterVortexTPPoint;
+
     public Banner banner;
     public ForgeryController forgery;
     private Vector3 attackLock;
@@ -422,15 +424,15 @@ public class PlayerController : MonoBehaviour {
         return final;
     }
 
-    private void OnTriggerStay(Collider other) {
-        if (other.CompareTag("Water")) {
-            stats.hp = 0f;
-        }
-    }
-
     private void OnTriggerEnter(Collider other) {
         if (other.GetComponent<BossDamage>() != null) {
             TakeDamage(other.GetComponent<BossDamage>().boss.atk);
+        }
+        if (other.CompareTag("Water")) {
+            stats.hp = 0f;
+        } else if (other.CompareTag("WaterVortex")) {
+            Teleport(waterVortexTPPoint);
+            FindObjectOfType<VortexBefall>().Init();
         }
     }
 }
