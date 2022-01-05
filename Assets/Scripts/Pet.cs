@@ -15,6 +15,8 @@ public class Pet : MonoBehaviour {
 
         if (type == PetType.BOT) {
             if (skillCD <= 0f) {
+                PlayerController player = FindObjectOfType<PlayerController>();
+                player.healHP += player.stats.maxhp * .05f; // heals 5% every 15s
                 foreach (Enemy e in FindObjectsOfType<Enemy>()) {
                     if (Vector3.Distance(e.transform.position, transform.position) < 10f) {
                         e.paralyze = 5f; // paralyzes for 5s every 15s
@@ -26,8 +28,8 @@ public class Pet : MonoBehaviour {
             if (skillCD <= 0f) {
                 foreach (Enemy e in FindObjectsOfType<Enemy>()) {
                     if (Vector3.Distance(e.transform.position, transform.position) < 10f) {
-                        e.effSpeed = .5f; // slows down enemies to half speed
-                        e.bleed = 1f; // bleeds minimally
+                        e.effSpeed = .5f; // slows down enemies to half speed every 10s
+                        e.bleed = 1f; // bleeds minimally every 10s
                     }
                 }
                 skillCD = 10f;
