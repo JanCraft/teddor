@@ -430,6 +430,7 @@ public class PlayerController : MonoBehaviour {
         }
         if (other.CompareTag("Water")) {
             stats.hp = 0f;
+            Instantiate(splashPrefab, transform.position, Quaternion.identity);
         } else if (other.CompareTag("WaterVortex")) {
             Teleport(waterVortexTPPoint);
             FindObjectOfType<VortexBefall>().Init();
