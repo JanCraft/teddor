@@ -23,11 +23,26 @@ public class WellOfDepthsScores : MonoBehaviour {
         }
     }
 
+    private IEnumerator ReportToServer() {
+        ResourceController res = FindObjectOfType<ResourceController>();
+        PlayerController pc = FindObjectOfType<PlayerController>();
+        
+        UnityWebRequest www = UnityWebRequest.Get("https://game.jdev.com.es/teddor/sprl?token=" + PlayerPrefs.GetString("teddor.token") + "&bstars=" + res.bstars + "&lvl=" + pc.stats.level + "&xp=" + (int) pc.stats.xp);
+        yield return www.SendWebRequest();
+
+        if (www.result != UnityWebRequest.Result.Success) {
+            Debug.LogError("SPRL Report failed\n\n" + www.error);
+            yield break;
+        }
+    }
+
     public IEnumerator Fetch() {
         UnityWebRequest www = UnityWebRequest.Get("https://game.jdev.com.es/teddor/topscores?token=" + PlayerPrefs.GetString("teddor.token"));
         yield return www.SendWebRequest();
 
         if (www.result != UnityWebRequest.Result.Success) yield break;
+
+        yield return ReportToServer();
 
         Dictionary<string, int> scores = www.downloadHandler.text.FromJson<Dictionary<string, int>>();
         string[] keys = scores.Keys.ToArray();
