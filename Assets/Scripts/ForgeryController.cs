@@ -62,17 +62,18 @@ public class ForgeryController : MonoBehaviour {
                             return x.reforged.CompareTo(y.reforged);
                         });
 
-                        PlayerBuff bufi = FindInReturn(buffs.buffs[0], player.stats.buffs);
+                        int bufidx = buffs.buffs.FindIndex((x) => x.type == opt.type);
+                        PlayerBuff bufi = FindInReturn(buffs.buffs[bufidx], player.stats.buffs);
 
-                        if (buffs.buffs[0].reforged) {
-                            buffs.buffs[0].value = player.stats.level + 35;
+                        if (buffs.buffs[bufidx].reforged) {
+                            buffs.buffs[bufidx].value = player.stats.level + 35;
                         } else {
-                            buffs.buffs[0].value = player.stats.level + 25;
-                            buffs.buffs[0].reforged = true;
+                            buffs.buffs[bufidx].value = player.stats.level + 25;
+                            buffs.buffs[bufidx].reforged = true;
                         }
 
                         if (bufi != null) {
-                            bufi.value = buffs.buffs[0].value;
+                            bufi.value = buffs.buffs[bufidx].value;
                             bufi.reforged = true;
 
                             player.stats.Calculate();
@@ -146,10 +147,11 @@ public class ForgeryController : MonoBehaviour {
                 buyinfo.text += "\n\n";
 
                 if (opt.reforge) {
+                    int bufidx = buffs.buffs.FindIndex((x) => x.type == opt.type);
                     buyinfo.text += "<color=red>";
-                    buyinfo.text += buffs.buffs[0].value;
+                    buyinfo.text += buffs.buffs[bufidx].value;
                     buyinfo.text += "%</color> <color=yellow>>></color> <color=green>";
-                    if (buffs.buffs[0].reforged) {
+                    if (buffs.buffs[bufidx].reforged) {
                         buyinfo.text += (player.stats.level + 35).ToString();
                     } else {
                         buyinfo.text += (player.stats.level + 25).ToString();
@@ -164,8 +166,7 @@ public class ForgeryController : MonoBehaviour {
                 }
             }
 
-
-            outp += opt.type + " <color=yellow>";
+            outp += opt.type.ToString().Replace('_', ' ') + " <color=yellow>";
             if (opt.reforge) outp += TranslateKey.Translate("ui.foundry.reforge");
             outp += "</color>\n";
         }

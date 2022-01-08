@@ -286,3 +286,27 @@ story.1.10.4:
 story.1.10.5:
   en: "The swirlpool at the edge of the island."
   es: "El remolino en el borde de la isla."
+
+story.2.01.1:
+  en: "You must do the things on this list."
+  es: "Tienes que hacer las cosas de esta lista."
+
+story.2.01.2:
+  en: "Okay, see ya later!"
+  es: "Vale, luego nos vemos!"
+
+story.2.01.3:
+  en: "(it's fairly long though...)"
+  es: "(aunque... es bastante larga...)"
+
+story.2.09.1:
+  en: "You're back! What did you find?"
+  es: "¡Has vuelto! ¿Qué encontraste?"
+
+story.2.09.2:
+  en: "There's so many Squids everywhere!"
+  es: "¡Hay un montón de Squids por todos lados!"
+
+story.2.09.3:
+  en: "If they're gone now, we can continue searching..."
+  es: "Si ya no están, podemos continuar buscando..."

@@ -9,7 +9,11 @@ public class Enemy : MonoBehaviour {
     public float atk = 10f;
     public int areadanger = 0;
     public int level = -1;
-    public bool canGrantXP = true;
+    public bool canGrantStars = true;
+
+    public float bleed;
+    public float flaming;
+    public float paralyze;
 
     private float attackCD = 2.5f;
     private bool attacking;
@@ -18,12 +22,14 @@ public class Enemy : MonoBehaviour {
     public float shieldReduction = .5f;
 
     public bool gravityEnabled = true;
+    public bool bleedATKs;
 
     public float baseSpeed = 2f;
     public float baseAttackDST = 1.5f;
     public float baseAttackCD = .75f;
     public float baseHealthMLT = 1f;
     public float baseAttackDMG = 1f;
+    public float effSpeed = 1f;
     public bool stationary;
     public LongRangeMode longRange;
 
@@ -55,9 +61,9 @@ public class Enemy : MonoBehaviour {
 
         if (!stationary && !attacking) {
             if (dst > 1.5f) {
-                transform.position += dir * baseSpeed * Time.deltaTime;
+                transform.position += dir * baseSpeed * effSpeed * Time.deltaTime;
             } else if (dst < 1.45f) {
-                transform.position -= dir * baseSpeed * Time.deltaTime;
+                transform.position -= dir * baseSpeed * effSpeed * Time.deltaTime;
             }
         }
 
@@ -74,6 +80,7 @@ public class Enemy : MonoBehaviour {
                     StartCoroutine(ShortRangeAttack());
                 } else if (longRange == LongRangeMode.SPEEDUP) {
                     baseSpeed *= 1.25f;
+                    baseSpeed = Mathf.Min(baseSpeed, 8f);
                     attacking = false;
                 }
                 attackCD += 3.5f;
@@ -88,6 +95,23 @@ public class Enemy : MonoBehaviour {
             v.y = 0f;
             rb.velocity = v;
         }
+
+        if (paralyze > 0f) {
+            paralyze -= Time.deltaTime;
+            attackCD = 1f;
+        }
+
+        if (bleed > 0f) {
+            bleed = Mathf.Lerp(bleed, 0f, .75f * Time.deltaTime);
+            hp -= ((1.5f + bleed) * Mathf.Min(maxhp * .1f, 750)) * Time.deltaTime;
+            CheckDeath();
+        }
+
+        if (flaming > 0f) {
+            flaming = Mathf.Lerp(flaming, 1f, 1.5f * Time.deltaTime);
+            hp -= ((2.5f + flaming) * Mathf.Min(maxhp * .25f, 1000)) * Time.deltaTime;
+            CheckDeath();
+        }
     }
 
     IEnumerator ShortRangeAttack() {
@@ -97,6 +121,7 @@ public class Enemy : MonoBehaviour {
         hitsound.Play();
         if (Vector3.Distance(player.transform.position, transform.position) < baseAttackDST) {
             player.TakeDamage(atk);
+            if (bleedATKs) player.bleedHP = atk * .65f;
         }
 
         attacking = false;
@@ -128,14 +153,20 @@ public class Enemy : MonoBehaviour {
             SpawnDamageNumber((int) amount, transform.position + Vector3.up * 1f);
         }
 
+        if (bleed > 0f) bleed += 1f;
+
+        CheckDeath();
+    }
+
+    private void CheckDeath() {
         hp = Mathf.Max(hp, 0f);
         if (hp <= 0f) {
             Destroy(gameObject);
-            if (canGrantXP) {
-                player.stats.xp += 100f;
-                player.stats.Calculate();
-                player.GetComponent<ResourceController>().coins += 500;
-                player.GetComponent<ResourceController>().bmatter += 5;
+            player.stats.xp += 100f;
+            player.stats.Calculate();
+            player.GetComponent<ResourceController>().coins += 500;
+            player.GetComponent<ResourceController>().bmatter += 5;
+            if (canGrantStars) {
                 if (UnityEngine.Random.value < .075f) {
                     player.GetComponent<ResourceController>().bstars += 1;
                 }

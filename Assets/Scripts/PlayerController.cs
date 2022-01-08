@@ -26,10 +26,13 @@ public class PlayerController : MonoBehaviour {
     public GameObject earthquakePrefab;
     public GameObject kaboomPrefab;
     public GameObject lightningPrefab;
+    public GameObject splashPrefab;
 
     public Transform slasher;
     public TrailRenderer slasherTrail;
     public ParticleSystem slasherParticles;
+
+    public Transform waterVortexTPPoint;
 
     public Banner banner;
     public ForgeryController forgery;
@@ -46,8 +49,11 @@ public class PlayerController : MonoBehaviour {
     public Transform hpbar;
     public Transform hpdmgbar;
     public Transform hpshieldbar;
+    public Transform xpbar;
     public float burstModeMult = 0f;
     public float burstModeTime = 0f;
+
+    public float bleedHP, healHP;
 
     [Header("Enemy HUD")]
     public GameObject enemyhud;
@@ -57,6 +63,8 @@ public class PlayerController : MonoBehaviour {
     public Transform enemyshield;
     [HideInInspector]
     public Enemy lasthitenemy;
+    [HideInInspector]
+    public bool removeEnemyHUD;
 
     [Header("Storyline")]
     public DialogController dialog;
@@ -102,11 +110,16 @@ public class PlayerController : MonoBehaviour {
         hpshieldbar.localScale = Vector3.Lerp(hpshieldbar.localScale, new Vector3(Mathf.Min(shieldValue / stats.maxhp, 1f), 1f, 1f), 5f * Time.deltaTime);
         hpdmgbar.localScale = Vector3.Lerp(hpdmgbar.localScale, hpbarscale, Time.deltaTime * 2.5f);
         lvltxt.text = "Lv. " + stats.level;
+        xpbar.localScale = new Vector3(Mathf.Clamp01(stats.xp / stats.xptonext), 1f, 1f);
 
         if (shieldValue > 0f) {
             shieldValue -= shieldValue * .025f * Time.deltaTime;
         }
 
+        if (removeEnemyHUD && lasthitenemy != null) {
+            lasthitenemy = null;
+            removeEnemyHUD = false;
+        }
         if (lasthitenemy != null) {
             enemylvl.text = "Lv. " + lasthitenemy.level;
             enemyhp.localScale = new Vector3(lasthitenemy.hp / lasthitenemy.maxhp, 1f, 1f);
@@ -140,11 +153,28 @@ public class PlayerController : MonoBehaviour {
             stats.hp += .001f * stats.maxhp * Time.deltaTime;
         }
 
+        if (bleedHP > 0f) {
+            float tobleed = bleedHP * Time.deltaTime;
+            stats.hp -= tobleed;
+            bleedHP -= tobleed;
+        }
+        if (healHP > 0f) {
+            float toheal = healHP * Time.deltaTime;
+            stats.hp += toheal;
+            healHP -= toheal;
+        }
+
+        stats.hp = Mathf.Clamp(stats.hp, 0f, stats.maxhp);
+
         if (iframes > 0f) iframes -= Time.deltaTime;
     }
 
     public void ResetCD() {
         abilityCD = stats.ability.GetCooldown();
+    }
+
+    public void ZeroCD() {
+        abilityCD = 0f;
     }
 
     public void Teleport(Vector3 worldPos) {
@@ -157,6 +187,10 @@ public class PlayerController : MonoBehaviour {
         controller.enabled = false;
         transform.position = worldPos.position;
         controller.enabled = true;
+    }
+
+    public void HealMax() {
+        stats.hp = stats.maxhp;
     }
 
     public void TeleportFade(Transform worldPos) {
@@ -390,21 +424,22 @@ public class PlayerController : MonoBehaviour {
         return final;
     }
 
-    private void OnTriggerStay(Collider other) {
-        if (other.CompareTag("Water")) {
-            stats.hp = 0f;
-        }
-    }
-
     private void OnTriggerEnter(Collider other) {
         if (other.GetComponent<BossDamage>() != null) {
             TakeDamage(other.GetComponent<BossDamage>().boss.atk);
+        }
+        if (other.CompareTag("Water")) {
+            stats.hp = 0f;
+            Instantiate(splashPrefab, transform.position, Quaternion.identity);
+        } else if (other.CompareTag("WaterVortex")) {
+            Teleport(waterVortexTPPoint);
+            FindObjectOfType<VortexBefall>().Init();
         }
     }
 }
 
 public enum PlayerBuffType {
-    HP, ATK, CRIT_RATE, CRIT_DMG, BURST_DMG
+    HP, ATK, CRIT_RATE, CRIT_DMG, BURST_DMG, BLEED_DMG
 }
 
 [System.Serializable]
@@ -420,7 +455,7 @@ public class PlayerBuff {
 }
 
 public enum PlayerAbilityType {
-    NONE, RANGED, SHIELD, HEAL, BLINK, METEOR, EARTHQUAKE, BOLT
+    NONE, RANGED, SHIELD, HEAL, BLINK, METEOR, EARTHQUAKE, BOLT, WATERJET
 }
 
 [System.Serializable]
@@ -431,7 +466,7 @@ public class PlayerAbility {
     public int GetStarCount() {
         if (type == PlayerAbilityType.METEOR || type == PlayerAbilityType.EARTHQUAKE) {
             return 5;
-        } else if (type == PlayerAbilityType.BOLT) {
+        } else if (type == PlayerAbilityType.BOLT || type == PlayerAbilityType.WATERJET) {
             return 6;
         }
 
@@ -454,6 +489,8 @@ public class PlayerAbility {
                 return 9.5f;
             case PlayerAbilityType.BOLT:
                 return 5.5f;
+            case PlayerAbilityType.WATERJET:
+                return 2.0f;
             default:
                 return 5f;
         }
@@ -485,7 +522,7 @@ public class PlayerAbility {
         } else if (type == PlayerAbilityType.HEAL) {
             float mult = .1f + (level - 1) * .05f;
             float value = player.stats.maxhp * mult;
-            player.Heal(value);
+            player.healHP += value;
         } else if (type == PlayerAbilityType.BLINK) {
             float mult = 2.5f + (level - 1) * .1f;
             player.AddSpeedMult(mult, 3.5f);
@@ -501,6 +538,20 @@ public class PlayerAbility {
             float mult = 2f + (level - 1) * .08f;
             GameObject.Instantiate(player.lightningPrefab, player.transform.position, Quaternion.identity);
             AoE(player, 5f, mult, false, false, false);
+        } else if (type == PlayerAbilityType.WATERJET) {
+            float mult = 1f + (level - 1) * .05f * (1f + player.stats.GetTotalBuff(PlayerBuffType.BLEED_DMG)) * (1f + player.stats.GetTotalBuff(PlayerBuffType.ATK));
+            Enemy[] enemies = GameObject.FindObjectsOfType<Enemy>();
+            List<Enemy> hittable = new List<Enemy>();
+            foreach (Enemy enemy in enemies) {
+                if (Vector3.Distance(player.transform.position, enemy.transform.position) < 5f) {
+                    hittable.Add(enemy);
+                }
+            }
+            foreach (Enemy enemy in hittable) {
+                enemy.bleed += mult;
+                player.lasthitenemy = enemy;
+            }
+            GameObject.Instantiate(player.splashPrefab, player.transform.position, Quaternion.identity);
         }
     }
 
@@ -532,7 +583,7 @@ public class PlayerAbility {
 }
 
 public enum PlayerSoulShardType {
-    NONE, CROWNED, WINGED, DEPTHS, MAGE, DEMON
+    NONE, CROWNED, WINGED, DEPTHS, MAGE, DEMON, TIDES
 }
 
 [System.Serializable]
@@ -546,6 +597,7 @@ public class PlayerSoulShard {
         if (type == PlayerSoulShardType.DEPTHS) return 1500;
         if (type == PlayerSoulShardType.MAGE) return 500;
         if (type == PlayerSoulShardType.DEMON) return 1500;
+        if (type == PlayerSoulShardType.TIDES) return 1750;
 
         return 5000; // in case I forget to add new ones
     }
@@ -576,6 +628,16 @@ public class PlayerSoulShard {
         if (type == PlayerSoulShardType.DEMON) {
             AoE(player, 10f, player.stats.maxhp * 1.5f);
             player.stats.hp *= .7f;
+        }
+        if (type == PlayerSoulShardType.TIDES) {
+            AoE(player, 10f, player.stats.atk * (1f + player.stats.GetTotalBuff(PlayerBuffType.BURST_DMG)));
+            Enemy[] enemies = GameObject.FindObjectsOfType<Enemy>();
+            List<Enemy> hittable = new List<Enemy>();
+            foreach (Enemy enemy in enemies) {
+                if (Vector3.Distance(player.transform.position, enemy.transform.position) < 10) {
+                    enemy.bleed = 15f;
+                }
+            }
         }
     }
 
@@ -629,6 +691,8 @@ public class PlayerStats {
     public float critrate = .25f;
     public float critdmg = .5f;
 
+    public float xptonext { get; private set; }
+
     public long checksum;
 
     public void Calculate() {
@@ -646,11 +710,11 @@ public class PlayerStats {
     }
 
     public void CheckLevelUp() {
+        xptonext = level * 100f + Mathf.Floor(level / 25) * 1000f + Mathf.Floor(level / 50) * 1000f + Mathf.Floor(level / 75) * 1000f + Mathf.Floor(Mathf.Max(0, level - 90)) * 1000f * Mathf.Min(Mathf.Max(level - 99, 0), 1);
+
         if (level >= 99) return; // level limited to 99 (this version)
 
-        float xptonext = level * 100f;
         if (xp >= xptonext) {
-
             if (level > 15) {
                 if (PlayerPrefs.GetInt("teddor.day", -1) != System.DateTime.UtcNow.Day) {
                     PlayerPrefs.SetInt("teddor.day", System.DateTime.UtcNow.Day);

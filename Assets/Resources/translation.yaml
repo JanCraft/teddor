@@ -50,6 +50,10 @@ ui.menu.quality:
   en: "Quality"
   es: "Calidad"
 
+ui.menu.multiplayer:
+  en: "Multiplayer"
+  es: "Multijugador"
+
 ui.menu.credits:
   en: "Credits"
   es: "Créditos"
@@ -95,3 +99,7 @@ ui.banner.use:
 ui.banner.top:
   en: "Stargazing"
   es: "Observar Estrellas"
+
+ui.pets.buy:
+  en: "[Enter]\nBuy Pet"
+  es: "[Enter]\nComprar Pet"

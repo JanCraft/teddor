@@ -17,6 +17,7 @@ public class WellOfDepthsController : MonoBehaviour {
     public bool isInChallenge;
     public bool triggerChallenge;
     private bool loadingLevel;
+    private bool startOnly = false;
 
     private int score;
 
@@ -39,7 +40,7 @@ public class WellOfDepthsController : MonoBehaviour {
 
         if (isInChallenge) {
             activeEnemies.RemoveAll(item => item == null);
-            if (activeEnemies.Count == 0 && !loadingLevel) {
+            if (activeEnemies.Count <= 1 && !loadingLevel) {
                 level++;
                 score += Mathf.Max(0, 1200 - Mathf.FloorToInt((Time.time - floorStart) * Mathf.Min(40, level))) + (level * 10);
 #if !UNITY_EDITOR
@@ -61,6 +62,8 @@ public class WellOfDepthsController : MonoBehaviour {
             triggerChallenge = false;
             isInChallenge = true;
             player.canDie = false;
+            startOnly = true;
+            LoadingScreen.FadeInOutTeleport(.25f, player, enemySpawnPoint.position);
         }
 
         if (isInChallenge && player.hasDied) {
@@ -79,14 +82,17 @@ public class WellOfDepthsController : MonoBehaviour {
 
     IEnumerator LoadLevel() {
         loadingLevel = true;
-        LoadingScreen.FadeInOutTeleport(1f, player, enemySpawnPoint.position);
         floorStart = Time.time;
 
-        player.stats.hp = player.stats.maxhp * .95f;
-        player.ReduceCD(888.888f, 1f);
+        player.healHP += .33f * player.stats.maxhp;
+        player.ZeroCD();
         player.soulCharge += (int) (player.stats.soulShard.ChargeMax() * .1f);
 
-        yield return new WaitForSeconds(2.5f);
+        if (startOnly) {
+            yield return new WaitForSeconds(2.5f);
+            startOnly = false;
+        }
+        yield return new WaitForSeconds(.1f);
 
         int enemies = 2 + Mathf.Min(Mathf.FloorToInt(level / 10f), 1);
         for (int i = 0; i < enemies; i++) {
@@ -95,7 +101,7 @@ public class WellOfDepthsController : MonoBehaviour {
             GameObject o = Instantiate(enemyPool[Random.Range(0, enemyPool.Length)], pos, Quaternion.identity);
             Enemy e = o.GetComponent<Enemy>();
             e.level = level * 2 - player.stats.level;
-            e.canGrantXP = true;
+            e.canGrantStars = true;
             activeEnemies.Add(e);
         }
 

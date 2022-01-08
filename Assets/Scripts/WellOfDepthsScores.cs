@@ -27,6 +27,8 @@ public class WellOfDepthsScores : MonoBehaviour {
         UnityWebRequest www = UnityWebRequest.Get("https://game.jdev.com.es/teddor/topscores?token=" + PlayerPrefs.GetString("teddor.token"));
         yield return www.SendWebRequest();
 
+        if (www.result != UnityWebRequest.Result.Success) yield break;
+
         Dictionary<string, int> scores = www.downloadHandler.text.FromJson<Dictionary<string, int>>();
         string[] keys = scores.Keys.ToArray();
 

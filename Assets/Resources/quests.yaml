@@ -40,4 +40,40 @@ ui.quest.1.09:
 
 ui.quest.1.10:
   en: "<b>Chapter I</b>\n conclusion"
-  es: "<b>Capítulo I</b>\n conclusion"
+  es: "<b>Capítulo I</b>\n conclusión"
+
+ui.quest.2.01:
+  en: "<b>Chapter II</b>\n talk to the mage"
+  es: "<b>Capítulo II</b>\n habla con el mago"
+
+ui.quest.2.02:
+  en: "<b>Chapter II</b>\n observe the platform"
+  es: "<b>Capítulo II</b>\n observa la plataforma"
+
+ui.quest.2.03:
+  en: "<b>Chapter II</b>\n observe the entrance"
+  es: "<b>Capítulo II</b>\n observa la entrada"
+
+ui.quest.2.04:
+  en: "<b>Chapter II</b>\n defeat (1/3)"
+  es: "<b>Capítulo II</b>\n derrota (1/3)"
+
+ui.quest.2.05:
+  en: "<b>Chapter II</b>\n defeat (2/3)"
+  es: "<b>Capítulo II</b>\n derrota (2/3)"
+
+ui.quest.2.06:
+  en: "<b>Chapter II</b>\n defeat (3/3)"
+  es: "<b>Capítulo II</b>\n derrota (3/3)"
+
+ui.quest.2.07:
+  en: "<b>Chapter II</b>\n enter the vortex"
+  es: "<b>Capítulo II</b>\n entra al vórtice"
+
+ui.quest.2.08:
+  en: "<b>Chapter II</b>\n escape the vortex"
+  es: "<b>Capítulo II</b>\n escapa del vórtice"
+
+ui.quest.2.09:
+  en: "<b>Chapter II</b>\n talk to the mage"
+  es: "<b>Capítulo II</b>\n habla con el mago"
