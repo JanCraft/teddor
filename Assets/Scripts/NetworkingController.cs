@@ -20,23 +20,27 @@ public class NetworkingController : MonoBehaviour {
         }
         
         ws = new WebSocket("wss://relay.jdev.com.es/");
-        ws.Connect();
+        ws.SslConfiguration.ServerCertificateValidationCallback = (a, b, c, d) => true;
         ws.OnOpen += (sender, e) => {
             Debug.Log("bws > connected to relay");
             ws.Send("{}");
         };
         ws.OnClose += (sender, e) => {
-            Debug.Log("bws > connection cut with relay");
+            Debug.Log("bws > connection cut with relay\n\n" + e.Code + ": " + e.Reason);
+        };
+        ws.OnError += (sender, e) => {
+            Debug.LogError(e.Exception);
         };
         ws.OnMessage += (sender, e) => {
             
         };
+        ws.Connect();
     }
 
     void Update() {
     }
 
     void OnDisable() {
-        ws.Close();
+        if (ws != null && ws.ReadyState == WebSocketState.Open) ws.Close();
     }
 }
