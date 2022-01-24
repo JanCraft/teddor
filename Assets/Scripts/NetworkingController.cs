@@ -1,17 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using WebSocketSharp;
 using TinyJson;
 
 public class NetworkingController : MonoBehaviour {
     public static NetworkingController instance;
-    public Transform localPlayer;
+    public PlayerController localPlayer;
     [Range(1f, 10f)]
     public float smoothing = 7.5f;
     [Range(1f, 100f)]
     public float packetRate = 75f;
     public GameObject playerPrefab;
+
+    public Transform colliseum;
 
     private WebSocket ws;
     private float npi;
@@ -41,11 +44,19 @@ public class NetworkingController : MonoBehaviour {
         };
         ws.OnMessage += (sender, e) => {
             Dictionary<string, object> data = e.Data.FromJson< Dictionary<string, object>>();
-            
-            if (players.ContainsKey((string) data["name"])) {
-                players[(string) data["name"]].Update(pf(data["x"]), pf(data["y"]), pf(data["z"]), pf(data["r"]));
-            } else {
-                players.Add((string) data["name"], new NPlayerData().Update(pf(data["x"]), pf(data["y"]), pf(data["z"]), pf(data["r"])));
+
+            if (data["event"].ToString() == "teddor:mp/move") {
+                if (players.ContainsKey((string) data["name"])) {
+                    players[(string) data["name"]].Update(pf(data["x"]), pf(data["y"]), pf(data["z"]), pf(data["r"]));
+                } else {
+                    players.Add((string) data["name"], new NPlayerData().Update(pf(data["x"]), pf(data["y"]), pf(data["z"]), pf(data["r"])));
+                }
+            } else if (data["event"].ToString() == "teddor:mp/damage") {
+                if (data["name"].ToString() == PlayerPrefs.GetString("teddor.user")) {
+                    if (Vector3.Distance(colliseum.position, localPlayer.transform.position) < 15f) {
+                        localPlayer.TakeDamage(pf(data["dmg"]));
+                    }
+                }
             }
         };
         ws.Connect();
@@ -55,10 +66,10 @@ public class NetworkingController : MonoBehaviour {
         if (npi <= 0f) {
             pkt.Clear();
             pkt.Add("name", PlayerPrefs.GetString("teddor.user", "<unknown>"));
-            pkt.Add("x", localPlayer.position.x);
-            pkt.Add("y", localPlayer.position.y);
-            pkt.Add("z", localPlayer.position.z);
-            pkt.Add("r", localPlayer.eulerAngles.y);
+            pkt.Add("x", localPlayer.transform.position.x);
+            pkt.Add("y", localPlayer.transform.position.y);
+            pkt.Add("z", localPlayer.transform.position.z);
+            pkt.Add("r", localPlayer.transform.eulerAngles.y);
 
             SendPacket("teddor:mp/move", pkt);
             npi = packetRate / 1000f;
@@ -69,8 +80,9 @@ public class NetworkingController : MonoBehaviour {
                 objects[player].position = Vector3.Lerp(objects[player].position, players[player].pos, smoothing * Time.deltaTime);
                 objects[player].eulerAngles = Vector3.up * Mathf.LerpAngle(objects[player].eulerAngles.y, players[player].rot, smoothing * Time.deltaTime);
             } else {
-                objects.Add(player, Instantiate(playerPrefab, players[player].pos, Quaternion.AngleAxis(players[player].rot, Vector3.up)).transform);
-
+                GameObject obj = Instantiate(playerPrefab, players[player].pos, Quaternion.AngleAxis(players[player].rot, Vector3.up));
+                obj.transform.GetChild(1).GetChild(0).GetComponent<Text>().text = player;
+                objects.Add(player, obj.transform);
             }
         }
     }
