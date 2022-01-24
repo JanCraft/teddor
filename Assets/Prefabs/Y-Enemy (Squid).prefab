@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8507302840350859999}
   - component: {fileID: 8507302840350859936}
   - component: {fileID: 8507302840350859937}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Y-Enemy (Squid)
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -99,6 +99,7 @@ MonoBehaviour:
   stationary: 1
   longRange: 2
   dmgIndicatorPrefab: {fileID: 30260464280918322, guid: 5ec3a00fbdc45c4409222ebe7609d248, type: 3}
+  deathEffectPrefab: {fileID: 6607158544034161482, guid: a47f7ee052e0d6c4aa4dd5db6f5f1b54, type: 3}
   anim: {fileID: 8507302841136703938}
   hitsound: {fileID: 8507302840818423733}
 --- !u!1 &8507302840818423731
@@ -111,7 +112,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8507302840818423730}
   - component: {fileID: 8507302840818423733}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Hit Sound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -321,11 +322,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7297404195775441271, guid: 94bf168ab31bc4c44965153cdc8e5b1c, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: -5998391054064006031, guid: 94bf168ab31bc4c44965153cdc8e5b1c, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: -5622433519524500490, guid: 94bf168ab31bc4c44965153cdc8e5b1c, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -341,7 +342,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 94bf168ab31bc4c44965153cdc8e5b1c, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2232149271022330637, guid: 94bf168ab31bc4c44965153cdc8e5b1c, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -349,7 +350,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 7949fd1d304114747bdbf9776ae34a31, type: 2}
     - target: {fileID: 4458446352946251909, guid: 94bf168ab31bc4c44965153cdc8e5b1c, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7857373725450398628, guid: 94bf168ab31bc4c44965153cdc8e5b1c, type: 3}
       propertyPath: m_LocalScale.x

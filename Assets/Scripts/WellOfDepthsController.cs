@@ -101,7 +101,7 @@ public class WellOfDepthsController : MonoBehaviour {
             GameObject o = Instantiate(enemyPool[Random.Range(0, enemyPool.Length)], pos, Quaternion.identity);
             Enemy e = o.GetComponent<Enemy>();
             e.level = level * 2 - player.stats.level;
-            e.canGrantStars = true;
+            e.canGrantStars = false;
             activeEnemies.Add(e);
         }
 
@@ -121,17 +121,17 @@ public class WellOfDepthsController : MonoBehaviour {
     string GetRank() {
         if (level < player.stats.level) {
             return "D";
-        } else if (level < player.stats.level + 2) {
-            return "C";
         } else if (level < player.stats.level + 4) {
+            return "C";
+        } else if (level < player.stats.level + 8) {
             return "B";
-        } else if (level < player.stats.level + 7) {
-            return "A";
-        } else if (level < player.stats.level + 10) {
-            return "S";
         } else if (level < player.stats.level + 14) {
+            return "A";
+        } else if (level < player.stats.level + 20) {
+            return "S";
+        } else if (level < player.stats.level + 28) {
             return "SS";
-        } else if (level < player.stats.level + 19) {
+        } else if (level < player.stats.level + 38) {
             return "SSS";
         }
         return "SSS+";

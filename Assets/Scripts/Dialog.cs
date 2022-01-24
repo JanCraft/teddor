@@ -9,6 +9,7 @@ public class Dialog : MonoBehaviour {
     public DialogEvents events;
 
     private int current = 0;
+    private bool willEnd;
     public bool trigger;
     public bool physicalTrigger;
 
@@ -27,6 +28,11 @@ public class Dialog : MonoBehaviour {
         if (DialogController.instance.next) {
             current++;
             Refresh();
+        }
+
+        if (willEnd && Input.GetKeyDown(KeyCode.Return)) {
+            willEnd = false;
+            events.onFinish.Invoke();
         }
     }
 
@@ -56,7 +62,7 @@ public class Dialog : MonoBehaviour {
         DialogController.instance.contentslow = TranslateKey.Translate(contents[current]);
         DialogController.instance.ConsumeCache();
 
-        if (!DialogController.instance.hasNext) events.onFinish.Invoke();
+        if (!DialogController.instance.hasNext) willEnd = true;
     }
 }
 

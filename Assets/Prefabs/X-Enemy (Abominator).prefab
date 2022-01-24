@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1628057388}
   - component: {fileID: 1628057389}
   - component: {fileID: 6519127323302553427}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 1927158437458128419}
   - component: {fileID: 2244255748415469341}
   - component: {fileID: 2244255748415469336}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: X-Enemy (Abominator)
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -253,18 +253,24 @@ MonoBehaviour:
   atk: 10
   areadanger: 0
   level: -1
-  canGrantXP: 1
+  canGrantStars: 1
+  bleed: 0
+  flaming: 0
+  paralyze: 0
   shield: 0
   shieldReduction: 0.5
   gravityEnabled: 1
+  bleedATKs: 0
   baseSpeed: 0
   baseAttackDST: 15
   baseAttackCD: 0.5
   baseHealthMLT: 0.5
   baseAttackDMG: 0.25
+  effSpeed: 1
   stationary: 1
   longRange: 2
   dmgIndicatorPrefab: {fileID: 30260464280918322, guid: 5ec3a00fbdc45c4409222ebe7609d248, type: 3}
+  deathEffectPrefab: {fileID: 6607158544034161482, guid: a47f7ee052e0d6c4aa4dd5db6f5f1b54, type: 3}
   anim: {fileID: 84706903455304128}
   hitsound: {fileID: 744437584763323399}
 --- !u!1 &4595351660586304539
@@ -277,7 +283,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6778320863771932854}
   - component: {fileID: 744437584763323399}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Hit Sound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -473,6 +479,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8308520557088052106, guid: 1aef17cbc0b5321419cd652d3b8b7811, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: -7921429402485293198, guid: 1aef17cbc0b5321419cd652d3b8b7811, type: 3}
       propertyPath: m_LocalScale.x
       value: 100
@@ -501,13 +511,33 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c714ef11402af0045ae3d7363887a833, type: 2}
+    - target: {fileID: -3661985432938654458, guid: 1aef17cbc0b5321419cd652d3b8b7811, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: -1333418004115654058, guid: 1aef17cbc0b5321419cd652d3b8b7811, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 2e8faa65b8877c4449a1abcbee500f5f, type: 2}
+    - target: {fileID: -259972160606440404, guid: 1aef17cbc0b5321419cd652d3b8b7811, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -49426936630978696, guid: 1aef17cbc0b5321419cd652d3b8b7811, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 635547659545568360, guid: 1aef17cbc0b5321419cd652d3b8b7811, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1aef17cbc0b5321419cd652d3b8b7811, type: 3}
       propertyPath: m_Name
       value: Graphics
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1aef17cbc0b5321419cd652d3b8b7811, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3324942178290223197, guid: 1aef17cbc0b5321419cd652d3b8b7811, type: 3}
       propertyPath: m_Materials.Array.data[0]

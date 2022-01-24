@@ -276,6 +276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: ui.banner.use
+  useController: 0
 --- !u!1001 &22345703
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10074,6 +10075,7 @@ MonoBehaviour:
   stationary: 0
   longRange: 0
   dmgIndicatorPrefab: {fileID: 0}
+  deathEffectPrefab: {fileID: 0}
   anim: {fileID: 0}
   hitsound: {fileID: 0}
   boss: {fileID: 919132148624494055}
@@ -18925,6 +18927,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: ui.pets.buy
+  useController: 0
 --- !u!1 &579320762
 GameObject:
   m_ObjectHideFlags: 0
@@ -42913,6 +42916,7 @@ MonoBehaviour:
   stationary: 0
   longRange: 0
   dmgIndicatorPrefab: {fileID: 0}
+  deathEffectPrefab: {fileID: 0}
   anim: {fileID: 0}
   hitsound: {fileID: 0}
   boss: {fileID: 1425000227542495278}
@@ -52517,6 +52521,7 @@ MonoBehaviour:
   stationary: 0
   longRange: 0
   dmgIndicatorPrefab: {fileID: 0}
+  deathEffectPrefab: {fileID: 0}
   anim: {fileID: 0}
   hitsound: {fileID: 0}
   boss: {fileID: 5046532091815946974}
@@ -52692,6 +52697,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   localPlayer: {fileID: 2037163456}
   smoothing: 7.5
+  packetRate: 75
+  playerPrefab: {fileID: 8769485720353963378, guid: ef1d2da391d81fc49afd7cddb9263f44, type: 3}
 --- !u!4 &1328472793
 Transform:
   m_ObjectHideFlags: 0
@@ -53378,6 +53385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: ui.banner.top
+  useController: 0
 --- !u!114 &1381291684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56086,6 +56094,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: ui.pause.items
+  useController: 0
 --- !u!1001 &1586866231
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57344,6 +57353,7 @@ MonoBehaviour:
   stationary: 0
   longRange: 0
   dmgIndicatorPrefab: {fileID: 0}
+  deathEffectPrefab: {fileID: 0}
   anim: {fileID: 0}
   hitsound: {fileID: 0}
   boss: {fileID: 5046532091815946974}
@@ -57834,6 +57844,7 @@ MonoBehaviour:
   stationary: 0
   longRange: 0
   dmgIndicatorPrefab: {fileID: 0}
+  deathEffectPrefab: {fileID: 0}
   anim: {fileID: 0}
   hitsound: {fileID: 0}
   boss: {fileID: 919132148624494055}
@@ -59035,6 +59046,7 @@ MonoBehaviour:
   stationary: 0
   longRange: 0
   dmgIndicatorPrefab: {fileID: 0}
+  deathEffectPrefab: {fileID: 0}
   anim: {fileID: 0}
   hitsound: {fileID: 0}
   boss: {fileID: 1425000227542495278}
