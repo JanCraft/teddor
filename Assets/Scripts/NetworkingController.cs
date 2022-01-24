@@ -17,12 +17,15 @@ public class NetworkingController : MonoBehaviour {
     public Transform colliseum;
 
     private WebSocket ws;
+    private string username;
     private float npi;
     private Dictionary<string, object> pkt = new Dictionary<string, object>();
     private Dictionary<string, NPlayerData> players = new Dictionary<string, NPlayerData>();
     private Dictionary<string, Transform> objects = new Dictionary<string, Transform>();
+    private Queue<float> damage = new Queue<float>();
 
     void Start() {
+        username = PlayerPrefs.GetString("teddor.user");
         instance = this;
 
         if (PlayerPrefs.GetInt("teddor.coop", 1) != 1) {
@@ -52,10 +55,10 @@ public class NetworkingController : MonoBehaviour {
                     players.Add((string) data["name"], new NPlayerData().Update(pf(data["x"]), pf(data["y"]), pf(data["z"]), pf(data["r"])));
                 }
             } else if (data["event"].ToString() == "teddor:mp/damage") {
-                if (data["name"].ToString() == PlayerPrefs.GetString("teddor.user")) {
-                    if (Vector3.Distance(colliseum.position, localPlayer.transform.position) < 15f) {
-                        localPlayer.TakeDamage(pf(data["dmg"]));
-                    }
+                Debug.Log(data["name"].ToString() + " " + username);
+                if (data["name"].ToString() == username) {
+                    Debug.Log(pf(data["dmg"]));
+                    damage.Enqueue(pf(data["dmg"]));
                 }
             }
         };
@@ -82,8 +85,17 @@ public class NetworkingController : MonoBehaviour {
             } else {
                 GameObject obj = Instantiate(playerPrefab, players[player].pos, Quaternion.AngleAxis(players[player].rot, Vector3.up));
                 obj.transform.GetChild(1).GetChild(0).GetComponent<Text>().text = player;
+                obj.GetComponent<PlayerProfile>().username = player;
                 objects.Add(player, obj.transform);
             }
+        }
+
+        bool candmg = Vector3.Distance(colliseum.position, localPlayer.transform.position) < 15f;
+        while (damage.Count > 0) {
+            float f = damage.Dequeue();
+            Debug.Log(f);
+            Debug.Log(candmg);
+            if (candmg) localPlayer.TakeDamage(f);
         }
     }
 

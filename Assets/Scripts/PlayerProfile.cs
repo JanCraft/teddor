@@ -7,6 +7,7 @@ public class PlayerProfile : Enemy {
     private NetworkingController nc;
 
     public override void Start() {
+        nc = FindObjectOfType<NetworkingController>();
         level = 0;
     }
     public override void Update() {
