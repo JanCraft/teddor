@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject kaboomPrefab;
     public GameObject lightningPrefab;
     public GameObject splashPrefab;
+    public GameObject firePrefab;
 
     public Transform slasher;
     public TrailRenderer slasherTrail;
@@ -455,7 +456,7 @@ public class PlayerBuff {
 }
 
 public enum PlayerAbilityType {
-    NONE, RANGED, SHIELD, HEAL, BLINK, METEOR, EARTHQUAKE, BOLT, WATERJET
+    NONE, RANGED, SHIELD, HEAL, BLINK, METEOR, EARTHQUAKE, BOLT, WATERJET, IGNITION
 }
 
 [System.Serializable]
@@ -466,7 +467,7 @@ public class PlayerAbility {
     public int GetStarCount() {
         if (type == PlayerAbilityType.METEOR || type == PlayerAbilityType.EARTHQUAKE) {
             return 5;
-        } else if (type == PlayerAbilityType.BOLT || type == PlayerAbilityType.WATERJET) {
+        } else if (type == PlayerAbilityType.BOLT || type == PlayerAbilityType.WATERJET || type == PlayerAbilityType.IGNITION) {
             return 6;
         }
 
@@ -491,6 +492,8 @@ public class PlayerAbility {
                 return 5.5f;
             case PlayerAbilityType.WATERJET:
                 return 2.0f;
+            case PlayerAbilityType.IGNITION:
+                return 3.0f;
             default:
                 return 5f;
         }
@@ -552,6 +555,21 @@ public class PlayerAbility {
                 player.lasthitenemy = enemy;
             }
             GameObject.Instantiate(player.splashPrefab, player.transform.position, Quaternion.identity);
+        } else if (type == PlayerAbilityType.IGNITION) {
+            float mult = 1f + (level - 1) * .05f * (1f + player.stats.GetTotalBuff(PlayerBuffType.BLEED_DMG)) * (1f + player.stats.GetTotalBuff(PlayerBuffType.ATK)) * (1f + player.stats.GetTotalBuff(PlayerBuffType.BURST_DMG));
+
+            Enemy[] enemies = GameObject.FindObjectsOfType<Enemy>();
+            List<Enemy> hittable = new List<Enemy>();
+            foreach (Enemy enemy in enemies) {
+                if (Vector3.Distance(player.transform.position, enemy.transform.position) < 5f) {
+                    hittable.Add(enemy);
+                }
+            }
+            foreach (Enemy enemy in hittable) {
+                enemy.flaming += mult;
+                player.lasthitenemy = enemy;
+            }
+            GameObject.Instantiate(player.firePrefab, player.transform.position, Quaternion.identity);
         }
     }
 
@@ -583,7 +601,7 @@ public class PlayerAbility {
 }
 
 public enum PlayerSoulShardType {
-    NONE, CROWNED, WINGED, DEPTHS, MAGE, DEMON, TIDES
+    NONE, CROWNED, WINGED, DEPTHS, MAGE, DEMON, TIDES, FLAMES
 }
 
 [System.Serializable]
@@ -598,6 +616,7 @@ public class PlayerSoulShard {
         if (type == PlayerSoulShardType.MAGE) return 500;
         if (type == PlayerSoulShardType.DEMON) return 1500;
         if (type == PlayerSoulShardType.TIDES) return 1750;
+        if (type == PlayerSoulShardType.FLAMES) return 1650;
 
         return 5000; // in case I forget to add new ones
     }
@@ -611,33 +630,44 @@ public class PlayerSoulShard {
         if (type == PlayerSoulShardType.CROWNED) {
             player.burstModeMult = 2f;
             player.burstModeTime = 10f;
-        }
-        if (type == PlayerSoulShardType.WINGED) {
+        } else if (type == PlayerSoulShardType.WINGED) {
             player.burstModeMult = 1f;
             player.burstModeTime = 15f;
             player.AddSpeedMult(.5f, 10f);
             player.ReduceCD(5f, 10f);
-        }
-        if (type == PlayerSoulShardType.DEPTHS) {
+        } else if (type == PlayerSoulShardType.DEPTHS) {
             float dmg = ReverseAoE(player, 10f) * .35f;
             AoE(player, 10f, dmg);
-        }
-        if (type == PlayerSoulShardType.MAGE) {
+        } else if (type == PlayerSoulShardType.MAGE) {
             player.ReduceCD(1.5f, 10f);
-        }
-        if (type == PlayerSoulShardType.DEMON) {
+        } else if (type == PlayerSoulShardType.DEMON) {
             AoE(player, 10f, player.stats.maxhp * 1.5f);
             player.stats.hp *= .7f;
-        }
-        if (type == PlayerSoulShardType.TIDES) {
+        } else if (type == PlayerSoulShardType.TIDES) {
             AoE(player, 10f, player.stats.atk * (1f + player.stats.GetTotalBuff(PlayerBuffType.BURST_DMG)));
             Enemy[] enemies = GameObject.FindObjectsOfType<Enemy>();
-            List<Enemy> hittable = new List<Enemy>();
             foreach (Enemy enemy in enemies) {
                 if (Vector3.Distance(player.transform.position, enemy.transform.position) < 10) {
                     enemy.bleed = 15f;
                 }
             }
+        } else if (type == PlayerSoulShardType.FLAMES) {
+            player.StartCoroutine(_FlamesSS(player));
+        }
+    }
+
+    private IEnumerator _FlamesSS(PlayerController player) {
+        for (int i = 0; i < 5; i++) {
+            AoE(player, 10f, player.stats.atk * .25f, true);
+            Enemy[] enemies = GameObject.FindObjectsOfType<Enemy>();
+            foreach (Enemy enemy in enemies) {
+                if (Vector3.Distance(player.transform.position, enemy.transform.position) < 10) {
+                    enemy.flaming = 25f;
+                    GameObject.Instantiate(player.firePrefab, enemy.transform.position, Quaternion.identity);
+                }
+            }
+
+            yield return new WaitForSeconds(2.5f);
         }
     }
 
@@ -656,7 +686,7 @@ public class PlayerSoulShard {
         return hpacc;
     }
 
-    private void AoE(PlayerController pc, float radius, float directdmg) {
+    private void AoE(PlayerController pc, float radius, float directdmg, bool trueDMG=false) {
         Enemy[] enemies = GameObject.FindObjectsOfType<Enemy>();
         List<Enemy> hittable = new List<Enemy>();
         foreach (Enemy enemy in enemies) {
@@ -665,7 +695,7 @@ public class PlayerSoulShard {
             }
         }
         foreach (Enemy enemy in hittable) {
-            enemy.TakeDamage(directdmg, pc, false);
+            enemy.TakeDamage(directdmg, pc, trueDMG);
             pc.OnHitEnemy(enemy);
             pc.lasthitenemy = enemy;
         }

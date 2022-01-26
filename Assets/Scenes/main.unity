@@ -17846,7 +17846,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_LocalRotation: {x: 0.31317425, y: 4.992438e-10, z: 1.6463149e-10, w: 0.9496957}
+  m_LocalRotation: {x: 0.31317425, y: -4.992438e-10, z: -1.6463149e-10, w: 0.9496957}
   m_LocalPosition: {x: -83.22, y: 21.988, z: -0.5799999}
   m_LocalScale: {x: 1000, y: 1000, z: 1000}
   m_Children: []
@@ -21885,7 +21885,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 796359150}
-  m_LocalRotation: {x: 0.34042525, y: -0.000000016178669, z: 0.000000005857486, w: 0.9402716}
+  m_LocalRotation: {x: 0.34042525, y: 0.000000016178673, z: -0.0000000058574874, w: 0.9402716}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -32597,7 +32597,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 927575515}
-  m_LocalRotation: {x: 0.28584558, y: 1e-45, z: -0, w: 0.95827574}
+  m_LocalRotation: {x: 0.28584558, y: -3e-45, z: 1e-45, w: 0.95827574}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -56003,6 +56003,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b7d6a69780b2a412592d70b346fbefcf, type: 3}
   - {fileID: 21300000, guid: 2b2298b8d5bac4042b11f7899c34eb20, type: 3}
   - {fileID: 21300000, guid: 933fa9cf3e51249e2a1fc508fe2431b3, type: 3}
+  - {fileID: 21300000, guid: f11260b97d6a8bb4c8b5299b0e847e6d, type: 3}
   soulshard: {fileID: 21300000, guid: 41d55874f0f4e964b9721e875e6a1ce0, type: 3}
   res: {fileID: 2037163461}
   player: {fileID: 2037163457}
@@ -66953,6 +66954,7 @@ MonoBehaviour:
   kaboomPrefab: {fileID: 2652066343733216053, guid: 4ba067e18ee0c484da7daf7a00a4712f, type: 3}
   lightningPrefab: {fileID: 1122527260168664987, guid: a86229ee112228b45bd9238e89ea8cd2, type: 3}
   splashPrefab: {fileID: 1938907783233556951, guid: 305c09fd5b01e49c9a2aff5e268b01a7, type: 3}
+  firePrefab: {fileID: 2987402922780678802, guid: 632c99af84fccf74d886269b6b128c87, type: 3}
   slasher: {fileID: 973522559}
   slasherTrail: {fileID: 1528139395}
   slasherParticles: {fileID: 1943350852}
