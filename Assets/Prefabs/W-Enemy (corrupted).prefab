@@ -157,7 +157,7 @@ GameObject:
   - component: {fileID: 8769485720353963368}
   - component: {fileID: 8769485720353963373}
   m_Layer: 8
-  m_Name: Enemy (corrupted)
+  m_Name: W-Enemy (corrupted)
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

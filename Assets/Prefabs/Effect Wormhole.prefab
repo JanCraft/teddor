@@ -4823,7 +4823,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5259635511872764551}
   m_Layer: 0
-  m_Name: Wormhole
+  m_Name: Effect Wormhole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

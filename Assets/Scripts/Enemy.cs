@@ -31,6 +31,7 @@ public class Enemy : MonoBehaviour {
     public float baseAttackDMG = 1f;
     public float effSpeed = 1f;
     public bool stationary;
+    public bool fastATK;
     public LongRangeMode longRange;
 
     public GameObject dmgIndicatorPrefab;
@@ -73,7 +74,7 @@ public class Enemy : MonoBehaviour {
             attacking = true;
             if (dst <= baseAttackDST) {
                 StartCoroutine(ShortRangeAttack());
-                attackCD += 1.5f;
+                attackCD += fastATK ? baseAttackCD * 2f : 1.5f;
             } else {
                 if (longRange == LongRangeMode.OVERHEAD) {
                     StartCoroutine(LongRangeAttack());
@@ -84,7 +85,7 @@ public class Enemy : MonoBehaviour {
                     baseSpeed = Mathf.Min(baseSpeed, 8f);
                     attacking = false;
                 }
-                attackCD += 3.5f;
+                attackCD += fastATK ? baseAttackCD * 2f : 3.5f;
             }
         }
         if (attackCD > 0f) attackCD -= Time.deltaTime;
@@ -105,12 +106,17 @@ public class Enemy : MonoBehaviour {
         if (bleed > 0f) {
             bleed = Mathf.Lerp(bleed, 0f, .75f * Time.deltaTime);
             hp -= Mathf.Min((1.5f + bleed) * maxhp * .05f, maxhp * .25f) * Time.deltaTime;
+            if (fastATK && shield > 0f) bleed = 0f;
             CheckDeath();
         }
 
         if (flaming > 0f) {
             flaming = Mathf.Lerp(flaming, 1f, 1.5f * Time.deltaTime);
-            hp -= Mathf.Min((2.5f + flaming) * maxhp * .1f, maxhp * .5f) * Time.deltaTime;
+            if (fastATK && shield > 0f) {
+                shield -= Mathf.Min((1.5f + flaming) * maxhp * .025f, maxhp * .5f) * Time.deltaTime;
+            } else {
+                hp -= Mathf.Min((2.5f + flaming) * maxhp * .1f, maxhp * .5f) * Time.deltaTime;
+            }
             CheckDeath();
         }
     }
