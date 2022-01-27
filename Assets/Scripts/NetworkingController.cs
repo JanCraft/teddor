@@ -90,7 +90,7 @@ public class NetworkingController : MonoBehaviour {
             }
         }
 
-        bool candmg = Vector3.Distance(colliseum.position, localPlayer.transform.position) < 15f;
+        bool candmg = Vector3.Distance(colliseum.position, localPlayer.transform.position) < 25f;
         while (damage.Count > 0) {
             float f = damage.Dequeue();
             Debug.Log(f);
