@@ -104,9 +104,9 @@ public class Enemy : MonoBehaviour {
         }
 
         if (bleed > 0f) {
+            if (fastATK) bleed = 0f;
             bleed = Mathf.Lerp(bleed, 0f, .75f * Time.deltaTime);
             hp -= Mathf.Min((1.5f + bleed) * maxhp * .05f, maxhp * .25f) * Time.deltaTime;
-            if (fastATK && shield > 0f) bleed = 0f;
             CheckDeath();
         }
 

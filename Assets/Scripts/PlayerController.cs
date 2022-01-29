@@ -485,11 +485,11 @@ public class PlayerAbility {
             case PlayerAbilityType.BLINK:
                 return 4.5f;
             case PlayerAbilityType.METEOR:
-                return 8.5f;
+                return 4.5f;
             case PlayerAbilityType.EARTHQUAKE:
-                return 9.5f;
-            case PlayerAbilityType.BOLT:
                 return 5.5f;
+            case PlayerAbilityType.BOLT:
+                return 3.5f;
             case PlayerAbilityType.WATERJET:
                 return 2.0f;
             case PlayerAbilityType.IGNITION:
@@ -531,6 +531,8 @@ public class PlayerAbility {
             player.AddSpeedMult(mult, 3.5f);
         } else if (type == PlayerAbilityType.METEOR) {
             float mult = 1f + (level - 1) * .05f;
+            if (player.burstModeMult < mult) player.burstModeMult = mult;
+            player.burstModeTime += 1.5f;
             GameObject.Instantiate(player.kaboomPrefab, player.transform.position, Quaternion.identity);
             AoE(player, 5f, mult, false, true, false);
         } else if (type == PlayerAbilityType.EARTHQUAKE) {

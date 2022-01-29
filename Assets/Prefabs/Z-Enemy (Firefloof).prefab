@@ -260,7 +260,7 @@ MonoBehaviour:
   baseAttackDST: 15
   baseAttackCD: 0.05
   baseHealthMLT: 3
-  baseAttackDMG: 0.25
+  baseAttackDMG: 0.125
   effSpeed: 1
   stationary: 1
   fastATK: 1
