@@ -36,7 +36,8 @@ public class BonusRush : MonoBehaviour {
 
     private BonusRushDifficulty diff, nextdiff;
     private int round, enemiesLeft, enemiesSpawnLeft;
-    private bool onRound, running;
+    private bool onRound, running, timeRunning;
+    private float time, hideTime;
     private List<Enemy> enemies = new List<Enemy>();
     private PlayerController pc;
 
@@ -45,9 +46,12 @@ public class BonusRush : MonoBehaviour {
     }
 
     void Update() {
-        brUI.SetActive(running);
-        roundText.text = round + "/" + (8 + (int) diff * 4);
-        diffText.text = diff.ToString();
+        if (hideTime > 0f) hideTime -= Time.deltaTime;
+        brUI.SetActive(running || hideTime > 0f);
+        roundText.text = round + "/" + (8 + (int) (diff - 1) * 4);
+        diffText.text = diff.ToString()[0] + ". " + FormatTime(time);
+
+        if (timeRunning) time += Time.deltaTime;
 
         if (onRound) {
             if (enemiesLeft <= 0) {
@@ -55,12 +59,14 @@ public class BonusRush : MonoBehaviour {
                 round++;
                 enemies.Clear();
 
-                if (round > 8 + (int) diff * 4) {
+                if (round > 8 + (int) (diff - 1) * 4) {
                     pc.Teleport(spawnPos);
                     FindObjectOfType<ResourceController>().GiveStars(5 + (int) diff * 2);
                     FindObjectOfType<ResourceController>().GiveUMatter(5 + (int) diff * 2);
                     FindObjectOfType<ResourceController>().GiveMatter(15 + (int) diff * 5);
                     running = false;
+                    timeRunning = false;
+                    hideTime = 2.5f;
                     return;
                 }
                 
@@ -81,6 +87,7 @@ public class BonusRush : MonoBehaviour {
                 pc.Teleport(startPos);
                 ShowDoor(da, doorPosA);
                 ShowDoor(db, doorPosB);
+                timeRunning = false;
 
                 nextdiff = diff;
             } else {
@@ -95,6 +102,10 @@ public class BonusRush : MonoBehaviour {
                 }
             }
         }
+    }
+
+    private string FormatTime(float time) {
+        return ((int) (time / 60f)).ToString().PadLeft(2, '0') + ":" + (time % 60f).ToString("00.00");
     }
 
     private void SpawnEnemy() {
@@ -136,6 +147,8 @@ public class BonusRush : MonoBehaviour {
         hardDoor.SetActive(true);
         pc.TeleportFade(startPos);
         running = true;
+        timeRunning = false;
+        time = 0;
     }
 
     public void SetDifficulty(int diff) {
@@ -148,6 +161,7 @@ public class BonusRush : MonoBehaviour {
         enemiesLeft = 0;
         enemiesSpawnLeft = 0;
         pc.Teleport(startPos);
+        timeRunning = true;
     }
 
     public void SetBonusDoor(int door) {
@@ -158,9 +172,10 @@ public class BonusRush : MonoBehaviour {
         shieldDoor.SetActive(false);
         easyChainDoor.SetActive(false);
         onRound = true;
-        enemiesLeft = 5 + (int) nextdiff * 5;
-        enemiesSpawnLeft = 5 + (int) nextdiff * 5;
+        enemiesLeft = 5 + (int) (nextdiff-1) * 5;
+        enemiesSpawnLeft = 5 + (int) (nextdiff-1) * 5;
         pc.Teleport(startPos);
+        timeRunning = true;
 
         if ((BonusRushDoor) door == BonusRushDoor.HEAL) {
             pc.HealMax();
@@ -181,7 +196,7 @@ public class BonusRush : MonoBehaviour {
 }
 
 public enum BonusRushDifficulty {
-    EASY, NORMAL, HARD
+    ZERO, EASY, NORMAL, HARD
 }
 
 public enum BonusRushDoor {
