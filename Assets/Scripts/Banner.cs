@@ -26,7 +26,7 @@ public class Banner : MonoBehaviour {
     public static bool playing;
     public bool open;
 
-    public static int NEW_BANNER = 1;
+    public static int NEW_BANNER = 2;
 
     void Update() {
         playing = bannerNewAnim.isPlaying;
@@ -153,6 +153,7 @@ public class Banner : MonoBehaviour {
             PlayerSoulShardType.DEMON,
             PlayerSoulShardType.WINGED,
             PlayerSoulShardType.TIDES,
+            PlayerSoulShardType.FLAMES,
         };
         if (PlayerPrefs.GetInt("teddor.newbanner", 0) < NEW_BANNER) {
             PlayerPrefs.SetInt("teddor.css", choice.Length - 1);
@@ -219,7 +220,8 @@ public class Banner : MonoBehaviour {
     private PlayerAbilityType GetRandom6() {
         PlayerAbilityType[] choice = {
             PlayerAbilityType.BOLT,
-            PlayerAbilityType.WATERJET
+            PlayerAbilityType.WATERJET,
+            PlayerAbilityType.IGNITION
         };
         return choice[Random.Range(0, choice.Length)];
     }

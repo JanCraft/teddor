@@ -140,6 +140,10 @@ Base Charge cannot be lower than 100.
  Additionally, all enemies (in a 10m radius) bleed by a factor of 15.
  Base Charge: 1750
 
+"Soul Shard of the Flames": Performs a "flaming round" every 2.5s for 12.5s.
+ "Flaming Round": deals 25% of ATK as True DMG and ignites enemies by a factor of 25.
+ Base Charge: 1650
+
 ================
 = BANNER RATES =
 ================

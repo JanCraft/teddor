@@ -41,7 +41,7 @@ public class PetBaseController : MonoBehaviour {
                 active = !status;
             }
             else {
-                if (FindObjectOfType<ResourceController>().umatter >= 50) {
+                if (FindObjectOfType<ResourceController>().umatter >= 5) {
                     buying = true;
                     buyMenu.SetActive(true);
                 }

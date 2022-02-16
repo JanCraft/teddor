@@ -31,7 +31,7 @@ public class SettingsMenu : MonoBehaviour {
 
         SetVolume(PlayerPrefs.GetFloat("teddor.volume", 1f));
         SetQuality(PlayerPrefs.GetInt("teddor.quality", 5));
-        coop.isOn = PlayerPrefs.GetInt("teddor.coop", 0) == 1;
+        coop.isOn = PlayerPrefs.GetInt("teddor.coop", 1) == 1;
     }
 
     public void SetVolume(float volume) {

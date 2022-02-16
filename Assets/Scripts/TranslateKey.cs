@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class TranslateKey : MonoBehaviour {
     public static string lang = "en";
     public string key = "";
+    public bool useController;
     private Text text;
 
     public static Dictionary<string, TranslateKeyObject> keys = new Dictionary<string, TranslateKeyObject>();
