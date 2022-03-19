@@ -69,10 +69,10 @@ public class NetworkingController : MonoBehaviour {
         if (npi <= 0f) {
             pkt.Clear();
             pkt.Add("name", PlayerPrefs.GetString("teddor.user", "<unknown>"));
-            pkt.Add("x", localPlayer.transform.position.x);
-            pkt.Add("y", localPlayer.transform.position.y);
-            pkt.Add("z", localPlayer.transform.position.z);
-            pkt.Add("r", localPlayer.transform.eulerAngles.y);
+            pkt.Add("x", localPlayer.transform.position.x.ToString(System.Globalization.CultureInfo.InvariantCulture));
+            pkt.Add("y", localPlayer.transform.position.y.ToString(System.Globalization.CultureInfo.InvariantCulture));
+            pkt.Add("z", localPlayer.transform.position.z.ToString(System.Globalization.CultureInfo.InvariantCulture));
+            pkt.Add("r", localPlayer.transform.eulerAngles.y.ToString(System.Globalization.CultureInfo.InvariantCulture));
 
             SendPacket("teddor:mp/move", pkt);
             npi = packetRate / 1000f;
