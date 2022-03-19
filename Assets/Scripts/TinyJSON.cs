@@ -55,7 +55,7 @@ namespace TinyJson
             }
 
             //Parse the thing!
-            return (T) ParseValue(typeof(T), stringBuilder.ToString());
+            return (T) ParseValue(typeof(T), Convert.ToString(stringBuilder, System.Globalization.CultureInfo.InvariantCulture));
         }
 
         static int AppendUntilStringEnd(bool appendEscapeCharacter, int startIdx, string json) {
@@ -99,7 +99,7 @@ namespace TinyJson
                     case ',':
                     case ':':
                         if (parseDepth == 0) {
-                            splitArray.Add(stringBuilder.ToString());
+                            splitArray.Add(Convert.ToString(stringBuilder, System.Globalization.CultureInfo.InvariantCulture));
                             stringBuilder.Length = 0;
                             continue;
                         }
@@ -109,7 +109,7 @@ namespace TinyJson
                 stringBuilder.Append(json[i]);
             }
 
-            splitArray.Add(stringBuilder.ToString());
+            splitArray.Add(Convert.ToString(stringBuilder, System.Globalization.CultureInfo.InvariantCulture));
 
             return splitArray;
         }
@@ -138,7 +138,7 @@ namespace TinyJson
                     }
                     parseStringBuilder.Append(json[i]);
                 }
-                return parseStringBuilder.ToString();
+                return Convert.ToString(parseStringBuilder, System.Globalization.CultureInfo.InvariantCulture);
             }
             if (type.IsPrimitive) {
                 var result = Convert.ChangeType(json, type, System.Globalization.CultureInfo.InvariantCulture);
@@ -337,7 +337,7 @@ namespace TinyJson
         public static string ToJson(this object item) {
             StringBuilder stringBuilder = new StringBuilder();
             AppendValue(stringBuilder, item);
-            return stringBuilder.ToString();
+            return Convert.ToString(stringBuilder, System.Globalization.CultureInfo.InvariantCulture);
         }
 
         static void AppendValue(StringBuilder stringBuilder, object item) {
@@ -349,7 +349,7 @@ namespace TinyJson
             Type type = item.GetType();
             if (type == typeof(string) || type == typeof(char)) {
                 stringBuilder.Append('"');
-                string str = item.ToString();
+                string str = Convert.ToString(item, System.Globalization.CultureInfo.InvariantCulture);
                 for (int i = 0; i < str.Length; ++i)
                     if (str[i] < ' ' || str[i] == '"' || str[i] == '\\') {
                         stringBuilder.Append('\\');
@@ -362,13 +362,13 @@ namespace TinyJson
                         stringBuilder.Append(str[i]);
                 stringBuilder.Append('"');
             } else if (type == typeof(byte) || type == typeof(sbyte)) {
-                stringBuilder.Append(item.ToString());
+                stringBuilder.Append(Convert.ToString(item, System.Globalization.CultureInfo.InvariantCulture));
             } else if (type == typeof(short) || type == typeof(ushort)) {
-                stringBuilder.Append(item.ToString());
+                stringBuilder.Append(Convert.ToString(item, System.Globalization.CultureInfo.InvariantCulture));
             } else if (type == typeof(int) || type == typeof(uint)) {
-                stringBuilder.Append(item.ToString());
+                stringBuilder.Append(Convert.ToString(item, System.Globalization.CultureInfo.InvariantCulture));
             } else if (type == typeof(long) || type == typeof(ulong)) {
-                stringBuilder.Append(item.ToString());
+                stringBuilder.Append(Convert.ToString(item, System.Globalization.CultureInfo.InvariantCulture));
             } else if (type == typeof(float)) {
                 stringBuilder.Append(((float) item).ToString(System.Globalization.CultureInfo.InvariantCulture));
             } else if (type == typeof(double)) {
