@@ -24,6 +24,10 @@ public class MainMenuController : MonoBehaviour {
     }
 
     void Update() {
+        if (Input.GetKeyDown(KeyCode.F11)) {
+            Screen.fullScreen = !Screen.fullScreen;
+        }
+
         if (statuscurrent.Length < statustarget.Length) {
             if (!statusDelay.isPlaying) {
                 statuscurrent += statustarget[statuscurrent.Length];
