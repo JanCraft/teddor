@@ -55,9 +55,7 @@ public class NetworkingController : MonoBehaviour {
                     players.Add((string) data["name"], new NPlayerData().Update(pf(data["x"]), pf(data["y"]), pf(data["z"]), pf(data["r"])));
                 }
             } else if (data["event"].ToString() == "teddor:mp/damage") {
-                Debug.Log(data["name"].ToString() + " " + username);
                 if (data["name"].ToString() == username) {
-                    Debug.Log(pf(data["dmg"]));
                     damage.Enqueue(pf(data["dmg"]));
                 }
             }
@@ -93,8 +91,6 @@ public class NetworkingController : MonoBehaviour {
         bool candmg = Vector3.Distance(colliseum.position, localPlayer.transform.position) < 25f;
         while (damage.Count > 0) {
             float f = damage.Dequeue();
-            Debug.Log(f);
-            Debug.Log(candmg);
             if (candmg) localPlayer.TakeDamage(f);
         }
     }
