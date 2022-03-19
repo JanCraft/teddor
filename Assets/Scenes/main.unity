@@ -2585,7 +2585,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.65
+  m_Radius: 0.35
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: -0.5, z: -0.00000008940697}
@@ -13284,7 +13284,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.65
+  m_Radius: 0.35
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: -0.5, z: -0.00000008940697}
@@ -23077,7 +23077,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.65
+  m_Radius: 0.35
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: -0.5, z: -0.00000008940697}
@@ -39285,7 +39285,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.65
+  m_Radius: 0.35
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: -0.5, z: -0.00000008940697}
@@ -50768,7 +50768,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.65
+  m_Radius: 0.35
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: -0.5, z: -0.00000008940697}
@@ -51478,7 +51478,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.65
+  m_Radius: 0.35
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: -0.5, z: -0.00000008940697}
@@ -51883,7 +51883,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.65
+  m_Radius: 0.35
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: -0.5, z: -0.00000008940697}
@@ -59626,7 +59626,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.65
+  m_Radius: 0.35
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: -0.5, z: -0.00000008940697}
@@ -59736,7 +59736,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.65
+  m_Radius: 0.35
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: -0.5, z: -0.00000008940697}
@@ -61501,7 +61501,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1352067648}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.75000113}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1710933078}
@@ -61509,7 +61509,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.000045776367, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1352067651
@@ -61545,7 +61545,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '<color=red>v1.2</color>
+  m_Text: '<color=black>v1.3</color>
 
     "<color>BONUS RUSH</color>" and
 
@@ -62580,7 +62580,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.65
+  m_Radius: 0.35
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: -0.5, z: -0.00000008940697}
@@ -63629,7 +63629,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.65
+  m_Radius: 0.35
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: -0.5, z: -0.00000008940697}
@@ -65249,7 +65249,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.65
+  m_Radius: 0.35
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: -0.5, z: -0.00000008940697}
@@ -70470,7 +70470,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.65
+  m_Radius: 0.35
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: -0.5, z: -0.00000008940697}
@@ -78851,10 +78851,10 @@ MonoBehaviour:
   - {fileID: 7400000, guid: 86778ce9c9f09334787bebea5c489682, type: 2}
   attackCD: 2
   randomAttack: 0
-  xp: 2000
+  xp: 2500
   bMatter: 20
   bStars: 1
-  uMatter: 1
+  uMatter: 2
   reward:
     m_PersistentCalls:
       m_Calls:
@@ -78968,7 +78968,7 @@ MonoBehaviour:
   xp: 1000
   bMatter: 10
   bStars: 1
-  uMatter: 0
+  uMatter: 1
   reward:
     m_PersistentCalls:
       m_Calls:
@@ -79504,7 +79504,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpMult: 25
-  atkMult: 1
+  atkMult: 0.25
   shieldReduction: 0.75
   anim: {fileID: 5046532091815946975}
   attacks:
@@ -79512,10 +79512,10 @@ MonoBehaviour:
   - {fileID: 7400000, guid: 39b56fd481ee25545a55532fdf450ca6, type: 2}
   attackCD: 1.5
   randomAttack: 1
-  xp: 3000
+  xp: 5000
   bMatter: 35
   bStars: 2
-  uMatter: 1
+  uMatter: 3
   reward:
     m_PersistentCalls:
       m_Calls:
