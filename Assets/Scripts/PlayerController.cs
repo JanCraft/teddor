@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour {
     private float turnSmoothVelocity;
     private float velocity = 0f;
     private float dashTime = 0f;
+    public LayerMask groundLayer;
     public Transform cam;
     public CharacterController controller;
     public Animation anim;
@@ -39,6 +40,7 @@ public class PlayerController : MonoBehaviour {
     public ForgeryController forgery;
     private Vector3 attackLock;
     private float attackCD;
+    private int attackCnt;
     public bool hasDied;
     public bool canDie = true;
     private float iframes;
@@ -256,7 +258,7 @@ public class PlayerController : MonoBehaviour {
             iframes = .25f;
             bSpeed *= 5f;
             attackCD = .1f;
-            dashTime = .75f;
+            dashTime = .5f;
         }
 
         if (attackCD > 0f) {
@@ -265,8 +267,12 @@ public class PlayerController : MonoBehaviour {
             Vector2 toVector = attackLock - transform.position;
             float angleToTarget = Vector2.Angle(transform.forward, toVector);
 
-            float target = FixAngle(angleToTarget + 25f);
-            slasher.localEulerAngles += Vector3.up * 360f * 2.5f * Time.deltaTime;
+            float target = FixAngle(angleToTarget + 90f);
+            if (attackCnt == 0) {
+                slasher.localEulerAngles += Vector3.up * 360f * 2.5f * Time.deltaTime;
+            } else {
+                slasher.localEulerAngles -= Vector3.up * 360f * 2.5f * Time.deltaTime;
+            }
             if (FixAngle(slasher.localEulerAngles.y) >= target) {
                 slasherTrail.emitting = false;
                 slasherParticles.Stop();
@@ -274,6 +280,8 @@ public class PlayerController : MonoBehaviour {
         }
 
         if (Input.GetMouseButtonDown(0) && attackCD <= 0f) {
+            attackCnt++;
+            attackCnt %= 2;
             Enemy[] enemies = FindObjectsOfType<Enemy>();
             Enemy tohit = null;
             float tohitdst = 3f;
@@ -295,7 +303,11 @@ public class PlayerController : MonoBehaviour {
                 transform.LookAt(tohit.transform);
                 Vector2 toVector = attackLock - transform.position;
                 float angleToTarget = Vector2.Angle(transform.forward, toVector);
-                slasher.localEulerAngles = Vector3.up * (angleToTarget - 25f);
+                if (attackCnt == 0) {
+                    slasher.localEulerAngles = Vector3.up * (angleToTarget - 90f);
+                } else {
+                    slasher.localEulerAngles = Vector3.up * (angleToTarget + 90f);
+                }
 
                 OnHitEnemy(tohit);
                 GameObject obj = Instantiate(burstModeMult > 0f ? burstSlashPrefab : slashPrefab);
@@ -312,21 +324,22 @@ public class PlayerController : MonoBehaviour {
                 hitAudioSource.Play();
 
                 if (burstModeMult > 0f) {
-                    attackCD = .05f;
+                    attackCD = .1f;
                 } else {
-                    attackCD = .25f;
+                    if (attackCnt == 0) {
+                        attackCD = .25f;
+                    } else {
+                        attackCD = .15f;
+                    }
                 }
             }
         }
 
         velocity -= Time.deltaTime * 9.81f;
         controller.Move(Vector3.up * velocity * Time.deltaTime);
-        if (controller.isGrounded) {
-            if (velocity < 0f) velocity = -.2f;
-
-            if (Input.GetKeyDown(KeyCode.Space)) {
-                velocity = 9.81f * .66f;
-            }
+        if (controller.isGrounded && velocity < 0f) velocity = -.2f;
+        if (Input.GetKeyDown(KeyCode.Space) && Physics.CheckSphere(transform.position + Vector3.down * .25f, .1f, groundLayer)) {
+            velocity = 9.81f * .66f;
         }
 
         if (dashTime > 0f) dashTime -= Time.deltaTime;
