@@ -16,20 +16,6 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &2268506683388966139
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 483219642521036282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a779ac9b81de8e54faa76c59a9b32fad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  axis: {x: 0.97, y: -0.83, z: 0.25}
-  speed: 200
 --- !u!1 &2268269468184454524
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,10 +368,5 @@ GameObject:
 --- !u!4 &1061728872836210160 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2ac2efc36f47f06498a50ddccd8024e7, type: 3}
-  m_PrefabInstance: {fileID: 663926582981753371}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &483219642521036282 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -8105916371740270623, guid: 2ac2efc36f47f06498a50ddccd8024e7, type: 3}
   m_PrefabInstance: {fileID: 663926582981753371}
   m_PrefabAsset: {fileID: 0}

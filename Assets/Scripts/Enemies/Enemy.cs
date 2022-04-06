@@ -183,8 +183,9 @@ public class Enemy : MonoBehaviour {
     }
 
     public void SpawnDamageNumber(int damage, Vector3 pos) {
-        GameObject obj = Instantiate(dmgIndicatorPrefab, pos, Quaternion.identity);
-        obj.GetComponentInChildren<UnityEngine.UI.Text>().text = damage.ToString();
+        GameObject obj = Instantiate(dmgIndicatorPrefab, pos + UnityEngine.Random.insideUnitSphere * .33f, Quaternion.identity);
+        UnityEngine.UI.Text[] a = obj.GetComponentsInChildren<UnityEngine.UI.Text>();
+        foreach (UnityEngine.UI.Text t in a) t.text = damage.ToString();
     }
 }
 

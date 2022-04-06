@@ -63123,7 +63123,6 @@ GameObject:
   - component: {fileID: 1496236758}
   - component: {fileID: 1496236760}
   - component: {fileID: 1496236759}
-  - component: {fileID: 1496236761}
   m_Layer: 5
   m_Name: banner_eq
   m_TagString: Untagged
@@ -63188,19 +63187,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1496236757}
   m_CullTransparentMesh: 1
---- !u!114 &1496236761
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1496236757}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bddaae82d0f7e4b4189f6fc2bae0deeb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  range: 0.5
 --- !u!1 &1496419701
 GameObject:
   m_ObjectHideFlags: 0
@@ -65945,7 +65931,6 @@ GameObject:
   - component: {fileID: 1660750961}
   - component: {fileID: 1660750963}
   - component: {fileID: 1660750962}
-  - component: {fileID: 1660750964}
   m_Layer: 6
   m_Name: reality hole
   m_TagString: Untagged
@@ -66016,19 +66001,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1660750960}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1660750964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1660750960}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bddaae82d0f7e4b4189f6fc2bae0deeb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  range: 0.025
 --- !u!1 &1664909443
 GameObject:
   m_ObjectHideFlags: 0
@@ -70001,7 +69973,6 @@ GameObject:
   - component: {fileID: 1912597580}
   - component: {fileID: 1912597582}
   - component: {fileID: 1912597581}
-  - component: {fileID: 1912597583}
   m_Layer: 5
   m_Name: banner_mt
   m_TagString: Untagged
@@ -70066,19 +70037,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1912597579}
   m_CullTransparentMesh: 1
---- !u!114 &1912597583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1912597579}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bddaae82d0f7e4b4189f6fc2bae0deeb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  range: 0.5
 --- !u!1001 &1915522866
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -77342,7 +77300,6 @@ GameObject:
   - component: {fileID: 2042716532}
   - component: {fileID: 2042716534}
   - component: {fileID: 2042716533}
-  - component: {fileID: 2042716535}
   m_Layer: 5
   m_Name: banner_lb
   m_TagString: Untagged
@@ -77407,19 +77364,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2042716531}
   m_CullTransparentMesh: 1
---- !u!114 &2042716535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2042716531}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bddaae82d0f7e4b4189f6fc2bae0deeb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  range: 0.5
 --- !u!1001 &2057596729
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -78368,7 +78312,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2118874754}
-  - component: {fileID: 2118874755}
   m_Layer: 6
   m_Name: depths
   m_TagString: Untagged
@@ -78396,20 +78339,6 @@ Transform:
   m_Father: {fileID: 1563575255}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2118874755
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2118874753}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a779ac9b81de8e54faa76c59a9b32fad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  axis: {x: -0.1, y: 1, z: 0.25}
-  speed: 35
 --- !u!1 &2123402680
 GameObject:
   m_ObjectHideFlags: 0
