@@ -50,7 +50,7 @@ public class LoadingScreen : MonoBehaviour {
         yield return fade(1f, 0f, totalTime / 2f);
     }
 
-    IEnumerator _FadeInOutTeleport(float totalTime, PlayerController pc, Vector3 loc) {
+    IEnumerator _FadeInOutTeleport(float totalTime, PlayerMovement pc, Vector3 loc) {
         yield return fade(0f, 1f, totalTime / 2f);
         pc.Teleport(loc);
         yield return fade(1f, 0f, totalTime / 2f);
@@ -60,7 +60,7 @@ public class LoadingScreen : MonoBehaviour {
         instance.StartCoroutine(instance._FadeInOut(totalTime));
     }
 
-    public static void FadeInOutTeleport(float totalTime, PlayerController pc, Vector3 loc) {
+    public static void FadeInOutTeleport(float totalTime, PlayerMovement pc, Vector3 loc) {
         instance.StartCoroutine(instance._FadeInOutTeleport(totalTime, pc, loc));
     }
 }

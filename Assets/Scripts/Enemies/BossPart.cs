@@ -24,7 +24,7 @@ public class BossPart : Enemy {
         }
     }
 
-    public override void TakeDamage(float amount, PlayerController _, bool tdmg) {
+    public override void TakeDamage(float amount, PlayerCombat _, bool tdmg) {
         if (tdmg) {
             boss.TakeDamage(amount * 2f);
         } else boss.TakeDamage(amount);

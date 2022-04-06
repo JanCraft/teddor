@@ -55,28 +55,28 @@ public class WellOfDepthsController : MonoBehaviour {
         }
 
         if (triggerChallenge) {
-            level = player.stats.level - 2;
+            level = player.combat.stats.level - 2;
             score = 0;
 
             floorStart = float.MaxValue;
             triggerChallenge = false;
             isInChallenge = true;
-            player.canDie = false;
+            player.combat.canDie = false;
             startOnly = true;
-            LoadingScreen.FadeInOutTeleport(.25f, player, enemySpawnPoint.position);
+            LoadingScreen.FadeInOutTeleport(.25f, player.movement, enemySpawnPoint.position);
         }
 
-        if (isInChallenge && player.hasDied) {
-            player.stats.hp = player.stats.maxhp;
-            player.hasDied = false;
-            player.canDie = true;
+        if (isInChallenge && player.combat.hasDied) {
+            player.combat.stats.hp = player.combat.stats.maxhp;
+            player.combat.hasDied = false;
+            player.combat.canDie = true;
             isInChallenge = false;
             foreach (Enemy e in activeEnemies) {
                 if (e != null) Destroy(e.gameObject);
             }
             activeEnemies.Clear();
             scores.StartCoroutine(scores.Fetch());
-            LoadingScreen.FadeInOutTeleport(1f, player, respawnPoint.position);
+            LoadingScreen.FadeInOutTeleport(1f, player.movement, respawnPoint.position);
         }
     }
 
@@ -84,9 +84,9 @@ public class WellOfDepthsController : MonoBehaviour {
         loadingLevel = true;
         floorStart = Time.time;
 
-        player.healHP += .33f * player.stats.maxhp;
-        player.ZeroCD();
-        player.soulCharge += (int) (player.stats.soulShard.ChargeMax() * .1f);
+        player.combat.healHP += .33f * player.combat.stats.maxhp;
+        player.abilities.ZeroCD();
+        player.abilities.soulCharge += (int) (player.combat.stats.soulShard.ChargeMax() * .1f);
 
         if (startOnly) {
             yield return new WaitForSeconds(2.5f);
@@ -100,7 +100,7 @@ public class WellOfDepthsController : MonoBehaviour {
             pos.y = player.transform.position.y;
             GameObject o = Instantiate(enemyPool[Random.Range(0, enemyPool.Length)], pos, Quaternion.identity);
             Enemy e = o.GetComponent<Enemy>();
-            e.level = level * 2 - player.stats.level;
+            e.level = level * 2 - player.combat.stats.level;
             e.canGrantStars = false;
             activeEnemies.Add(e);
         }
@@ -119,19 +119,19 @@ public class WellOfDepthsController : MonoBehaviour {
     }
 
     string GetRank() {
-        if (level < player.stats.level) {
+        if (level < player.combat.stats.level) {
             return "D";
-        } else if (level < player.stats.level + 4) {
+        } else if (level < player.combat.stats.level + 4) {
             return "C";
-        } else if (level < player.stats.level + 8) {
+        } else if (level < player.combat.stats.level + 8) {
             return "B";
-        } else if (level < player.stats.level + 14) {
+        } else if (level < player.combat.stats.level + 14) {
             return "A";
-        } else if (level < player.stats.level + 20) {
+        } else if (level < player.combat.stats.level + 20) {
             return "S";
-        } else if (level < player.stats.level + 28) {
+        } else if (level < player.combat.stats.level + 28) {
             return "SS";
-        } else if (level < player.stats.level + 38) {
+        } else if (level < player.combat.stats.level + 38) {
             return "SSS";
         }
         return "SSS+";

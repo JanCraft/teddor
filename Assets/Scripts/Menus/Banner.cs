@@ -15,7 +15,7 @@ public class Banner : MonoBehaviour {
     public Sprite soulshard;
 
     public ResourceController res;
-    public PlayerController player;
+    public PlayerCombat player;
     public AbilityController abc;
     public SoulShardController ssc;
 

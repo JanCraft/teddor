@@ -10622,7 +10622,7 @@ MonoBehaviour:
   alldata: {fileID: 906382491}
   slideSfx: {fileID: 498437419}
   clickSfx: {fileID: 579320764}
-  player: {fileID: 2037163457}
+  player: {fileID: 2037163465}
   shards: []
 --- !u!114 &313324699
 MonoBehaviour:
@@ -11459,7 +11459,7 @@ MonoBehaviour:
   abilityController: {fileID: 563192066}
   buffController: {fileID: 1039885760}
   shardController: {fileID: 313324698}
-  playerController: {fileID: 2037163457}
+  playerCombat: {fileID: 2037163465}
   storyController: {fileID: 2037163459}
   resourceController: {fileID: 2037163461}
 --- !u!1 &326314027
@@ -20607,7 +20607,7 @@ MonoBehaviour:
   alldata: {fileID: 672098116}
   slideSfx: {fileID: 498437419}
   clickSfx: {fileID: 579320764}
-  player: {fileID: 2037163457}
+  player: {fileID: 2037163465}
   abilities:
   - type: 1
     level: 1
@@ -21800,8 +21800,8 @@ MonoBehaviour:
   onEnter:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2037163457}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 2037163463}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
         m_MethodName: Teleport
         m_Mode: 2
         m_Arguments:
@@ -21824,8 +21824,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 2037163457}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 2037163465}
+        m_TargetAssemblyTypeName: PlayerCombat, Assembly-CSharp
         m_MethodName: HealMax
         m_Mode: 1
         m_Arguments:
@@ -51613,7 +51613,7 @@ MonoBehaviour:
   alldata: {fileID: 552573084}
   slideSfx: {fileID: 498437419}
   clickSfx: {fileID: 579320764}
-  player: {fileID: 2037163457}
+  player: {fileID: 2037163465}
   buffs: []
 --- !u!1 &1041831397
 GameObject:
@@ -61030,7 +61030,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dcadb8519ae8484e8946129c2049c6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localPlayer: {fileID: 2037163457}
+  localPlayer: {fileID: 2037163465}
   smoothing: 7.5
   packetRate: 75
   playerPrefab: {fileID: 8769485720353963378, guid: ef1d2da391d81fc49afd7cddb9263f44, type: 3}
@@ -64544,7 +64544,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f11260b97d6a8bb4c8b5299b0e847e6d, type: 3}
   soulshard: {fileID: 21300000, guid: 41d55874f0f4e964b9721e875e6a1ce0, type: 3}
   res: {fileID: 2037163461}
-  player: {fileID: 2037163457}
+  player: {fileID: 2037163465}
   abc: {fileID: 563192066}
   ssc: {fileID: 313324698}
   sfxPay: {fileID: 1548818012}
@@ -69352,8 +69352,8 @@ MonoBehaviour:
   onEnter:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2037163457}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 2037163463}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
         m_MethodName: Teleport
         m_Mode: 2
         m_Arguments:
@@ -69376,8 +69376,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 2037163457}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 2037163465}
+        m_TargetAssemblyTypeName: PlayerCombat, Assembly-CSharp
         m_MethodName: HealMax
         m_Mode: 1
         m_Arguments:
@@ -76865,8 +76865,8 @@ MonoBehaviour:
   onEnter:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2037163457}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 2037163463}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
         m_MethodName: Teleport
         m_Mode: 2
         m_Arguments:
@@ -76889,8 +76889,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 2037163457}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 2037163465}
+        m_TargetAssemblyTypeName: PlayerCombat, Assembly-CSharp
         m_MethodName: HealMax
         m_Mode: 1
         m_Arguments:
@@ -77010,6 +77010,10 @@ GameObject:
   - component: {fileID: 2037163455}
   - component: {fileID: 2037163460}
   - component: {fileID: 2037163457}
+  - component: {fileID: 2037163465}
+  - component: {fileID: 2037163464}
+  - component: {fileID: 2037163463}
+  - component: {fileID: 2037163462}
   - component: {fileID: 2037163458}
   - component: {fileID: 2037163459}
   - component: {fileID: 2037163461}
@@ -77070,80 +77074,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d1b1c42d9c97cf4a98e4022f9ebfff9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
-  bSpeed: 6
-  turnSmoothTime: 0.1
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  cam: {fileID: 519420032}
-  controller: {fileID: 2037163455}
-  anim: {fileID: 2037163460}
-  hitAudioSource: {fileID: 1903425405}
-  hitSoundClips:
-  - {fileID: 8300000, guid: 3bb745b40b60f1d4f82886d845c5839b, type: 3}
-  - {fileID: 8300000, guid: 452e78a10b5fa62478605a516801e9b2, type: 3}
-  - {fileID: 8300000, guid: d075604b236c403418eb5a4731cc9e34, type: 3}
-  slashPrefab: {fileID: 853387627234114198, guid: d948f47f480ed61458788df6e74ed0e3, type: 3}
-  burstSlashPrefab: {fileID: 1097370977986725576, guid: 3e23a4fc00420ad469a810c6dce5322b, type: 3}
-  earthquakePrefab: {fileID: 842542012231294918, guid: b6646ad76c0540b44a9db9e75eca3927, type: 3}
-  kaboomPrefab: {fileID: 2652066343733216053, guid: 4ba067e18ee0c484da7daf7a00a4712f, type: 3}
-  lightningPrefab: {fileID: 1122527260168664987, guid: a86229ee112228b45bd9238e89ea8cd2, type: 3}
-  splashPrefab: {fileID: 1938907783233556951, guid: 305c09fd5b01e49c9a2aff5e268b01a7, type: 3}
-  firePrefab: {fileID: 2987402922780678802, guid: 632c99af84fccf74d886269b6b128c87, type: 3}
-  slasher: {fileID: 973522559}
-  slasherTrail: {fileID: 1528139395}
-  slasherParticles: {fileID: 1943350852}
-  waterVortexTPPoint: {fileID: 1134799140}
+  combat: {fileID: 2037163465}
+  abilities: {fileID: 2037163464}
+  movement: {fileID: 2037163463}
+  ui: {fileID: 2037163462}
   banner: {fileID: 1582385131}
   forgery: {fileID: 19474531860328034}
-  hasDied: 0
-  canDie: 1
-  stats:
-    level: 1
-    xp: 0
-    buffs: []
-    ability:
-      type: 1
-      level: 1
-    soulShard:
-      type: 0
-      level: 1
-    hp: 100
-    maxhp: 100
-    atk: 10
-    critrate: 25
-    critdmg: 50
-    checksum: 0
-  shieldValue: 0
-  lvltxt: {fileID: 1698726119}
-  hpbar: {fileID: 1903386764}
-  hpdmgbar: {fileID: 2106723853}
-  hpshieldbar: {fileID: 1937573760}
-  xpbar: {fileID: 249085306}
-  burstModeMult: 0
-  burstModeTime: 0
-  bleedHP: 0
-  healHP: 0
-  enemyhud: {fileID: 1975534174}
-  enemylvl: {fileID: 314839021}
-  enemyhp: {fileID: 768812878}
-  enemydmg: {fileID: 311487545}
-  enemyshield: {fileID: 1813383457}
-  lasthitenemy: {fileID: 0}
-  removeEnemyHUD: 0
   dialog: {fileID: 2037163458}
-  story: {fileID: 2037163459}
-  abilityProgress: {fileID: 1145830143}
-  abilityIcon: {fileID: 1007971087}
-  abilityActiveColor: {r: 1, g: 0.42313176, b: 0, a: 1}
-  soulCharge: 0
-  soulShardGraphics: {fileID: 1563575255}
-  soulChargeProgress: {fileID: 1212538674}
-  soulShardAnimation: {fileID: 1563575256}
-  soulShardAudio: {fileID: 1563575257}
-  ingameUI: {fileID: 417656605}
-  cinematicUI: {fileID: 467706347}
 --- !u!114 &2037163458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77213,6 +77150,132 @@ MonoBehaviour:
   bmatter: 250
   umatter: 0
   resourceText: {fileID: 427604934}
+--- !u!114 &2037163462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2037163454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 185bd812802dd764facec18587bfb870, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  combat: {fileID: 2037163465}
+  ingameUI: {fileID: 417656605}
+  cinematicUI: {fileID: 467706347}
+  enemyhud: {fileID: 1975534174}
+  enemylvl: {fileID: 314839021}
+  enemyhp: {fileID: 768812878}
+  enemydmg: {fileID: 311487545}
+  enemyshield: {fileID: 1813383457}
+  removeEnemyHUD: 0
+  hpbar: {fileID: 1903386764}
+  hpdmgbar: {fileID: 2106723853}
+  hpshieldbar: {fileID: 1937573760}
+  lvltxt: {fileID: 1698726119}
+  xpbar: {fileID: 249085306}
+  abilityProgress: {fileID: 1145830143}
+  abilityIcon: {fileID: 1007971087}
+  abilityActiveColor: {r: 1, g: 0.36862782, b: 0, a: 1}
+  soulShardGraphics: {fileID: 1563575255}
+  soulChargeProgress: {fileID: 1212538674}
+--- !u!114 &2037163463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2037163454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1af559c9229d8fc46b395c6413bf657a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  combat: {fileID: 2037163465}
+  speed: 6
+  bSpeed: 6
+  turnSmoothTime: 0.1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  cam: {fileID: 519420032}
+  controller: {fileID: 2037163455}
+  anim: {fileID: 2037163460}
+  waterVortexTPPoint: {fileID: 1134799140}
+--- !u!114 &2037163464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2037163454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4c759821333f754badfa63b6d5f23de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  combat: {fileID: 2037163465}
+  ui: {fileID: 2037163462}
+  soulCharge: 0
+  soulShardAnimation: {fileID: 1563575256}
+  soulShardAudio: {fileID: 1563575257}
+--- !u!114 &2037163465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2037163454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4aee6802ec5b7846a2d0ceb66164885, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  combatAbilities: {fileID: 2037163464}
+  ui: {fileID: 2037163462}
+  slashPrefab: {fileID: 853387627234114198, guid: d948f47f480ed61458788df6e74ed0e3, type: 3}
+  burstSlashPrefab: {fileID: 1097370977986725576, guid: 3e23a4fc00420ad469a810c6dce5322b, type: 3}
+  earthquakePrefab: {fileID: 842542012231294918, guid: b6646ad76c0540b44a9db9e75eca3927, type: 3}
+  kaboomPrefab: {fileID: 2652066343733216053, guid: 4ba067e18ee0c484da7daf7a00a4712f, type: 3}
+  lightningPrefab: {fileID: 1122527260168664987, guid: a86229ee112228b45bd9238e89ea8cd2, type: 3}
+  splashPrefab: {fileID: 1938907783233556951, guid: 305c09fd5b01e49c9a2aff5e268b01a7, type: 3}
+  firePrefab: {fileID: 2987402922780678802, guid: 632c99af84fccf74d886269b6b128c87, type: 3}
+  slasher: {fileID: 973522559}
+  slasherTrail: {fileID: 1528139395}
+  slasherParticles: {fileID: 1943350852}
+  hitAudioSource: {fileID: 1903425405}
+  hitSoundClips:
+  - {fileID: 8300000, guid: 3bb745b40b60f1d4f82886d845c5839b, type: 3}
+  - {fileID: 8300000, guid: 452e78a10b5fa62478605a516801e9b2, type: 3}
+  - {fileID: 8300000, guid: d075604b236c403418eb5a4731cc9e34, type: 3}
+  attackCD: 0
+  hasDied: 0
+  canDie: 1
+  iframes: 0
+  stats:
+    level: 1
+    xp: 0
+    buffs: []
+    ability:
+      type: 0
+      level: 0
+    soulShard:
+      type: 0
+      level: 1
+    hp: 100
+    maxhp: 100
+    atk: 10
+    critrate: 0.25
+    critdmg: 0.5
+    checksum: 0
+  shieldValue: 0
+  burstModeMult: 0
+  burstModeTime: 0
+  bleedHP: 0
+  healHP: 0
+  lasthitenemy: {fileID: 0}
 --- !u!1 &2039835759
 GameObject:
   m_ObjectHideFlags: 0
@@ -78586,7 +78649,7 @@ PrefabInstance:
     - target: {fileID: 919132147620033687, guid: 0752218c25364af4e9a9a57f9e1420c1, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 2037163457}
+      objectReference: {fileID: 2037163465}
     - target: {fileID: 919132147620033687, guid: 0752218c25364af4e9a9a57f9e1420c1, type: 3}
       propertyPath: alldata
       value: 
@@ -78778,8 +78841,8 @@ MonoBehaviour:
   reward:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2037163457}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 2037163463}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
         m_MethodName: TeleportFade
         m_Mode: 2
         m_Arguments:
@@ -78892,8 +78955,8 @@ MonoBehaviour:
   reward:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2037163457}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 2037163463}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
         m_MethodName: TeleportFade
         m_Mode: 2
         m_Arguments:
@@ -79439,8 +79502,8 @@ MonoBehaviour:
   reward:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2037163457}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 2037163463}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
         m_MethodName: TeleportFade
         m_Mode: 2
         m_Arguments:

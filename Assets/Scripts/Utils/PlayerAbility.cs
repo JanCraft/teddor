@@ -42,7 +42,7 @@ public class PlayerAbility {
         }
     }
 
-    public void Perform(PlayerController player) {
+    public void Perform(PlayerCombat player) {
         float level = Mathf.Min(player.stats.level, this.level);
 
         if (type == PlayerAbilityType.RANGED) {
@@ -72,7 +72,7 @@ public class PlayerAbility {
             player.healHP += value;
         } else if (type == PlayerAbilityType.BLINK) {
             float mult = 2.5f + (level - 1) * .1f;
-            player.AddSpeedMult(mult, 3.5f);
+            player.GetComponent<PlayerMovement>().AddSpeedMult(mult, 3.5f);
         } else if (type == PlayerAbilityType.METEOR) {
             float mult = 1f + (level - 1) * .05f;
             if (player.burstModeMult < mult) player.burstModeMult = mult;
@@ -121,7 +121,7 @@ public class PlayerAbility {
         }
     }
 
-    private void AoE(PlayerController pc, float radius, float mult, bool particles, bool shieldDMG, bool trueDMG) {
+    private void AoE(PlayerCombat pc, float radius, float mult, bool particles, bool shieldDMG, bool trueDMG) {
         Enemy[] enemies = GameObject.FindObjectsOfType<Enemy>();
         List<Enemy> hittable = new List<Enemy>();
         foreach (Enemy enemy in enemies) {

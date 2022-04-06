@@ -15,7 +15,7 @@ public class Pet : MonoBehaviour {
 
         if (type == PetType.BOT) {
             if (skillCD <= 0f) {
-                PlayerController player = FindObjectOfType<PlayerController>();
+                PlayerCombat player = FindObjectOfType<PlayerCombat>();
                 player.healHP += player.stats.maxhp * .15f; // heals 15% every 10s
                 foreach (Enemy e in FindObjectsOfType<Enemy>()) {
                     if (Vector3.Distance(e.transform.position, transform.position) < 10f) {

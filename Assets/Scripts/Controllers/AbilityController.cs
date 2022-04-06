@@ -10,7 +10,7 @@ public class AbilityController : MonoBehaviour {
     public AudioSource slideSfx;
     public AudioSource clickSfx;
 
-    public PlayerController player;
+    public PlayerCombat player;
     public List<PlayerAbility> abilities;
 
     void OnEnable() {
@@ -31,7 +31,7 @@ public class AbilityController : MonoBehaviour {
         } else if (Input.GetKeyDown(KeyCode.Return)) {
             PlayerAbility ability = abilities[cursor];
             player.stats.ability = ability;
-            player.ResetCD();
+            player.combatAbilities.ResetCD();
 
             changed = true;
             clickSfx.Play();

@@ -22,7 +22,7 @@ public class PlayerProfile : Enemy {
         }
     }
 
-    public override void TakeDamage(float amount, PlayerController _, bool tdmg) {
+    public override void TakeDamage(float amount, PlayerCombat _, bool tdmg) {
         Dictionary<string, object> pkt = new Dictionary<string, object>();
         pkt.Add("name", username);
         pkt.Add("dmg", amount.ToString(System.Globalization.CultureInfo.InvariantCulture));

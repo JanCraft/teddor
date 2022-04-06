@@ -9,7 +9,7 @@ public class ForgeryController : MonoBehaviour {
     public Text buyinfo;
     private int cursor;
 
-    public PlayerController player;
+    public PlayerCombat player;
     public ResourceController resources;
     public BuffController buffs;
 

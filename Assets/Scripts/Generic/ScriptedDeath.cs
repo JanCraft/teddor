@@ -5,10 +5,10 @@ using UnityEngine.Events;
 
 public class ScriptedDeath : MonoBehaviour {
     public UnityEvent onTrigger;
-    private PlayerController player;
+    private PlayerCombat player;
 
     void Start() {
-        player = FindObjectOfType<PlayerController>();
+        player = FindObjectOfType<PlayerCombat>();
         player.canDie = false;
     }
 

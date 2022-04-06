@@ -37,12 +37,12 @@ public class Enemy : MonoBehaviour {
     public GameObject dmgIndicatorPrefab;
     public GameObject deathEffectPrefab;
     public Animation anim;
-    private PlayerController player;
+    private PlayerCombat player;
     private Rigidbody rb;
     public AudioSource hitsound;
 
     public virtual void Start() {
-        player = FindObjectOfType<PlayerController>();
+        player = FindObjectOfType<PlayerCombat>();
         rb = GetComponent<Rigidbody>();
         if (level < 0) {
             int baselvl = player.stats.level;
@@ -56,7 +56,7 @@ public class Enemy : MonoBehaviour {
 
     public virtual void Update() {
         if (transform.position.y < -250) Destroy(gameObject);
-        if (PauseMenu.open || PlayerController.soulShardAnimationPause) return;
+        if (PauseMenu.open || PlayerCombatAbilities.soulShardAnimationPause) return;
 
         Vector3 dir = (player.transform.position - transform.position).normalized;
         float dst = Vector3.Distance(player.transform.position, transform.position);
@@ -151,7 +151,7 @@ public class Enemy : MonoBehaviour {
         attacking = false;
     }
 
-    public virtual void TakeDamage(float amount, PlayerController player, bool trueDMG) {
+    public virtual void TakeDamage(float amount, PlayerCombat player, bool trueDMG) {
         if (shield > 0f && !trueDMG) {
             shield -= (amount - amount * shieldReduction);
             if (shield < 0) shield = 0f;

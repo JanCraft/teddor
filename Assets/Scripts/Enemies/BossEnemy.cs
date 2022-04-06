@@ -31,10 +31,10 @@ public class BossEnemy : MonoBehaviour {
     [HideInInspector]
     public int lvl;
     private float nextAttack;
-    private PlayerController pc;
+    private PlayerCombat pc;
 
     void OnEnable() {
-        pc = FindObjectOfType<PlayerController>();
+        pc = FindObjectOfType<PlayerCombat>();
         lvl = pc.stats.level;
         maxhp = hp = pc.stats.maxhp * hpMult;
         atk = pc.stats.atk * atkMult;
@@ -84,7 +84,7 @@ public class BossEnemy : MonoBehaviour {
             pc.GetComponent<ResourceController>().bmatter += bMatter;
             pc.GetComponent<ResourceController>().bstars += bStars;
             pc.GetComponent<ResourceController>().umatter += uMatter;
-            pc.removeEnemyHUD = true;
+            pc.ui.removeEnemyHUD = true;
             reward.Invoke();
 
             gameObject.SetActive(false);

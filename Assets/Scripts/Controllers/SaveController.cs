@@ -10,7 +10,7 @@ public class SaveController : MonoBehaviour {
     public AbilityController abilityController;
     public BuffController buffController;
     public SoulShardController shardController;
-    public PlayerController playerController;
+    public PlayerCombat playerCombat;
     public StorylineController storyController;
     public ResourceController resourceController;
 
@@ -37,7 +37,7 @@ public class SaveController : MonoBehaviour {
                     stats.xp = 0;
                 }
 
-                playerController.stats = stats;
+                playerCombat.stats = stats;
             }
 
             if (PlayerPrefs.HasKey("teddor_save_" + gamedef.channel + "abilities")) {
@@ -49,7 +49,7 @@ public class SaveController : MonoBehaviour {
                     a.level = 1;
                     a.type = PlayerAbilityType.RANGED;
                     abilities.array.Add(a);
-                    playerController.stats.ability = a;
+                    playerCombat.stats.ability = a;
                 }
 
                 abilityController.abilities = abilities.array;
@@ -60,7 +60,7 @@ public class SaveController : MonoBehaviour {
 
                 if (buffs.checksum != buffs.Checksum()) {
                     buffs.array.Clear();
-                    playerController.stats.buffs.Clear();
+                    playerCombat.stats.buffs.Clear();
                 }
 
                 buffController.buffs = buffs.array;
@@ -71,8 +71,8 @@ public class SaveController : MonoBehaviour {
 
                 if (shards.checksum != shards.Checksum()) {
                     shards.array.Clear();
-                    playerController.stats.soulShard.level = 0;
-                    playerController.stats.soulShard.type = PlayerSoulShardType.NONE;
+                    playerCombat.stats.soulShard.level = 0;
+                    playerCombat.stats.soulShard.type = PlayerSoulShardType.NONE;
                 }
 
                 shardController.shards = shards.array;
@@ -113,7 +113,7 @@ public class SaveController : MonoBehaviour {
         string gamedefstr = File.ReadAllText(Application.streamingAssetsPath + "/gamedef.json");
         GameDef gamedef = JsonUtility.FromJson<GameDef>(gamedefstr);
 
-        PlayerPrefs.SetString("teddor_save_" + gamedef.channel + "player", JsonUtility.ToJson(playerController.stats.Verify()));
+        PlayerPrefs.SetString("teddor_save_" + gamedef.channel + "player", JsonUtility.ToJson(playerCombat.stats.Verify()));
         PlayerPrefs.SetString("teddor_save_" + gamedef.channel + "abilities", JsonUtility.ToJson(new PlayerAbilityList(abilityController.abilities).Verify()));
         PlayerPrefs.SetString("teddor_save_" + gamedef.channel + "buffs", JsonUtility.ToJson(new PlayerBuffList(buffController.buffs).Verify()));
         PlayerPrefs.SetString("teddor_save_" + gamedef.channel + "soulshards", JsonUtility.ToJson(new PlayerShardList(shardController.shards).Verify()));
@@ -126,7 +126,7 @@ public class SaveController : MonoBehaviour {
     private void Migrate(GameDef gamedef) {
         if (File.Exists(Application.persistentDataPath + "/" + gamedef.channel + "player.dat")) {
             PlayerStats stats = JsonUtility.FromJson<PlayerStats>(File.ReadAllText(Application.persistentDataPath + "/" + gamedef.channel + "player.dat"));
-            playerController.stats = stats;
+            playerCombat.stats = stats;
         }
 
         if (File.Exists(Application.persistentDataPath + "/" + gamedef.channel + "abilities.dat")) {

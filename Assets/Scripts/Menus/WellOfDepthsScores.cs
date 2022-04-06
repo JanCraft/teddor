@@ -25,7 +25,7 @@ public class WellOfDepthsScores : MonoBehaviour {
 
     private IEnumerator ReportToServer() {
         ResourceController res = FindObjectOfType<ResourceController>();
-        PlayerController pc = FindObjectOfType<PlayerController>();
+        PlayerCombat pc = FindObjectOfType<PlayerCombat>();
         
         UnityWebRequest www = UnityWebRequest.Get("https://game.jdev.com.es/teddor/sprl?token=" + PlayerPrefs.GetString("teddor.token") + "&bstars=" + res.bstars + "&lvl=" + pc.stats.level + "&xp=" + (int) pc.stats.xp);
         yield return www.SendWebRequest();

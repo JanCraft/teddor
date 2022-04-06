@@ -24,20 +24,20 @@ public class PlayerSoulShard {
         return (int) Mathf.Max(cb * (1f - (level - 1) * .05f), 100);
     }
 
-    public void Perform(PlayerController player) {
+    public void Perform(PlayerCombat player) {
         if (type == PlayerSoulShardType.CROWNED) {
             player.burstModeMult = 2f;
             player.burstModeTime = 10f;
         } else if (type == PlayerSoulShardType.WINGED) {
             player.burstModeMult = 1f;
             player.burstModeTime = 15f;
-            player.AddSpeedMult(.5f, 10f);
-            player.ReduceCD(5f, 10f);
+            player.GetComponent<PlayerMovement>().AddSpeedMult(.5f, 10f);
+            player.combatAbilities.ReduceCD(5f, 10f);
         } else if (type == PlayerSoulShardType.DEPTHS) {
             float dmg = ReverseAoE(player, 10f) * .35f;
             AoE(player, 10f, dmg);
         } else if (type == PlayerSoulShardType.MAGE) {
-            player.ReduceCD(1.5f, 10f);
+            player.combatAbilities.ReduceCD(1.5f, 10f);
         } else if (type == PlayerSoulShardType.DEMON) {
             AoE(player, 10f, player.stats.maxhp * 1.5f);
             player.stats.hp *= .7f;
@@ -54,7 +54,7 @@ public class PlayerSoulShard {
         }
     }
 
-    private IEnumerator _FlamesSS(PlayerController player) {
+    private IEnumerator _FlamesSS(PlayerCombat player) {
         for (int i = 0; i < 5; i++) {
             AoE(player, 10f, player.stats.atk * .25f, true);
             Enemy[] enemies = GameObject.FindObjectsOfType<Enemy>();
@@ -69,7 +69,7 @@ public class PlayerSoulShard {
         }
     }
 
-    private float ReverseAoE(PlayerController pc, float radius) {
+    private float ReverseAoE(PlayerCombat pc, float radius) {
         float hpacc = 0f;
         Enemy[] enemies = GameObject.FindObjectsOfType<Enemy>();
         List<Enemy> hittable = new List<Enemy>();
@@ -84,7 +84,7 @@ public class PlayerSoulShard {
         return hpacc;
     }
 
-    private void AoE(PlayerController pc, float radius, float directdmg, bool trueDMG = false) {
+    private void AoE(PlayerCombat pc, float radius, float directdmg, bool trueDMG = false) {
         Enemy[] enemies = GameObject.FindObjectsOfType<Enemy>();
         List<Enemy> hittable = new List<Enemy>();
         foreach (Enemy enemy in enemies) {

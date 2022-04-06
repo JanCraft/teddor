@@ -10,7 +10,7 @@ public class SoulShardController : MonoBehaviour {
     public AudioSource slideSfx;
     public AudioSource clickSfx;
 
-    public PlayerController player;
+    public PlayerCombat player;
     public List<PlayerSoulShard> shards;
 
     private void Start() {

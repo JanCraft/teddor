@@ -7,7 +7,7 @@ using TinyJson;
 
 public class NetworkingController : MonoBehaviour {
     public static NetworkingController instance;
-    public PlayerController localPlayer;
+    public PlayerCombat localPlayer;
     [Range(1f, 10f)]
     public float smoothing = 7.5f;
     [Range(1f, 100f)]

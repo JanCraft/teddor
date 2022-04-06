@@ -11,7 +11,7 @@ public class BuffController : MonoBehaviour {
     public AudioSource slideSfx;
     public AudioSource clickSfx;
 
-    public PlayerController player;
+    public PlayerCombat player;
     public List<PlayerBuff> buffs;
 
     private void Start() {

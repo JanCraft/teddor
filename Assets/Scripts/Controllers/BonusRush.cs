@@ -60,7 +60,7 @@ public class BonusRush : MonoBehaviour {
                 enemies.Clear();
 
                 if (round > 8 + (int) (diff - 1) * 4) {
-                    pc.Teleport(spawnPos);
+                    pc.movement.Teleport(spawnPos);
                     FindObjectOfType<ResourceController>().GiveStars(5 + (int) diff * 2);
                     FindObjectOfType<ResourceController>().GiveUMatter(5 + (int) diff * 2);
                     FindObjectOfType<ResourceController>().GiveMatter(15 + (int) diff * 5);
@@ -84,7 +84,7 @@ public class BonusRush : MonoBehaviour {
                     db = (BonusRushDoor) arr.GetValue(Random.Range(0, arr.Length));
                 }
 
-                pc.Teleport(startPos);
+                pc.movement.Teleport(startPos);
                 ShowDoor(da, doorPosA);
                 ShowDoor(db, doorPosB);
                 timeRunning = false;
@@ -145,7 +145,7 @@ public class BonusRush : MonoBehaviour {
         easyDoor.SetActive(true);
         normalDoor.SetActive(true);
         hardDoor.SetActive(true);
-        pc.TeleportFade(startPos);
+        pc.movement.TeleportFade(startPos);
         running = true;
         timeRunning = false;
         time = 0;
@@ -160,7 +160,7 @@ public class BonusRush : MonoBehaviour {
         onRound = true;
         enemiesLeft = 0;
         enemiesSpawnLeft = 0;
-        pc.Teleport(startPos);
+        pc.movement.Teleport(startPos);
         timeRunning = true;
     }
 
@@ -174,21 +174,21 @@ public class BonusRush : MonoBehaviour {
         onRound = true;
         enemiesLeft = 5 + (int) (nextdiff-1) * 5;
         enemiesSpawnLeft = 5 + (int) (nextdiff-1) * 5;
-        pc.Teleport(startPos);
+        pc.movement.Teleport(startPos);
         timeRunning = true;
 
         if ((BonusRushDoor) door == BonusRushDoor.HEAL) {
-            pc.HealMax();
+            pc.combat.HealMax();
         } else if ((BonusRushDoor) door == BonusRushDoor.BURST) {
-            pc.burstModeTime = 15f;
-            pc.burstModeMult = 2f;
+            pc.combat.burstModeTime = 15f;
+            pc.combat.burstModeMult = 2f;
         } else if ((BonusRushDoor) door == BonusRushDoor.CD) {
-            pc.ReduceCD(1000f, 15f);
+            pc.abilities.ReduceCD(1000f, 15f);
         } else if ((BonusRushDoor) door == BonusRushDoor.SS) {
-            pc.soulCharge = 10000;
+            pc.abilities.soulCharge = 10000;
         } else if ((BonusRushDoor) door == BonusRushDoor.SHIELD) {
-            pc.shieldValue += pc.stats.maxhp * .75f;
-            pc.shieldValue = Mathf.Min(pc.shieldValue, pc.stats.maxhp);
+            pc.combat.shieldValue += pc.combat.stats.maxhp * .75f;
+            pc.combat.shieldValue = Mathf.Min(pc.combat.shieldValue, pc.combat.stats.maxhp);
         } else if ((BonusRushDoor) door == BonusRushDoor.EASY_CHAIN) {
             nextdiff = BonusRushDifficulty.EASY;
         }

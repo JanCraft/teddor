@@ -11,10 +11,10 @@ public class CodeTrigger : MonoBehaviour {
     public UnityEvent onTriggered;
 
     private bool hasTriggered = false;
-    private PlayerController pc;
+    private PlayerCombat pc;
 
     void Start() {
-        pc = FindObjectOfType<PlayerController>();
+        pc = FindObjectOfType<PlayerCombat>();
     }
 
     void Update() {
