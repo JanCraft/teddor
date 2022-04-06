@@ -32,8 +32,9 @@ public class DialogController : MonoBehaviour {
                 contentslowidx++;
 
                 typesound.Play();
-                typesound.pitch = Random.Range(1f, 1.5f);
+                typesound.pitch = Random.Range(.75f, 1f);
             }
+            if (Input.GetKey(KeyCode.Return)) typesound.pitch = 3.5f;
             if (Input.GetKeyDown(KeyCode.Return)) {
                 if (contentTxt.text.Length >= contentslow.Length) {
                     if (hasNext) {

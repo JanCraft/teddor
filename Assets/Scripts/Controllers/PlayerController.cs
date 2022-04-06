@@ -287,6 +287,7 @@ public class PlayerController : MonoBehaviour {
             float tohitdst = 3f;
 
             foreach (Enemy enemy in enemies) {
+                if (!enemy.enabled || !enemy.gameObject.activeSelf) continue;
                 float dst = Vector3.Distance(transform.position, enemy.transform.position);
                 if (dst < tohitdst) {
                     tohitdst = dst;
@@ -520,6 +521,7 @@ public class PlayerAbility {
             Enemy targetenemy = null;
             float dstenemy = 25f;
             foreach (Enemy enemy in enemies) {
+                if (!enemy.enabled || !enemy.gameObject.activeSelf) continue;
                 float dst = Vector3.Distance(player.transform.position, enemy.transform.position);
                 if (dst < dstenemy) {
                     dstenemy = dst;
@@ -561,6 +563,7 @@ public class PlayerAbility {
             Enemy[] enemies = GameObject.FindObjectsOfType<Enemy>();
             List<Enemy> hittable = new List<Enemy>();
             foreach (Enemy enemy in enemies) {
+                if (!enemy.enabled || !enemy.gameObject.activeSelf) continue;
                 if (Vector3.Distance(player.transform.position, enemy.transform.position) < 5f) {
                     hittable.Add(enemy);
                 }
@@ -576,6 +579,7 @@ public class PlayerAbility {
             Enemy[] enemies = GameObject.FindObjectsOfType<Enemy>();
             List<Enemy> hittable = new List<Enemy>();
             foreach (Enemy enemy in enemies) {
+                if (!enemy.enabled || !enemy.gameObject.activeSelf) continue;
                 if (Vector3.Distance(player.transform.position, enemy.transform.position) < 5f) {
                     hittable.Add(enemy);
                 }
