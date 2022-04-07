@@ -41,6 +41,8 @@ public class Enemy : MonoBehaviour {
     private Rigidbody rb;
     public AudioSource hitsound;
 
+    public static List<Enemy> allEnemies = new List<Enemy>();
+
     public virtual void Start() {
         player = FindObjectOfType<PlayerCombat>();
         rb = GetComponent<Rigidbody>();
@@ -186,6 +188,41 @@ public class Enemy : MonoBehaviour {
         GameObject obj = Instantiate(dmgIndicatorPrefab, pos + UnityEngine.Random.insideUnitSphere * .33f, Quaternion.identity);
         UnityEngine.UI.Text[] a = obj.GetComponentsInChildren<UnityEngine.UI.Text>();
         foreach (UnityEngine.UI.Text t in a) t.text = damage.ToString();
+    }
+
+    private void OnEnable() {
+        allEnemies.Add(this);
+    }
+
+    private void OnDisable() {
+        allEnemies.Remove(this);
+    }
+
+    public static Enemy GetEnemyInRadius(Vector3 center, float radius) {
+        Enemy tohit = null;
+        float tohitdst = radius;
+
+        foreach (Enemy enemy in allEnemies) {
+            if (!enemy.enabled || !enemy.gameObject.activeSelf) continue;
+            float dst = Vector3.Distance(center, enemy.transform.position);
+            if (dst < tohitdst) {
+                tohitdst = dst;
+                tohit = enemy;
+            }
+        }
+
+        return tohit;
+    }
+    public static List<Enemy> GetEnemiesInRadius(Vector3 center, float radius) {
+        List<Enemy> hittable = new List<Enemy>();
+        foreach (Enemy enemy in allEnemies) {
+            if (!enemy.enabled || !enemy.gameObject.activeSelf) continue;
+            if (Vector3.Distance(center, enemy.transform.position) < radius) {
+                hittable.Add(enemy);
+            }
+        }
+
+        return hittable;
     }
 }
 

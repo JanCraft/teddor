@@ -49,10 +49,23 @@ public class ForgeryController : MonoBehaviour {
             if (options.Count > 0) {
                 ForgeryOption opt = options[cursor];
 
+                bool can_spend = true;
+                if (opt.reforge) {
+                    int bufidx = buffs.buffs.FindIndex((x) => x.type == opt.type);
+                    float bval = buffs.buffs[bufidx].value;
+                    float aval = 0f;
+                    if (buffs.buffs[bufidx].reforged) {
+                        aval = player.stats.level + 35;
+                    } else {
+                        aval = player.stats.level + 25;
+                    }
+                    if (bval >= aval) can_spend = false;
+                }
+
                 int priceCoins = opt.reforge ? 2250 : 1750;
                 int priceMatter = opt.reforge ? 125 : 75;
 
-                if (resources.coins >= priceCoins && resources.bmatter >= priceMatter) {
+                if (can_spend && resources.coins >= priceCoins && resources.bmatter >= priceMatter) {
                     if (opt.reforge) {
                         buffs.buffs.Sort((x, y) => {
                             return x.value.CompareTo(y.value);
@@ -130,8 +143,23 @@ public class ForgeryController : MonoBehaviour {
         });
 
         int end = Mathf.Min(options.Count, 10);
+        int drawn = 0;
         for (int i = 0; i < end; i++) {
             ForgeryOption opt = options[i];
+            if (opt.reforge) {
+                int bufidx = buffs.buffs.FindIndex((x) => x.type == opt.type);
+                float bval = buffs.buffs[bufidx].value;
+                float aval = 0f;
+                if(buffs.buffs[bufidx].reforged) {
+                    aval = player.stats.level + 35;
+                } else {
+                    aval = player.stats.level + 25;
+                }
+                if (bval >= aval) continue;
+            }
+
+            drawn++;
+
             if (i == cursor) {
                 outp += "> ";
                 int priceCoins = opt.reforge ? 2250 : 1750;
@@ -169,6 +197,11 @@ public class ForgeryController : MonoBehaviour {
             outp += opt.type.ToString().Replace('_', ' ') + " <color=yellow>";
             if (opt.reforge) outp += TranslateKey.Translate("ui.foundry.reforge");
             outp += "</color>\n";
+        }
+
+        if (drawn == 0) {
+            outp += "<color=red>all upgrades maxed</color>";
+            buyinfo.text += "\n\n\n";
         }
 
         buyinfo.text += TranslateKey.Translate("ui.foundry.back");

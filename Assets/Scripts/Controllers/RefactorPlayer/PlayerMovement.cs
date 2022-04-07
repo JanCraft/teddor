@@ -19,10 +19,6 @@ public class PlayerMovement : MonoBehaviour {
 
     public Transform waterVortexTPPoint;
 
-    void Start() {
-
-    }
-
     void Update() {
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");

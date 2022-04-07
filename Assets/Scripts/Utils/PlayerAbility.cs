@@ -46,17 +46,7 @@ public class PlayerAbility {
         float level = Mathf.Min(player.stats.level, this.level);
 
         if (type == PlayerAbilityType.RANGED) {
-            Enemy[] enemies = GameObject.FindObjectsOfType<Enemy>();
-            Enemy targetenemy = null;
-            float dstenemy = 25f;
-            foreach (Enemy enemy in enemies) {
-                if (!enemy.enabled || !enemy.gameObject.activeSelf) continue;
-                float dst = Vector3.Distance(player.transform.position, enemy.transform.position);
-                if (dst < dstenemy) {
-                    dstenemy = dst;
-                    targetenemy = enemy;
-                }
-            }
+            Enemy targetenemy = Enemy.GetEnemyInRadius(player.transform.position, 25f);
             if (targetenemy != null) {
                 player.lasthitenemy = targetenemy;
                 targetenemy.TakeDamage(player.GetDamage(true, .5f + (level - 1) * .02f), player, false);
@@ -89,14 +79,7 @@ public class PlayerAbility {
             AoE(player, 5f, mult, false, false, false);
         } else if (type == PlayerAbilityType.WATERJET) {
             float mult = 1f + (level - 1) * .05f * (1f + player.stats.GetTotalBuff(PlayerBuffType.BLEED_DMG)) * (1f + player.stats.GetTotalBuff(PlayerBuffType.ATK));
-            Enemy[] enemies = GameObject.FindObjectsOfType<Enemy>();
-            List<Enemy> hittable = new List<Enemy>();
-            foreach (Enemy enemy in enemies) {
-                if (!enemy.enabled || !enemy.gameObject.activeSelf) continue;
-                if (Vector3.Distance(player.transform.position, enemy.transform.position) < 5f) {
-                    hittable.Add(enemy);
-                }
-            }
+            List<Enemy> hittable = Enemy.GetEnemiesInRadius(player.transform.position, 5f);
             foreach (Enemy enemy in hittable) {
                 enemy.bleed += mult;
                 player.lasthitenemy = enemy;
@@ -105,14 +88,7 @@ public class PlayerAbility {
         } else if (type == PlayerAbilityType.IGNITION) {
             float mult = 1f + (level - 1) * .05f * (1f + player.stats.GetTotalBuff(PlayerBuffType.BLEED_DMG)) * (1f + player.stats.GetTotalBuff(PlayerBuffType.ATK)) * (1f + player.stats.GetTotalBuff(PlayerBuffType.BURST_DMG));
 
-            Enemy[] enemies = GameObject.FindObjectsOfType<Enemy>();
-            List<Enemy> hittable = new List<Enemy>();
-            foreach (Enemy enemy in enemies) {
-                if (!enemy.enabled || !enemy.gameObject.activeSelf) continue;
-                if (Vector3.Distance(player.transform.position, enemy.transform.position) < 5f) {
-                    hittable.Add(enemy);
-                }
-            }
+            List<Enemy> hittable = Enemy.GetEnemiesInRadius(player.transform.position, 5f);
             foreach (Enemy enemy in hittable) {
                 enemy.flaming += mult;
                 player.lasthitenemy = enemy;
@@ -122,13 +98,7 @@ public class PlayerAbility {
     }
 
     private void AoE(PlayerCombat pc, float radius, float mult, bool particles, bool shieldDMG, bool trueDMG) {
-        Enemy[] enemies = GameObject.FindObjectsOfType<Enemy>();
-        List<Enemy> hittable = new List<Enemy>();
-        foreach (Enemy enemy in enemies) {
-            if (Vector3.Distance(pc.transform.position, enemy.transform.position) < radius) {
-                hittable.Add(enemy);
-            }
-        }
+        List<Enemy> hittable = Enemy.GetEnemiesInRadius(pc.transform.position, radius);
         foreach (Enemy enemy in hittable) {
             if (enemy.shield > 0f && shieldDMG) {
                 mult += 1f;

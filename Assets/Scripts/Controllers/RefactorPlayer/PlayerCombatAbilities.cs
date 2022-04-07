@@ -50,7 +50,6 @@ public class PlayerCombatAbilities : MonoBehaviour {
     }
 
     public void ReduceCD(float reduce, float time) {
-        if (cdreduce == 888.888f) return; // wtf ?!?!?
         cdreduce += reduce;
         cdreducetime = Mathf.Max(cdreducetime, time);
         abilityCD -= reduce;

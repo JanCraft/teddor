@@ -85,7 +85,7 @@ public class WellOfDepthsController : MonoBehaviour {
         floorStart = Time.time;
 
         player.combat.healHP += .33f * player.combat.stats.maxhp;
-        player.abilities.ZeroCD();
+        player.abilities.ReduceCD(1f, .5f);
         player.abilities.soulCharge += (int) (player.combat.stats.soulShard.ChargeMax() * .1f);
 
         if (startOnly) {

@@ -65,18 +65,7 @@ public class PlayerCombat : MonoBehaviour {
         if (Input.GetMouseButtonDown(0) && attackCD <= 0f) {
             attackCnt++;
             attackCnt %= 2;
-            Enemy[] enemies = FindObjectsOfType<Enemy>();
-            Enemy tohit = null;
-            float tohitdst = 3f;
-
-            foreach (Enemy enemy in enemies) {
-                if (!enemy.enabled || !enemy.gameObject.activeSelf) continue;
-                float dst = Vector3.Distance(transform.position, enemy.transform.position);
-                if (dst < tohitdst) {
-                    tohitdst = dst;
-                    tohit = enemy;
-                }
-            }
+            Enemy tohit = Enemy.GetEnemyInRadius(transform.position, 3f);
             if (tohit != null) {
                 if (burstModeMult > 0f) {
                     tohit.TakeDamage(GetDamage(true, burstModeMult), this, false);

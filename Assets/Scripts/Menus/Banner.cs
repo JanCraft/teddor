@@ -49,7 +49,6 @@ public class Banner : MonoBehaviour {
 
     private IEnumerator DoMultiPull() {
         if (res.bstars > 9) {
-            res.bstars -= 10;
             bannerNewAnim.Play("BannerLong");
 
             List<BannerType> bannr = new List<BannerType>();
@@ -88,14 +87,14 @@ public class Banner : MonoBehaviour {
                     bannerNewItem.text = "Soul Shard of the " + ss;
                     bannerNewIcon.sprite = soulshard;
                 }
+                res.bstars--;
+                SaveController.instance.SaveAll();
                 if (isFirst) {
                     isFirst = false;
                     yield return new WaitForSeconds(.15f);
                 }
                 yield return new WaitForSeconds(1.75f);
             }
-
-            SaveController.instance.SaveAll();
         } else {
             sfxError.Play();
         }

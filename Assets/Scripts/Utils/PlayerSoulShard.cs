@@ -45,7 +45,7 @@ public class PlayerSoulShard {
             AoE(player, 10f, player.stats.atk * (1f + player.stats.GetTotalBuff(PlayerBuffType.BURST_DMG)));
             Enemy[] enemies = GameObject.FindObjectsOfType<Enemy>();
             foreach (Enemy enemy in enemies) {
-                if (Vector3.Distance(player.transform.position, enemy.transform.position) < 10) {
+                if (Vector3.Distance(player.transform.position, enemy.transform.position) < 10f) {
                     enemy.bleed = 15f;
                 }
             }
@@ -71,13 +71,7 @@ public class PlayerSoulShard {
 
     private float ReverseAoE(PlayerCombat pc, float radius) {
         float hpacc = 0f;
-        Enemy[] enemies = GameObject.FindObjectsOfType<Enemy>();
-        List<Enemy> hittable = new List<Enemy>();
-        foreach (Enemy enemy in enemies) {
-            if (Vector3.Distance(pc.transform.position, enemy.transform.position) < radius) {
-                hittable.Add(enemy);
-            }
-        }
+        List<Enemy> hittable = Enemy.GetEnemiesInRadius(pc.transform.position, radius);
         foreach (Enemy enemy in hittable) {
             hpacc += enemy.maxhp;
         }
@@ -85,13 +79,7 @@ public class PlayerSoulShard {
     }
 
     private void AoE(PlayerCombat pc, float radius, float directdmg, bool trueDMG = false) {
-        Enemy[] enemies = GameObject.FindObjectsOfType<Enemy>();
-        List<Enemy> hittable = new List<Enemy>();
-        foreach (Enemy enemy in enemies) {
-            if (Vector3.Distance(pc.transform.position, enemy.transform.position) < radius) {
-                hittable.Add(enemy);
-            }
-        }
+        List<Enemy> hittable = Enemy.GetEnemiesInRadius(pc.transform.position, radius);
         foreach (Enemy enemy in hittable) {
             enemy.TakeDamage(directdmg, pc, trueDMG);
             pc.OnHitEnemy(enemy);

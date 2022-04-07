@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 
+// TODO: Change into new jDev Auth login system
+
 public class LoginController : MonoBehaviour {
     public GameObject loginObject;
     public InputField username;
