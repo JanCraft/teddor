@@ -130,7 +130,10 @@ public class Enemy : MonoBehaviour {
         hitsound.Play();
         if (Vector3.Distance(player.transform.position, transform.position) < baseAttackDST) {
             player.TakeDamage(atk);
-            if (bleedATKs) player.bleedHP = atk * .65f;
+            if (bleedATKs) {
+                if (player.iframes > 0f) player.bleedHP = atk * .25f;
+                else player.bleedHP = atk * .5f;
+            }
         }
 
         attacking = false;

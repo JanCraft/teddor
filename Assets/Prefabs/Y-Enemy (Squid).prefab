@@ -94,9 +94,10 @@ MonoBehaviour:
   baseAttackDST: 15
   baseAttackCD: 0.5
   baseHealthMLT: 0.5
-  baseAttackDMG: 1
+  baseAttackDMG: 0.5
   effSpeed: 1
   stationary: 1
+  fastATK: 0
   longRange: 2
   dmgIndicatorPrefab: {fileID: 30260464280918322, guid: 5ec3a00fbdc45c4409222ebe7609d248, type: 3}
   deathEffectPrefab: {fileID: 6607158544034161482, guid: a47f7ee052e0d6c4aa4dd5db6f5f1b54, type: 3}

@@ -243,12 +243,12 @@ MonoBehaviour:
   gravityEnabled: 1
   bleedATKs: 1
   baseSpeed: 2
-  baseAttackDST: 15
+  baseAttackDST: 5
   baseAttackCD: 0.05
   baseHealthMLT: 3
   baseAttackDMG: 0.125
   effSpeed: 1
-  stationary: 1
+  stationary: 0
   fastATK: 1
   longRange: 2
   dmgIndicatorPrefab: {fileID: 30260464280918322, guid: 5ec3a00fbdc45c4409222ebe7609d248, type: 3}
