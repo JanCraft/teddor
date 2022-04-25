@@ -61,17 +61,16 @@ public class BuffController : MonoBehaviour {
         string outp = "";
 
         int start = 0;
-        if (cursor > 9) {
-            start = cursor - 9;
+        if (cursor > 11) {
+            start = cursor - 11;
         }
-        int end = start + Mathf.Min(buffs.Count, 10);
+        int end = start + Mathf.Min(buffs.Count, 12);
         for (int i = start; i < end; i++) {
             PlayerBuff buff = buffs[i];
             if (i == cursor) outp += "> ";
             if (FindIn(buff, player.stats.buffs))
                 outp += "<color=green>*</color> ";
             outp += buff.type.ToString().Replace('_', ' ') + " <color=red>+" + ((int) buff.value).ToString() + "%</color> <color=yellow>";
-            if (buff.reforged) outp += "[ RF ]";
             outp += "</color>\n";
         }
 

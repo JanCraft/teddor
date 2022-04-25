@@ -106,6 +106,7 @@ public class ForgeryController : MonoBehaviour {
                     sfxClick.Play();
                 }
                 changed = true;
+                CalcOptions();
             }
         }
 
@@ -119,8 +120,27 @@ public class ForgeryController : MonoBehaviour {
     void CalcOptions() {
         options.Clear();
 
+        buffs.buffs.Sort((x, y) => {
+            return x.value.CompareTo(y.value);
+        });
+
+        buffs.buffs.Sort((x, y) => {
+            return x.reforged.CompareTo(y.reforged);
+        });
+
         foreach (PlayerBuffType type in System.Enum.GetValues(typeof(PlayerBuffType))) {
             int cnt = CountOfType(type);
+            int bufidx = buffs.buffs.FindIndex((x) => x.type == type);
+            if (bufidx != -1) {
+                float bval = buffs.buffs[bufidx].value;
+                float aval = 0f;
+                if (buffs.buffs[bufidx].reforged) {
+                    aval = player.stats.level + 35;
+                } else {
+                    aval = player.stats.level + 25;
+                }
+                if (bval >= aval) continue;
+            }
             if (cnt < 3)
                 options.Add(new ForgeryOption(type, false));
             if (cnt > 0)
@@ -133,14 +153,6 @@ public class ForgeryController : MonoBehaviour {
         buyinfo.text = "";
 
         CalcOptions();
-
-        buffs.buffs.Sort((x, y) => {
-            return x.value.CompareTo(y.value);
-        });
-
-        buffs.buffs.Sort((x, y) => {
-            return x.reforged.CompareTo(y.reforged);
-        });
 
         int end = Mathf.Min(options.Count, 10);
         int drawn = 0;

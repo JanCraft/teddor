@@ -48,10 +48,10 @@ public class AbilityController : MonoBehaviour {
         string outp = "";
 
         int start = 0;
-        if (cursor > 9) {
-            start = cursor - 9;
+        if (cursor > 11) {
+            start = cursor - 11;
         }
-        int end = start + Mathf.Min(abilities.Count, 10);
+        int end = start + Mathf.Min(abilities.Count, 12);
         for (int i = start; i < end; i++) {
             PlayerAbility ability = abilities[i];
             if (i == cursor) outp += "> ";

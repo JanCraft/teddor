@@ -52,10 +52,10 @@ public class SoulShardController : MonoBehaviour {
         string outp = "";
 
         int start = 0;
-        if (cursor > 9) {
-            start = cursor - 9;
+        if (cursor > 11) {
+            start = cursor - 11;
         }
-        int end = start + Mathf.Min(shards.Count-start, 10);
+        int end = start + Mathf.Min(shards.Count-start, 12);
         for (int i = start; i < end; i++) {
             PlayerSoulShard shard = shards[i];
             if (i == cursor) outp += "> ";
