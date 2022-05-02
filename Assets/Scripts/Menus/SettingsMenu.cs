@@ -57,7 +57,12 @@ public class SettingsMenu : MonoBehaviour {
 
     public void LogOut() {
         FileBrowser.HideDialog();
-        StartCoroutine(_LogOut());
+        StartCoroutine(_LogOut(false));
+    }
+
+    public void LogOutRevoke() {
+        FileBrowser.HideDialog();
+        StartCoroutine(_LogOut(true));
     }
 
     public void OpenWeb(string url) {
@@ -115,8 +120,13 @@ public class SettingsMenu : MonoBehaviour {
         return bytes;
     }
 
-    private IEnumerator _LogOut() {
-        UnityWebRequest www = UnityWebRequest.Get("https://game.jdev.com.es/teddor/logout?token=" + PlayerPrefs.GetString("teddor.token"));
+    private IEnumerator _LogOut(bool revoke) {
+        UnityWebRequest www;
+        if (revoke) {
+            www = UnityWebRequest.Get("https://game.jdev.com.es/teddor/revoketokens?user=" + PlayerPrefs.GetString("teddor.token.uid"));
+        } else {
+            www = UnityWebRequest.Get("https://game.jdev.com.es/teddor/logout?token=" + PlayerPrefs.GetString("teddor.token"));
+        }
         yield return www.SendWebRequest();
 
         if (www.responseCode == 200) {

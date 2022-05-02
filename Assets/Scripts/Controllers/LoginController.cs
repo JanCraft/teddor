@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
-
-// TODO: Change into new jDev Auth login system
+using jDevES.FirebaseIDToken;
+using jDevES.Auth;
+using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 public class LoginController : MonoBehaviour {
+    private System.Threading.CancellationTokenSource cancel;
     public GameObject loginObject;
-    public InputField username;
-    public InputField password;
-    public InputField email;
     public Text errorCode;
-    public Toggle toggleNew;
     public Button confirmBtn;
+    public Button cancelBtn;
 
     public bool open = false;
 
@@ -39,49 +39,50 @@ public class LoginController : MonoBehaviour {
 
     void Update() {
         loginObject.SetActive(open);
-        email.gameObject.SetActive(toggleNew.isOn);
     }
 
-    public void Confirm() {
-        StartCoroutine(LoginProcess());
-    }
+    public async void Confirm() {
+        confirmBtn.gameObject.SetActive(false);
+        cancelBtn.gameObject.SetActive(true);
 
-    private IEnumerator LoginProcess() {
-        errorCode.text = "Missing credentials";
-        if (username.text.Trim() == "") yield break;
-        if (password.text.Trim() == "") yield break;
-        if (toggleNew.isOn && email.text.Trim() == "") yield break;
-        errorCode.text = "";
-
-        string sUser = System.Uri.EscapeDataString(username.text);
-        string sPasswd = System.Uri.EscapeDataString(password.text);
-        string sEmail = System.Uri.EscapeDataString(email.text);
-        username.interactable = false;
-        password.interactable = false;
-        email.interactable = false;
-        toggleNew.interactable = false;
-        confirmBtn.interactable = false;
-
-        UnityWebRequest www = UnityWebRequest.Get("https://game.jdev.com.es/teddor/auth?user=" + sUser + "&passwd=" + sPasswd + "&email=" + sEmail);
-        yield return www.SendWebRequest();
-
-        if (www.responseCode == 400) {
-            errorCode.text = "Account not found";
-        } else if (www.responseCode == 401) {
-            errorCode.text = "Invalid credentials";
-        } else if (www.responseCode == 200) {
-            PlayerPrefs.SetString("teddor.token", www.downloadHandler.text);
-            PlayerPrefs.SetString("teddor.user", username.text.Trim());
-            open = false;
-        } else {
-            errorCode.text = www.error ?? "";
+        cancel = new System.Threading.CancellationTokenSource();
+        IDToken tok = await jDevAuth.OpenPopup(cancel.Token);
+        if (tok.IsExpired) {
+            errorCode.text = "ERROR: The token has expired";
+            cancelBtn.gameObject.SetActive(false);
+            confirmBtn.gameObject.SetActive(true);
         }
+        if (await tok.ValidateIDToken()) {
+            UnityWebRequest www = UnityWebRequest.Get("https://game.jdev.com.es/teddor/auth?authmode=1&jwt=" + tok.idToken);
+            await www.SendWebRequest();
 
-        username.interactable = true;
-        password.interactable = true;
-        email.interactable = true;
-        toggleNew.interactable = true;
-        confirmBtn.interactable = true;
+            if (www.responseCode == 400) {
+                errorCode.text = "Account not found";
+            } else if (www.responseCode == 401) {
+                errorCode.text = "Invalid credentials";
+            } else if (www.responseCode == 200) {
+                PlayerPrefs.SetString("teddor.token", www.downloadHandler.text);
+                PlayerPrefs.SetString("teddor.token.uid", tok.UserID);
+                PlayerPrefs.SetString("teddor.token.email", tok.jwt.Payload["email"].ToString());
+                PlayerPrefs.SetString("teddor.user", tok.jwt.Payload["name"].ToString().Trim());
+                open = false;
+            } else {
+                errorCode.text = www.error ?? "";
+            }
+
+            confirmBtn.gameObject.SetActive(true);
+            cancelBtn.gameObject.SetActive(false);
+        } else {
+            errorCode.text = "ERROR: The token is invalid";
+            confirmBtn.gameObject.SetActive(true);
+            cancelBtn.gameObject.SetActive(false);
+        }
+    }
+
+    public void Cancel() {
+        cancel.Cancel();
+        confirmBtn.gameObject.SetActive(true);
+        cancelBtn.gameObject.SetActive(false);
     }
 
     private IEnumerator CheckToken() {
@@ -98,5 +99,16 @@ public class LoginController : MonoBehaviour {
     public static System.DateTime StartOfWeek(System.DateTime dt, System.DayOfWeek startOfWeek) {
         int diff = (7 + (dt.DayOfWeek - startOfWeek)) % 7;
         return dt.AddDays(-1 * diff).Date;
+    }
+}
+
+public static class UnityWebRequestExtension {
+    public static TaskAwaiter<UnityWebRequest.Result> GetAwaiter(this UnityWebRequestAsyncOperation reqOp) {
+        TaskCompletionSource<UnityWebRequest.Result> tsc = new TaskCompletionSource<UnityWebRequest.Result>();
+        reqOp.completed += asyncOp => tsc.TrySetResult(reqOp.webRequest.result);
+
+        if (reqOp.isDone) tsc.TrySetResult(reqOp.webRequest.result);
+
+        return tsc.Task.GetAwaiter();
     }
 }

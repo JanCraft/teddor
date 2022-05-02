@@ -74,24 +74,21 @@ ui.foundry.reforge:
   en: "Reforge"
   es: "Reforjar"
 
-ui.login.title:
-  en: "Login"
-  es: "Iniciar Sesión"
-ui.login.username:
-  en: "Username"
-  es: "Nombre de Usuario"
-ui.login.email:
-  en: "Email"
-  es: "Correo electrónico"
-ui.login.password:
-  en: "Password"
-  es: "Contraseña"
-ui.login.confirm:
-  en: "Confirm"
-  es: "Confirmar"
+ui.login.cancel:
+  en: "Cancel"
+  es: "Cancelar"
+ui.login.authorize:
+  en: "Authorize"
+  es: "Autorizar"
+ui.login.error:
+  en: "An error ocurred while trying to log you in..."
+  es: "Un error ocurrió al intentar autorizarte..."
 ui.login.logout:
   en: "Log Out"
   es: "Cerrar sesión"
+ui.login.revoke:
+  en: "Revoke"
+  es: "Revocar"
 
 ui.banner.use:
   en: "[Enter] roll\n[Space] exit"
